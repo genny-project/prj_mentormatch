@@ -33,21 +33,22 @@ rule "GENERATE_ADD_ITEMS"
         serviceToken : GennyToken( code == "PER_SERVICE")
      then
      	System.out.println("   Generate "+drools.getRule().getName() );
+		System.out.println("   GENERATE_ADD_ITEMS Rule is firing in Mentormatch "+drools.getRule().getName() );
      	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken);
 
 			String sourceCode = "PER_SERVICE";
 			String targetCode = "PER_SERVICE";
-			
+
 			Attribute questionAttribute = new Attribute("QQQ_QUESTION_GROUP", "link", new DataType(String.class));
 			Attribute eventAttribute = new Attribute("PRI_EVENT", "link", new DataType(String.class));
-			
+
 			/* ADD ITEMS group */
 			Question addItemsQues = new Question("QUE_ADD_ITEMS_GRP", "Add Items", questionAttribute, true);
 			Ask addItemsAsk = new Ask(addItemsQues, sourceCode, targetCode);
-			
+
 				Question hostCompanyQues = new Question("QUE_HOST_CPY_MENU", "Host Company", eventAttribute, true);
 				Ask hostCompanyAsk = new Ask(hostCompanyQues, sourceCode, targetCode);
-				
+
 				Question hostCompanyRepQues = new Question("QUE_HOST_CPY_REP_MENU", "Host Company Rep", eventAttribute, true);
 				Ask hostCompanyRepAsk = new Ask(hostCompanyRepQues, sourceCode, targetCode);
 
@@ -78,12 +79,12 @@ rule "GENERATE_ADD_ITEMS"
 				Question personQues = new Question("QUE_PERSON_MENU", "Person", eventAttribute, true);
 				Ask personAsk = new Ask(personQues, sourceCode, targetCode);
 
-			
+
 			Ask[] agentAddItems = { hostCompanyAsk, hostCompanyRepAsk, eduProAsk, eduProRepAsk, internshipAsk, internAsk, agencyAsk, agentAsk };
 			Ask[] internAddItems = {  };
 			Ask[] eduProRepAddItems = { eduProRepAsk };
 			Ask[] hcRepAddItems = { hostCompanyRepAsk, internshipAsk};
-			
+
 			addItemsAsk.setChildAsks(agentAddItems);
 			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
 
