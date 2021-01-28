@@ -1,6 +1,5 @@
 package life.genny.rules;
 
-
 import life.genny.qwanda.message.QCmdMessage;
 import life.genny.qwanda.message.QBulkMessage;
 import life.genny.qwanda.message.QDataBaseEntityMessage;
@@ -8,7 +7,6 @@ import life.genny.qwanda.message.QEventMessage;
 import life.genny.rules.QRules;
 import life.genny.qwandautils.JsonUtils;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.List;
 import java.util.ArrayList;
@@ -33,7 +31,6 @@ rule "GENERATE_ADD_ITEMS"
         serviceToken : GennyToken( code == "PER_SERVICE")
      then
      	System.out.println("   Generate "+drools.getRule().getName() );
-		System.out.println("   GENERATE_ADD_ITEMS Rule is firing in Mentormatch "+drools.getRule().getName() );
      	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken);
 
 			String sourceCode = "PER_SERVICE";
@@ -46,54 +43,5 @@ rule "GENERATE_ADD_ITEMS"
 			Question addItemsQues = new Question("QUE_ADD_ITEMS_GRP", "Add Items", questionAttribute, true);
 			Ask addItemsAsk = new Ask(addItemsQues, sourceCode, targetCode);
 
-				Question hostCompanyQues = new Question("QUE_HOST_CPY_MENU", "Host Company", eventAttribute, true);
-				Ask hostCompanyAsk = new Ask(hostCompanyQues, sourceCode, targetCode);
 
-				Question hostCompanyRepQues = new Question("QUE_HOST_CPY_REP_MENU", "Host Company Rep", eventAttribute, true);
-				Ask hostCompanyRepAsk = new Ask(hostCompanyRepQues, sourceCode, targetCode);
-
-				Question eduProQues = new Question("QUE_EDU_PRO_MENU", "Education Provider", eventAttribute, true);
-				Ask eduProAsk = new Ask(eduProQues, sourceCode, targetCode);
-
-				Question eduProRepQues = new Question("QUE_EDU_PRO_REP_MENU", "Education Provider Rep", eventAttribute, true);
-				Ask eduProRepAsk = new Ask(eduProRepQues, sourceCode, targetCode);
-
-				Question internshipQues = new Question("QUE_INTERNSHIP_MENU", "Internship", eventAttribute, true);
-				Ask internshipAsk = new Ask(internshipQues, sourceCode, targetCode);
-
-				Question internQues = new Question("QUE_INTERN_MENU", "Intern", eventAttribute, true);
-				Ask internAsk = new Ask(internQues, sourceCode, targetCode);
-
-				Question refPartnerQues = new Question("QUE_REF_PART_MENU", "Referral Partner", eventAttribute, true);
-				Ask refPartnerAsk = new Ask(refPartnerQues, sourceCode, targetCode);
-
-				Question refPartnerRepQues = new Question("QUE_REF_PART_REP_MENU", "Referral Partner Rep", eventAttribute, true);
-				Ask refPartnerRepAsk = new Ask(refPartnerRepQues, sourceCode, targetCode);
-
-				Question agencyQues = new Question("QUE_AGENCY_MENU", "Agency", eventAttribute, true);
-				Ask agencyAsk = new Ask(agencyQues, sourceCode, targetCode);
-
-				Question agentQues = new Question("QUE_AGENT_MENU", "Agent", eventAttribute, true);
-				Ask agentAsk = new Ask(agentQues, sourceCode, targetCode);
-
-				Question personQues = new Question("QUE_PERSON_MENU", "Person", eventAttribute, true);
-				Ask personAsk = new Ask(personQues, sourceCode, targetCode);
-
-
-			Ask[] agentAddItems = { hostCompanyAsk, hostCompanyRepAsk, eduProAsk, eduProRepAsk, internshipAsk, internAsk, agencyAsk, agentAsk };
-			Ask[] internAddItems = {  };
-			Ask[] eduProRepAddItems = { eduProRepAsk };
-			Ask[] hcRepAddItems = { hostCompanyRepAsk, internshipAsk};
-
-			addItemsAsk.setChildAsks(agentAddItems);
-			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
-
-			addItemsAsk.setChildAsks(internAddItems);
-			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_INTERN", addItemsAsk, serviceToken.getToken());
-
-			addItemsAsk.setChildAsks(eduProRepAddItems);
-			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_EDU_PRO_REP", addItemsAsk, serviceToken.getToken());
-
-			addItemsAsk.setChildAsks(hcRepAddItems);
-			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_HOST_CPY_REP", addItemsAsk, serviceToken.getToken());
 end
