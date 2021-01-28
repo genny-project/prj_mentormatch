@@ -43,5 +43,5 @@ rule "GENERATE_ADD_ITEMS"
 			Question addItemsQues = new Question("QUE_ADD_ITEMS_GRP", "Add Items", questionAttribute, true);
 			Ask addItemsAsk = new Ask(addItemsQues, sourceCode, targetCode);
 
-
+			System.out.println("Inside GENERATE_ADD_ITEMS in Mentormatch");
 end
