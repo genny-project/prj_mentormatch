@@ -49,8 +49,8 @@ rule "GENERATE_ADD_ITEMS"
 				Question mentorQues  = new Question("QUE_MENTOR_MENU", "Mentor", eventAttribute, true);
 				Ask mentorAsk = new Ask(mentorQues, sourceCode, targetCode);
 
-				Question mentorQues  = new Question("QUE_ADMIN_MENU", "Admin", eventAttribute, true);
-				Ask adminAsk = new Ask(mentorQues, sourceCode, targetCode);
+				Question adminQues  = new Question("QUE_ADMIN_MENU", "Admin", eventAttribute, true);
+				Ask adminAsk = new Ask(adminQues, sourceCode, targetCode);
 
 			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk };
 
