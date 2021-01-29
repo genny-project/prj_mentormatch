@@ -46,10 +46,15 @@ rule "GENERATE_ADD_ITEMS"
 				Question menteeQues  = new Question("QUE_MENTEE_MENU", "Mentee", eventAttribute, true);
 				Ask menteeAsk = new Ask(menteeQues, sourceCode, targetCode);
 
-			Ask[] agentAddItems = { menteeAsk };
+				Question mentorQues  = new Question("QUE_MENTOR_MENU", "Mentor", eventAttribute, true);
+				Ask mentorAsk = new Ask(mentorQues, sourceCode, targetCode);
+
+				Question mentorQues  = new Question("QUE_ADMIN_MENU", "Admin", eventAttribute, true);
+				Ask adminAsk = new Ask(mentorQues, sourceCode, targetCode);
+
+			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk };
 
 			addItemsAsk.setChildAsks(agentAddItems);
 			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
 
-			System.out.println("Inside GENERATE_ADD_ITEMS in Mentormatch");
 end
