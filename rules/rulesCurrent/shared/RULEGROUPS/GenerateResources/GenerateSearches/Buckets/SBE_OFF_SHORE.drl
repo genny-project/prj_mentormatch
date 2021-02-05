@@ -36,15 +36,15 @@ rule "SBE_OFF_SHORE"
 						.addFilter("PRI_DISABLED", false)
 
 						.addColumn("PRI_NAME", "Name")
-						// .addColumn("PRI_MOBILE", "Mobile")
-						// .addColumn("PRI_EMAIL", "Email")
+						/*.addColumn("PRI_MOBILE", "Mobile")
+						.addColumn("PRI_EMAIL", "Email")
 
-						// .addColumn("PRI_STATUS_COLOR", " ")
-						// .addColumn("PRI_IMAGE_URL", " ")
+						.addColumn("PRI_STATUS_COLOR", " ")
+						.addColumn("PRI_IMAGE_URL", " ")*/
 
 						.setDisplayMode("CARD:MAIN_2")
 						/* Actions */
-						// .addAction("PRI_EVENT_VIEW", "View Intern Profile")
+						/* .addAction("PRI_EVENT_VIEW", "View Intern Profile") */
 						.setPageStart(0).setPageSize(15);
 
 		searchBE.setRealm(serviceToken.getRealm());
