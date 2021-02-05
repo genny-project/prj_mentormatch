@@ -30,13 +30,12 @@ rule "SBE_OFF_SHORE"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_OFF_SHORE", "Available")
+		SearchEntity searchBE = new SearchEntity("SBE_OFF_SHORE", "Off Shore")
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_DISABLED", false)
 
 						.addColumn("PRI_NAME", "Name")
-						.addColumn("PRI_ASSOC_OCCUPATION", " ")
 						.addColumn("PRI_MOBILE", "Mobile")
 						.addColumn("PRI_EMAIL", "Email")
 
