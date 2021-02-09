@@ -39,6 +39,7 @@ rule "DEF_MENTEE"
          BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentee","PER")
          .mandateAttribute("PRI_DOB")
          .mandateAttribute("PRI_USERNAME");
+         
 
 
   	     defBE.setRealm(serviceToken.getRealm());
