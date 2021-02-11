@@ -36,7 +36,7 @@ rule "DEF_MENTEE"
 
  		BaseEntity project = beUtils.getBaseEntityByCode(projectCode);
 
-      AttributeText attributeTextEmail = new AttributeText("PRI_EMAIL", "Email");
+      /* AttributeText attributeTextEmail = new AttributeText("PRI_EMAIL", "Email"); */
       AttributeText attributeTextFirstName = new AttributeText("PRI_EMAIL", "First Name");
       AttributeText attributeTextLastName = new AttributeText("PRI_LASTNAME", "Last Name");
 
@@ -44,10 +44,12 @@ rule "DEF_MENTEE"
          BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentee","PER")
          .mandateAttribute("PRI_DOB")
          .mandateAttribute("PRI_USERNAME");
+         .mandateAttribute("PRI_EMAIL");
 
-         defBE.addAttribute(attributeTextEmail, 9.0);
-         defBE.addAttribute(attributeTextFirstName, 8.0);
-         defBE.addAttribute(attributeTextLastName, 8.0);
+         /* defBE.addAttribute(attributeTextEmail, 9.0); */
+         defBE.addAttribute(attributeTextFirstName, 10.0);
+         defBE.addAttribute(attributeTextLastName, 10.0);
+         
 
   	      defBE.setRealm(serviceToken.getRealm());
 
