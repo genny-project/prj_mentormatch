@@ -43,15 +43,16 @@ rule "DEF_MENTEE"
 		if (project != null) {
          BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentee","PER")
          .mandateAttribute("PRI_DOB")
-         .mandateAttribute("PRI_USERNAME")
-         .addAttribute(attributeTextEmail, 9.0)
-         .addAttribute(attributeTextFirstName, 8.0)
-         .addAttribute(attributeTextLastName, 8.0);
+         .mandateAttribute("PRI_USERNAME");
 
-  	     defBE.setRealm(serviceToken.getRealm());
+         defBE.addAttribute(attributeTextEmail, 9.0);
+         defBE.addAttribute(attributeTextFirstName, 8.0);
+         defBE.addAttribute(attributeTextLastName, 8.0);
 
- 		 insert(defBE);
-		 beUtils.saveBaseEntity(defBE);
+  	      defBE.setRealm(serviceToken.getRealm());
+
+ 		   insert(defBE);
+		   beUtils.saveBaseEntity(defBE);
 
    	} else {
    		System.out.println("PROJECT is not in cache "+projectCode);
