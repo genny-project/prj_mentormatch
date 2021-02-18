@@ -22,11 +22,11 @@ import org.kie.api.runtime.process.WorkflowProcessInstance;
 import life.genny.utils.BaseEntityUtils;
 import life.genny.qwandautils.GennySettings;
 
-rule "DEF_MENTEE"
+rule "DEF_MENTOR"
     ruleflow-group 'GenerateDefinitions'
      no-loop true
     when
-       not  BaseEntityDefinition (code == "DEF_MENTEE")
+       not  BaseEntityDefinition (code == "DEF_MENTOR")
         serviceToken : GennyToken( code == "PER_SERVICE")
         beUtils : BaseEntityUtils()
      then
@@ -42,7 +42,7 @@ rule "DEF_MENTEE"
       AttributeText attributeAddress = new AttributeText("PRI_ADDRESS_FULL", "Last Name");
 
 		if (project != null) {
-         BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentee","PER")
+         BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentor","PER")
          .mandateAttribute("PRI_DOB")
          .mandateAttribute("PRI_USERNAME");
          .mandateAttribute("PRI_EMAIL");
@@ -51,6 +51,7 @@ rule "DEF_MENTEE"
          defBE.addAttribute(attributeTextFirstName, 10.0);
          defBE.addAttribute(attributeTextLastName, 10.0);
          defBE.addAttribute(attributeAddress, 10.0);
+
 
   	      defBE.setRealm(serviceToken.getRealm());
 
