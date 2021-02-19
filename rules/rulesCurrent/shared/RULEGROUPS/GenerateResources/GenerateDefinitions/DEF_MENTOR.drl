@@ -44,7 +44,7 @@ rule "DEF_MENTOR"
 		if (project != null) {
          BaseEntity defBE = new BaseEntityDefinition(drools.getRule().getName(),"Mentor","PER")
          .mandateAttribute("PRI_DOB")
-         .mandateAttribute("PRI_USERNAME");
+         .mandateAttribute("PRI_USERNAME")
          .mandateAttribute("PRI_EMAIL");
 
          /* defBE.addAttribute(attributeTextEmail, 9.0); */
