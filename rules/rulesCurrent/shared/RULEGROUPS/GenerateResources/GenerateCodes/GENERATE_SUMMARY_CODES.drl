@@ -25,24 +25,24 @@ import life.genny.qwanda.attribute.Attribute;
 import life.genny.qwanda.Question;
 import life.genny.qwanda.Ask;
 
-rule "GENERATE_DISPLAY_CODES"
+rule "GENERATE_SUMMARY_CODES"
 	ruleflow-group 'GenerateAsks'
 	no-loop true
 	when
-		not  SearchEntity (code == "GENERATE_DISPLAY_CODES")
+		not  SearchEntity (code == "GENERATE_SUMMARY_CODES")
 		serviceToken : GennyToken( code == "PER_SERVICE")
 	then
 		System.out.println("Generate "+drools.getRule().getName() );
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken);
 
-		Map<String, String> displayCodes = new HashMap<String, String>();
+		Map<String, Object> summaryCodes = new HashMap<String, Object>();
 
-		/* FORM:DETAIL */
-		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
+		List<String> agentCodes = new ArrayList<String>();
+		agentCodes.add("SBE_SUMMARY_AGENCY");
+		agentCodes.add("SBE_SUMMARY_AGENTS");
 
-		/* PROCESS */
-		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
+		summaryCodes.put("SUMMARY_CODES_AGENT", agentCodes);
 
-		insert(displayCodes);
-		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());
+		insert(summaryCodes);
+		VertxUtils.putObject(serviceToken.getRealm(), "", "SUMMARY_CODES", summaryCodes, serviceToken.getToken());
 end

@@ -15,9 +15,9 @@ import life.genny.utils.TableUtils;
 import org.drools.core.spi.KnowledgeHelper;
 import life.genny.qwanda.datatype.Allowed;
 
-rule "SEND_BUCKET_CODES"
+rule "SEND_SBE_ONE"
 	ruleflow-group 'BucketProcessing'
-	salience 8
+	salience 7
 	no-loop true
 	when
 		userToken : GennyToken (code != "PER_SERVICE" )
@@ -28,25 +28,10 @@ rule "SEND_BUCKET_CODES"
 		System.out.println(drools.getRule().getName() + " triggered");
 		Boolean cache = true;
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
-
-		String sessionCode= beUtils.getGennyToken().getSessionCode().toUpperCase();
-		System.out.println("sessionCode   ::   " + sessionCode);
-
-		List<String> codes = new ArrayList<String>();
-		if(sessionCode != null){
-			codes.add("SBE_ONE_"+sessionCode);
-			codes.add("SBE_TWO_"+sessionCode);
-			codes.add("SBE_THREE_"+sessionCode);
-		}
-
-		/* Send bucket arrayCodes */
-		QCmdMessage msg = new QCmdMessage("BUCKET_CODES", "BUCKET_CODES");
-		msg.setTargetCodes(codes);
-		msg.setToken(beUtils.getGennyToken().getToken());
-		msg.setSend(true);
-		VertxUtils.writeMsg("webcmds",msg);
+  
+		long totalTime = TableUtils.searchTable(beUtils,"SBE_ONE", cache);
+		System.out.println("total took " + (totalTime) + " ms"); 
 
 		output.setTypeOfResult("NONE");
 		output.setResultCode("NONE");  /* dont display anything new */
-
 end
