@@ -15,7 +15,7 @@ import life.genny.utils.TableUtils;
 import org.drools.core.spi.KnowledgeHelper;
 import life.genny.qwanda.datatype.Allowed;
 
-rule "SEND_SBE_THREE"
+rule "SEND_SBE_PEER_MENTORING"
 	ruleflow-group 'BucketProcessing'
 	salience 5
 	no-loop true
@@ -28,9 +28,9 @@ rule "SEND_SBE_THREE"
 		System.out.println(drools.getRule().getName() + " triggered");
 		Boolean cache = true;
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
-  
-		long totalTime = TableUtils.searchTable(beUtils,"SBE_THREE", cache);
-		System.out.println("total took " + (totalTime) + " ms"); 
+
+		long totalTime = TableUtils.searchTable(beUtils,"SBE_PEER_MENTORING", cache);
+		System.out.println("total took " + (totalTime) + " ms");
 
 		output.setTypeOfResult("NONE");
 		output.setResultCode("NONE");  /* dont display anything new */

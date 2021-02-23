@@ -15,9 +15,9 @@ import life.genny.utils.TableUtils;
 import org.drools.core.spi.KnowledgeHelper;
 import life.genny.qwanda.datatype.Allowed;
 
-rule "SEND_SBE_OFF_SHORE"
+rule "SEND_SBE_ROTARY_MENTORING"
 	ruleflow-group 'BucketProcessing'
-	salience 7
+	salience 5
 	no-loop true
 	when
 		userToken : GennyToken (code != "PER_SERVICE" )
@@ -29,7 +29,7 @@ rule "SEND_SBE_OFF_SHORE"
 		Boolean cache = true;
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
-		long totalTime = TableUtils.searchTable(beUtils,"SBE_OFF_SHORE", cache);
+		long totalTime = TableUtils.searchTable(beUtils,"SBE_ROTARY_MENTORING", cache);
 		System.out.println("total took " + (totalTime) + " ms");
 
 		output.setTypeOfResult("NONE");
