@@ -30,20 +30,20 @@ rule "SBE_ONE"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_ONE", "Column One")
+		SearchEntity searchBE = new SearchEntity("SBE_OFF_SHORE", "Off Shore")
 						/* Sorts */
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
-						
+
 						/* Filters */
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_DISABLED", false)
-						
+
 						/* Columns */
 						.addColumn("PRI_NAME", "Name")
-						
+
 						/* Display Code */
 						.setDisplayMode("CARD:MAIN_2")
-						
+
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Profile")
 						.setPageStart(0).setPageSize(15);
