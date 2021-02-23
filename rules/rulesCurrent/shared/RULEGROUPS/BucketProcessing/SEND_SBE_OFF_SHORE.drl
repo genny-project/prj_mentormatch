@@ -28,9 +28,9 @@ rule "SEND_SBE_ONE"
 		System.out.println(drools.getRule().getName() + " triggered");
 		Boolean cache = true;
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
-  
-		long totalTime = TableUtils.searchTable(beUtils,"SBE_ONE", cache);
-		System.out.println("total took " + (totalTime) + " ms"); 
+
+		long totalTime = TableUtils.searchTable(beUtils,"SBE_OFF_SHORE", cache);
+		System.out.println("total took " + (totalTime) + " ms");
 
 		output.setTypeOfResult("NONE");
 		output.setResultCode("NONE");  /* dont display anything new */

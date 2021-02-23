@@ -34,7 +34,7 @@ rule "SEND_BUCKET_CODES"
 
 		List<String> codes = new ArrayList<String>();
 		if(sessionCode != null){
-			codes.add("SBE_ONE_"+sessionCode);
+			codes.add("SBE_OFF_SHORE_"+sessionCode);
 			codes.add("SBE_TWO_"+sessionCode);
 			codes.add("SBE_THREE_"+sessionCode);
 		}
