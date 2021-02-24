@@ -23,6 +23,7 @@ rule "IS_MENTEE"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
+		baseEntityType : String(baseEntityType.equals("MENTEE"))
 		newBe : BaseEntity()
 
      then
