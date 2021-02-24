@@ -38,7 +38,6 @@ rule "GENERATE_SUMMARY_CODES"
 		Map<String, Object> summaryCodes = new HashMap<String, Object>();
 
 		List<String> agentCodes = new ArrayList<String>();
-		agentCodes.add("SBE_SUMMARY_AGENCY");
 		agentCodes.add("SBE_SUMMARY_AGENTS");
 
 		summaryCodes.put("SUMMARY_CODES_AGENT", agentCodes);
