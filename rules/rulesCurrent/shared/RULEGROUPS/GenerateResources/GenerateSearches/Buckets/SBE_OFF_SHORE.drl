@@ -36,10 +36,13 @@ rule "SBE_OFF_SHORE"
 
 						/* Filters */
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
+						.addFilter("PRI_IS_MENTEE", true)
 						.addFilter("PRI_DISABLED", false)
 
 						/* Columns */
 						.addColumn("PRI_NAME", "Name")
+						.addColumn("PRI_MOBILE", "Mobile")
+						.addColumn("PRI_EMAIL", "Email")
 
 						/* Display Code */
 						.setDisplayMode("CARD:MAIN_2")
