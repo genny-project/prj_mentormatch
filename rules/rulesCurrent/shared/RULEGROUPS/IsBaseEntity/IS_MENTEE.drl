@@ -1,4 +1,4 @@
-/*package life.genny.rules;
+package life.genny.rules;
 import life.genny.qwanda.message.QDataAnswerMessage;
 import life.genny.models.GennyToken;
 import life.genny.rules.QRules;
@@ -23,7 +23,6 @@ rule "IS_MENTEE"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("INTERN"))
 		newBe : BaseEntity()
 
      then
@@ -31,13 +30,12 @@ rule "IS_MENTEE"
  		System.out.println("IS_MENTEE: newBe = " + newBe.getCode());
 
  	/*  Construct answer with Source, Target, Attribute Code, Value */
- 	/*	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
+ 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_IS_MENTEE", "true"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS", "OFF SHORE"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS", "OFF_SHORE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS_COLOR", "#5cb85c"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_NUM_JOURNALS", "0"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_PROFILE", "Complete"));
 
 
@@ -46,7 +44,7 @@ rule "IS_MENTEE"
 		/* Set up in Keycloak */
 
 
-	/*	BaseEntity user = beUtils.getBaseEntityByCode(newBe.getCode());
+		BaseEntity user = beUtils.getBaseEntityByCode(newBe.getCode());
 		String userStr = newBe.getCode();
 		String[] userSplit = userStr.split("_");
 		String userCode = userSplit[1];
@@ -62,8 +60,8 @@ rule "IS_MENTEE"
 				if (email != null) {
 					/*String userPassword = UUID.randomUUID().toString().substring(0,10);*/
 					/* TODO HACK */
-	/*				if (true) {
-						String userPassword = "Password1";
+					if (true) {
+						String userPassword = "password1";
 						userId = KeycloakUtils.updateUser(userCode,serviceToken.getToken(), serviceToken.getRealm(), email, firstname, lastname,  email, userPassword,"user", "users");
 						userId = userId.toUpperCase();
 						Answer keycloakId = new Answer(beUtils.getGennyToken().getUserCode(),newBe.getCode(),"PRI_UUID",userId);
@@ -79,11 +77,10 @@ rule "IS_MENTEE"
 
 
 		String endPoint = GennySettings.projectUrl + "/v7/notes";
-		/*String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";*/
 
-	/*	String tag = "ni";
+		String tag = "ni";
 
-		QwandaUtils.apiPostNote(endPoint, userToken.getUserCode(), tag, userToken.getUserCode(), "Added an Mentee: " + firstname, serviceToken.getToken());
+		QwandaUtils.apiPostNote(endPoint, userToken.getUserCode(), tag, userToken.getUserCode(), "Added a Mentee: " + firstname, serviceToken.getToken());
 
 		System.out.println("I just posted the note");
 		System.out.println("Note endPoint: " +endPoint);
@@ -102,7 +99,6 @@ rule "IS_MENTEE"
 		output.setTypeOfResult("NONE");
 		output.setResultCode("NONE");  /* dont display anything new */
 
-	/*	retract(newBe)
+		retract(newBe)
 
 end
-*/
