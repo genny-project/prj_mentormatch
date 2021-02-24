@@ -36,6 +36,7 @@ rule "SBE_PEER_MENTORING"
 
 						/* Filters */
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
+						.addFilter("PRI_STATUS", SearchEntity.StringFilter.LIKE, "MENTORING")
 						.addFilter("PRI_DISABLED", false)
 
 						/* Columns */

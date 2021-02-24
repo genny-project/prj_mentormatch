@@ -36,6 +36,7 @@ rule "SBE_MENTEE_TRAINING"
 
 						/* Filters */
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
+						.addFilter("PRI_STATUS", SearchEntity.StringFilter.LIKE, "MENTEE_TRAINING")
 						.addFilter("PRI_DISABLED", false)
 
 						/* Columns */
