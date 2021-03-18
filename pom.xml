@@ -7,14 +7,14 @@
 
 	<groupId>life.genny.jbpm</groupId>
 	<artifactId>prj_mentormatch</artifactId>
-	<version>7.23.0</version>
+	<version>7.24.0</version>
 	<name>jBPM Internmatch </name>
 	<description>jBPM Internmatch Maven project</description>
 
 	<parent>
 			<groupId>life.genny.jbpm</groupId>
 			<artifactId>prj_genny</artifactId>
-			<version>7.23.0</version>
+			<version>7.24.0</version>
 	</parent>
 
 	<scm>
