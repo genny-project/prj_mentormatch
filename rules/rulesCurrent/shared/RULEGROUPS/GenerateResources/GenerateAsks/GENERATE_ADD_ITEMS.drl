@@ -30,7 +30,7 @@ rule "GENERATE_ADD_ITEMS"
        not  SearchEntity (code == "GENERATE_ADD_ITEMS")
         serviceToken : GennyToken( code == "PER_SERVICE")
      then
-     	System.out.println("   Generate "+drools.getRule().getName() );
+     	System.out.println("   GENERATE_ADD_ITEMS Generate "+drools.getRule().getName() );
      	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken);
 
 			String sourceCode = "PER_SERVICE";
