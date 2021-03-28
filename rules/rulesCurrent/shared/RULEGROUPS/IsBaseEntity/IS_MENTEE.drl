@@ -11,6 +11,7 @@ import life.genny.qwandautils.QwandaUtils;
 import life.genny.qwandautils.GennySettings;
 import java.util.UUID;
 import life.genny.notifications.EmailHelper;
+import java.util.Arrays;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -39,11 +40,27 @@ rule "IS_MENTEE"
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS_COLOR", "#5cb85c"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_PROFILE", "Complete"));
 
+		String target = newBe.getCode();
 
+		BaseEntity userBE = beUtils.getBaseEntityByCode(target);
+		System.out.println("userBE = " +userBE);
+		
 		newBe = beUtils.getBaseEntityByCode(newBe.getCode());
 
 		/* Set up in Keycloak */
 
+		String randomPW = "VZQ564P828";
+	    int targetLength = target.length();
+
+	    System.out.println(target);
+	    System.out.println(targetLength);
+
+	    if (target.startsWith("PER_") && targetLength == 40) {
+	      randomPW = target.substring(30,40);
+	      System.out.println("Random Password used: " + randomPW);
+	    } else {
+	      System.out.println("Backup password used: " + randomPW);
+	    }
 
 		BaseEntity user = beUtils.getBaseEntityByCode(newBe.getCode());
 		String userStr = newBe.getCode();
@@ -52,6 +69,7 @@ rule "IS_MENTEE"
 		System.out.println("User "+user+" with userCode = "+userCode);
 
 		String userId = "";
+		String email = "";
 
 		String firstname = user.getValue("PRI_FIRSTNAME",null);
 		if (firstname != null) {
