@@ -96,6 +96,58 @@ rule "IS_MENTEE"
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(menteeBeMsg));
 		}
 
+		/* Send email to Mentee */
+
+
+		String rawSendEmail = user.getValue("LNK_SEND_EMAIL", null);
+		System.out.println("rawSendEmail: " +rawSendEmail);
+
+		if (rawSendEmail.equals("SEL_YES")) {
+
+			BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
+
+			String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, email, serviceToken.getToken());
+			System.out.println("token: " + token);
+
+			String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX0ZJTklTSF9JTlRFUk4=";
+			System.out.println("url: " + url);
+
+			url = url + "?token=" + token;
+			System.out.println("url: " + url);
+
+			String subject = "You have been registered on MentorMatch";
+			String template_id = "d-94f647d38d7745a1b925300df2208279";
+
+			System.out.println("email: " + email);
+			System.out.println("subject: " + subject);
+			System.out.println("template_id: " + template_id);
+			System.out.println("randomPW: " + randomPW);
+
+
+			HashMap<String, String> templateData = new HashMap<String, String>();
+			templateData.put("Mentee", firstname);
+			templateData.put("pw", randomPW);
+			templateData.put("url", url);
+
+			List<String> bccList = Arrays.asList("rahul@gada.io");
+
+			/* if (!GennySettings.projectUrl.contains("dev")) {
+					EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
+			} else {
+				System.out.println("WARNING: Email not sent because on Dev server");
+			} */
+
+			/*
+ 			String mobile = "0433501177";
+			String smsBody = "You have been recommended for an internship on Internmatch. Login to take a look!";
+			SmsHelper smsHelper = new SmsHelper();
+			smsHelper.deliverSmsMsg(mobile, smsBody);
+			*/
+
+			} else {
+				System.out.println("rawSendEmail is not Yes: " + rawSendEmail);
+			}
+
 
 		output.setTypeOfResult("NONE");
 		output.setResultCode("NONE");  /* dont display anything new */
