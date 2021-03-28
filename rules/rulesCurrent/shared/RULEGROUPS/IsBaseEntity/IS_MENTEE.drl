@@ -144,9 +144,9 @@ rule "IS_MENTEE"
 			smsHelper.deliverSmsMsg(mobile, smsBody);
 			*/
 
-			} else {
-				System.out.println("rawSendEmail is not Yes: " + rawSendEmail);
-			}
+		} else {
+			System.out.println("rawSendEmail is not Yes: " + rawSendEmail);
+		}
 
 
 		output.setTypeOfResult("NONE");
