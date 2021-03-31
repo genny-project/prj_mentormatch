@@ -32,8 +32,7 @@ rule "SBE_GRP_YES_NO"
 		SearchEntity searchBE = new SearchEntity(drools.getRule().getName(), "Yes No Selection")
 						.addSort("PRI_NAME", "Name", SearchEntity.Sort.ASC)
 
-						.addFilter("PRI_CODE", SearchEntity.StringFilter.EQUAL, "SEL_YES")
-						.addOr("PRI_CODE", SearchEntity.StringFilter.EQUAL, "SEL_NO")
+						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "SEL_%")
 
 						.addColumn("PRI_NAME", "Name");
 
