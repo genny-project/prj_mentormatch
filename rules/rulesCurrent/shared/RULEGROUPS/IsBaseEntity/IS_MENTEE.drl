@@ -152,6 +152,7 @@ rule "IS_MENTEE"
 			/* if (!GennySettings.projectUrl.contains("dev")) { */
 			if (true) {
 				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
+				System.out.println("Sent Email to " + email);
 			} else {
 				System.out.println("WARNING: Email not sent because on Dev server");
 			}
