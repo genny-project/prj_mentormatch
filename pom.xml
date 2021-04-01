@@ -8,8 +8,8 @@
 	<groupId>life.genny.jbpm</groupId>
 	<artifactId>prj_mentormatch</artifactId>
 	<version>7.25.0</version>
-	<name>jBPM Internmatch </name>
-	<description>jBPM Internmatch Maven project</description>
+	<name>jBPM Mentormatch </name>
+	<description>jBPM Mentormatch Maven project</description>
 
 	<parent>
 			<groupId>life.genny.jbpm</groupId>
