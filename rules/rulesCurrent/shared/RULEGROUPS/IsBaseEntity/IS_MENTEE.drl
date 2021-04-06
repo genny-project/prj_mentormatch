@@ -69,13 +69,13 @@ rule "IS_MENTEE"
 		System.out.println("User:: "+user+" with userCode:: "+userCode);
 
 		String userId = "";
-		String email = "";
+		/*String email = "";*/
 
 		String firstname = user.getValue("PRI_FIRSTNAME",null);
 		if (firstname != null) {
 			String lastname = user.getValue("PRI_LASTNAME",null);
 			if (lastname != null) {
-				email = user.getValue("PRI_EMAIL",null);
+				String email = user.getValue("PRI_EMAIL",null);
 				if (email != null) {
 					/*String userPassword = UUID.randomUUID().toString().substring(0,10);*/
 					/* TODO HACK */
@@ -118,7 +118,7 @@ rule "IS_MENTEE"
 
 
 		String rawSendEmail = user.getValue("LNK_SEND_EMAIL", null);
-		System.out.println("rawSendEmail: " +rawSendEmail);
+		System.out.println("rawSendEmail: " + rawSendEmail + " Sending email to: " + email);
 
 		if (rawSendEmail.equals("SEL_YES")) {
 
@@ -166,7 +166,7 @@ rule "IS_MENTEE"
 			*/
 
 		} else {
-			System.out.println("rawSendEmail is not Yes: " + rawSendEmail);
+			System.out.println("rawSendEmail is not sent: " + rawSendEmail);
 		}
 
 
