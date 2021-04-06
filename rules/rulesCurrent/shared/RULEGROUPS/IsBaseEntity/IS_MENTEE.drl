@@ -69,13 +69,13 @@ rule "IS_MENTEE"
 		System.out.println("User:: "+user+" with userCode:: "+userCode);
 
 		String userId = "";
-		/*String email = "";*/
+		String email = "";
 
 		String firstname = user.getValue("PRI_FIRSTNAME",null);
 		if (firstname != null) {
 			String lastname = user.getValue("PRI_LASTNAME",null);
 			if (lastname != null) {
-				String email = user.getValue("PRI_EMAIL",null);
+				email = user.getValue("PRI_EMAIL",null);
 				if (email != null) {
 					/*String userPassword = UUID.randomUUID().toString().substring(0,10);*/
 					/* TODO HACK */
