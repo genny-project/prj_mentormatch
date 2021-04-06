@@ -30,7 +30,7 @@ rule "SBE_OFF_SHORE"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_OFF_SHORE", "Off Shore")
+		SearchEntity searchBE = new SearchEntity("SBE_OFF_SHORE", "Off-Shore")
 						/* Sorts */
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 
@@ -46,7 +46,7 @@ rule "SBE_OFF_SHORE"
 
 						.addColumn("PRI_STATUS_COLOR", " ")
 						.addColumn("PRI_IMAGE_URL", " ")
-						
+
 						/* Display Code */
 						.setDisplayMode("CARD:MAIN_2")
 

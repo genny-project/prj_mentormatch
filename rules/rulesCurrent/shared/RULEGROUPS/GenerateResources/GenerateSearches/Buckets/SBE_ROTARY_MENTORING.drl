@@ -30,7 +30,7 @@ rule "SBE_ROTARY_MENTORING"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_ROTARY_MENTORING", "Rotary Mentoring")
+		SearchEntity searchBE = new SearchEntity("SBE_ROTARY_MENTORING", "Mentoring")
 						/* Sorts */
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 

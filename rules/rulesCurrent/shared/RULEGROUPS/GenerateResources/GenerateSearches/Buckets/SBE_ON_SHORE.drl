@@ -30,7 +30,7 @@ rule "SBE_ON_SHORE"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_ON_SHORE", "On Shore")
+		SearchEntity searchBE = new SearchEntity("SBE_ON_SHORE", "On-Shore")
 						/* Sorts */
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 

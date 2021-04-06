@@ -30,7 +30,7 @@ rule "SBE_COMPLETED"
 	then
 		System.out.println("   Generate "+drools.getRule().getName() );
 
-		SearchEntity searchBE = new SearchEntity("SBE_COMPLETED", "Completed")
+		SearchEntity searchBE = new SearchEntity("SBE_COMPLETED", "Alumni")
 						/* Sorts */
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 
