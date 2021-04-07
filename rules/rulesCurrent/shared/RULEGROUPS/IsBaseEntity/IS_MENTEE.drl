@@ -134,7 +134,7 @@ rule "IS_MENTEE"
 			System.out.println("url: " + url);
 
 			String subject = "You have been registered on MentorMatch";
-			String template_id = "d-94f647d38d7745a1b925300df2208279";
+			String template_id = "d-0f954dec3a8642c8bcb21b1c8344b925";
 
 			System.out.println("email: " + email);
 			System.out.println("subject: " + subject);
