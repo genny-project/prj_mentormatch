@@ -46,5 +46,5 @@ rule "FILTER_OFF_SHORE_APPLICATION"
 		payload.add(msg);
 
 		drools.getKnowledgeRuntime().setGlobal("payload", payload);
-		retract(allowed);
+		/*retract(allowed);*/
 end
