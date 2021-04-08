@@ -37,28 +37,28 @@ rule "SET_PRI_STATUS_AS_ON_SHORE"
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		newApplication : BaseEntity()
 		output : OutputParam()
-		bucketCode : String(bucketCode.equals("ON_SHORE"))
+		bucketCode : String(bucketCode.equals("OFF_SHORE"))
 		controlSignalCode : String(controlSignalCode.equals("ON_SHORE"))
 
 
      then
- 		System.out.println("SET_PRI_STATUS_AS_PLACED: Rule fired" );
+ 		System.out.println("SET_PRI_STATUS_AS_ON_SHORE: Rule fired" );
 
 
- 		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","PLACED");
+ 		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","ON_SHORE");
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
  		beUtils.saveAnswer(answer);
 
 
-		System.out.println("SET_PRI_STATUS_AS_PLACED: Answer = " + answer);
-		System.out.println("SET_PRI_STATUS_AS_PLACED: newApplication = " + newApplication);
+		System.out.println("SET_PRI_STATUS_AS_ON_SHORE: Answer = " + answer);
+		System.out.println("SET_PRI_STATUS_AS_ON_SHORE: newApplication = " + newApplication);
 
 
-		TableUtils.moveEntity(newApplication.getCode(), "SBE_OFFERED_APPLICATIONS", "SBE_PLACED_APPLICATIONS", beUtils);
+		TableUtils.moveEntity(newApplication.getCode(), "SBE_OFF_SHORE", "SBE_ON_SHORE", beUtils);
 
 
 		/* Save status to the PER */
-		String assocIntern = newApplication.getValue("PRI_INTERN_CODE", null);
+		/*String assocIntern = newApplication.getValue("PRI_INTERN_CODE", null);
 		System.out.println("assocIntern: " +assocIntern);
 		if (assocIntern != null){
 			BaseEntity assocInternBe = beUtils.getBaseEntityByCode(assocIntern);
@@ -87,7 +87,7 @@ rule "SET_PRI_STATUS_AS_ON_SHORE"
 			System.out.println("answerApp: " +answerApp);
 
 
-			/* Remove from Available bucket */
+			/* Remove from Available bucket
 			Answer answerDisable = new Answer(userToken.getUserCode(), assocInternBe.getCode(), "PRI_DISABLED", true);
 			beUtils.saveAnswer(answerDisable);
 			System.out.println("answerDisable: " +answerDisable);
@@ -95,17 +95,17 @@ rule "SET_PRI_STATUS_AS_ON_SHORE"
 
 		} else {
 			System.out.println("$$$ assocIntern PRI_INTERN_CODE was null $$$");
-		}
+		}*/
 
 
-		BaseEntity user = beUtils.getBaseEntityByCode(newApplication.getCode());
+		/*BaseEntity user = beUtils.getBaseEntityByCode(newApplication.getCode());
 		String name = user.getValue("PRI_INTERN_NAME",null);
 
 		String title = user.getValue("PRI_TITLE",null);
 		String assoc_hc = user.getValue("PRI_ASSOC_HC",null);
 
 
-		String endPoint = GennySettings.projectUrl + "/v7/notes";
+		String endPoint = GennySettings.projectUrl + "/v7/notes";*/
 		/*String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";*/
 
 		String tag = "ni";
