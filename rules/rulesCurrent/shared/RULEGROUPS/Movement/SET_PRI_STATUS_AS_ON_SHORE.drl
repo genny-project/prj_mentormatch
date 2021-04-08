@@ -106,7 +106,7 @@ rule "SET_PRI_STATUS_AS_ON_SHORE"
 
 
 		String endPoint = GennySettings.projectUrl + "/v7/notes";*/
-		/*String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";*/
+		/*String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";
 
 		String tag = "ni";
 
@@ -114,7 +114,7 @@ rule "SET_PRI_STATUS_AS_ON_SHORE"
 
 		System.out.println("I just posted the note");
 		System.out.println("Note endPoint: " +endPoint);
-		System.out.println("Note userToken.getUserCode(): " +userToken.getUserCode());
+		System.out.println("Note userToken.getUserCode(): " +userToken.getUserCode());*/
 
 
 
