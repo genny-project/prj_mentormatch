@@ -33,7 +33,7 @@
   <bpmn2:signal id="Signal_7" name="START_ON_SHORE"/>
   <bpmn2:signal id="Signal_8" name="signature"/>
   <bpmn2:signal id="Signal_9" name="START_MOVE"/>
-  <bpmn2:process id="placedBucket" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Default Process" isExecutable="true">
+  <bpmn2:process id="onShoreBucket" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Default Process" isExecutable="true">
     <bpmn2:extensionElements>
       <drools:import name="life.genny.models.GennyToken"/>
       <drools:import name="life.genny.utils.SessionFacts"/>
@@ -277,7 +277,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
     <bpmn2:sequenceFlow id="SequenceFlow_14" drools:priority="1" sourceRef="SubProcess_2" targetRef="EndEvent_2"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Process Diagram">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="placedBucket">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="onShoreBucket">
       <bpmndi:BPMNShape id="BPMNShape_SubProcess_2" bpmnElement="SubProcess_2" isExpanded="true">
         <dc:Bounds height="162.0" width="1231.0" x="280.0" y="235.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_1">
