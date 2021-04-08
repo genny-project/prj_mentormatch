@@ -32,10 +32,10 @@ rule "MOVE_BUCKET_CLICK_EVENT_ON_SHORE"
         beUtils : BaseEntityUtils( )
 
     then
-		System.out.println("Processing ON_SHORE CLICK EVENT : " + $message );
+		System.out.println("Processing ON_SHORE CLICK EVENT: " + $message );
 
 
-		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing : " + $message );
+		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
 		String workflowSignalCode = "ON_SHORE";
