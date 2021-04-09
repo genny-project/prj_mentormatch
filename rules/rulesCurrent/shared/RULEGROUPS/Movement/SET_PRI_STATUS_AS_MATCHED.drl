@@ -38,7 +38,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		newApplication : BaseEntity()
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("TRAINING"))
-		controlSignalCode : String(controlSignalCode.equals("MATCHED"))
+		controlSignalCode : String(controlSignalCode.equals("MATCH"))
 
 
      then
