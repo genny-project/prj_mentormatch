@@ -198,7 +198,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => controlSignalCode = &quot
 </drools:script>
           </drools:onEntry-script>
           <drools:onExit-script scriptFormat="http://www.java.com/java">
-            <drools:script>System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => (Set PRI_STATUS as ON_SHORE) rule flow group&quot;);
+            <drools:script>System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => (Set PRI_STATUS as TRAINING) rule flow group&quot;);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => bucketCode = &quot; + bucketCode);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot; + controlSignalCode);
 </drools:script>
