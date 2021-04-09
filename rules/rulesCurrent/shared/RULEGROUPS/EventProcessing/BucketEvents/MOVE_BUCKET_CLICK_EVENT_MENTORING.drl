@@ -19,12 +19,12 @@ import life.genny.model.NodeStatus;
 import life.genny.utils.SessionFacts;
 import life.genny.qwanda.rule.RuleDetails;
 
-rule "MOVE_BUCKET_CLICK_EVENT_MATCHED"
+rule "MOVE_BUCKET_CLICK_EVENT_MENTORING"
     ruleflow-group 'EventProcessing'
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION")
+		$message : QEventMessage(data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -32,13 +32,13 @@ rule "MOVE_BUCKET_CLICK_EVENT_MATCHED"
         beUtils : BaseEntityUtils( )
 
     then
-		System.out.println("Processing MATCH CLICK EVENT: " + $message );
+		System.out.println("Processing MENTORING CLICK EVENT: " + $message );
 
 
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
-		String workflowSignalCode = "MATCH";
+		String workflowSignalCode = "MENTORING";
 
 		String targetCode = $message.getData().getTargetCode();
 		System.out.println("targetCode: " +targetCode);
@@ -56,7 +56,7 @@ rule "MOVE_BUCKET_CLICK_EVENT_MATCHED"
 		SessionFacts facts = new SessionFacts(serviceToken, userToken, output.getTargetCode());
 
 		System.out.println("START SIGNAL: " +workflowSignalCode);
-		System.out.println("STARTING THE MOVE FROM TRAINING TO MATCHED WITH: " +output);
+		System.out.println("STARTING THE MOVE FROM MATCHED TO MENTORING WITH: " + output);
 
 
 		/* If user is accepting application offer, then send a TOAST to inform them */
