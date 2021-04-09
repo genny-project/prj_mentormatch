@@ -41,6 +41,8 @@ rule "SBE_COMPLETED"
 
 						/* Columns */
 						.addColumn("PRI_NAME", "Name")
+						.addColumn("PRI_MOBILE", "Mobile")
+						.addColumn("PRI_EMAIL", "Email")
 
 						/* Display Code */
 						.setDisplayMode("CARD:MAIN_2")
