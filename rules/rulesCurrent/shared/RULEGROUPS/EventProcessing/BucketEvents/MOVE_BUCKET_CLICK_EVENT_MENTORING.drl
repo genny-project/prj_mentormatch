@@ -38,6 +38,9 @@ rule "MOVE_BUCKET_CLICK_EVENT_MENTORING"
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
+		
+		System.out.println("############  code: " +code);
+		
 		String workflowSignalCode = "MENTORING";
 
 		String targetCode = $message.getData().getTargetCode();

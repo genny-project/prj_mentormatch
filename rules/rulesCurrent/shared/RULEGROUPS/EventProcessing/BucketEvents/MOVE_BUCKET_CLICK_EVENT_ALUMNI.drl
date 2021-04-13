@@ -38,6 +38,7 @@ rule "MOVE_BUCKET_CLICK_EVENT_ALUMNI"
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
+		System.out.println("############  code: " +code);
 		String workflowSignalCode = "ALUMNI";
 
 		String targetCode = $message.getData().getTargetCode();

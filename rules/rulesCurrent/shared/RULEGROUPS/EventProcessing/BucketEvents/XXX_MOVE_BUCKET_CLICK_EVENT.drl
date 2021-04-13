@@ -19,12 +19,14 @@ import life.genny.model.NodeStatus;
 import life.genny.utils.SessionFacts;
 import life.genny.qwanda.rule.RuleDetails;
 
-rule "MOVE_BUCKET_CLICK_EVENT_TRAINING"
+rule "MOVE_BUCKET_CLICK_EVENT"
     ruleflow-group 'EventProcessing'
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_PRI_EVENT_TRAINING_APPLICATION")
+		$message : QEventMessage((data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_TRAINING_APPLICATION")
+								 || (data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION")
+								 || (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -32,15 +34,35 @@ rule "MOVE_BUCKET_CLICK_EVENT_TRAINING"
         beUtils : BaseEntityUtils( )
 
     then
-		System.out.println("Processing TRAINING CLICK EVENT: " + $message );
-
-
+		System.out.println("###### Processing MOVE BUCKET CLICK EVENT: " + $message );
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
-		System.out.println("############  code: " +code);
 		
-		String workflowSignalCode = "TRAINING";
+		switch (day) {
+		  case 1:
+		    System.out.println("Monday");
+		    break;
+		  case 2:
+		    System.out.println("Tuesday");
+		    break;
+		  case 3:
+		    System.out.println("Wednesday");
+		    break;
+		  case 4:
+		    System.out.println("Thursday");
+		    break;
+		  case 5:
+		    System.out.println("Friday");
+		    break;
+		  case 6:
+		    System.out.println("Saturday");
+		    break;
+		  case 7:
+		    System.out.println("Sunday");
+		    break;
+		}
+		String workflowSignalCode = "ALUMNI";
 
 		String targetCode = $message.getData().getTargetCode();
 		System.out.println("targetCode: " +targetCode);
@@ -58,21 +80,21 @@ rule "MOVE_BUCKET_CLICK_EVENT_TRAINING"
 		SessionFacts facts = new SessionFacts(serviceToken, userToken, output.getTargetCode());
 
 		System.out.println("START SIGNAL: " +workflowSignalCode);
-		System.out.println("STARTING THE MOVE FROM APPLIED TO TRAINING WITH: " +output);
+		System.out.println("STARTING THE MOVE FROM MENTORING TO ALUMNI WITH: " + output);
 
 
 		/* If user is accepting application offer, then send a TOAST to inform them */
 
 		if (code.equals("ACT_PRI_EVENT_ACCEPT_APPLY")) {
 
-            /*String msgText = "Congrats, you have been TRAININGD for this internship.";*/
+            /*String msgText = "Congrats, you have been MATCHD for this internship.";*/
 
 			/* Change the text if not user moving their own application */
 			/*String internCode = beUtils.getBaseEntityValueAsString(targetCode, "PRI_INTERN_CODE");
 			System.out.println("internCode = " + internCode);
 			if (internCode != null) {
 				if (!userToken.getUserCode().equals(internCode)) {
-					msgText = "Application was TRAINING.";
+					msgText = "Application was MATCH.";
 				}
 			}*/
 
