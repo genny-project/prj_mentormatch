@@ -42,23 +42,23 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		switch (code) {
 		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION": 
 		    workflowSignalCode = "ON_SHORE";
-		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_TRAINING_APPLICATION":
 		  	workflowSignalCode = "TRAINING";
-		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_MATCH_APPLICATION":
 		    workflowSignalCode = "MATCH";
-		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_MENTORING_APPLICATION":
 		    workflowSignalCode = "MENTORING";
-		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_ALUMNI_APPLICATION":
 		    workflowSignalCode = "ALUMNI";
-		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		}
 	
