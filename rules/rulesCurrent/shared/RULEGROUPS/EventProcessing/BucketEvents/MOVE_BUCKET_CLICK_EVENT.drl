@@ -38,26 +38,26 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
-		
+		String workflowSignalCode = null;
 		switch (code) {
 		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION": 
-		    String workflowSignalCode = "ON_SHORE";
+		    workflowSignalCode = "ON_SHORE";
 		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_TRAINING_APPLICATION":
-		  	String workflowSignalCode = "TRAINING";
+		  	workflowSignalCode = "TRAINING";
 		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_MATCH_APPLICATION":
-		    String workflowSignalCode = "MATCH";
+		    workflowSignalCode = "MATCH";
 		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_MENTORING_APPLICATION":
-		    String workflowSignalCode = "MENTORING";
+		    workflowSignalCode = "MENTORING";
 		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		case "ACT_PRI_EVENT_ALUMNI_APPLICATION":
-		    String workflowSignalCode = "ALUMNI";
+		    workflowSignalCode = "ALUMNI";
 		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		}
