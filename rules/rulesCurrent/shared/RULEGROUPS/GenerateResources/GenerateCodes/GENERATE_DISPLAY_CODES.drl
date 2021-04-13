@@ -40,6 +40,7 @@ rule "GENERATE_DISPLAY_CODES"
 
 		/* FORM:DETAIL */
 		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
+		displayCodes.put("QUE_QA_MENTEE_MENU", "FORM:DETAIL");
 
 		/* PROCESS */
 		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
