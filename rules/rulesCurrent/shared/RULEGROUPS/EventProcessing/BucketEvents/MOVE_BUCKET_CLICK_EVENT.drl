@@ -25,8 +25,8 @@ rule "MOVE_BUCKET_CLICK_EVENT"
     no-loop
     when
 		$message : QEventMessage((data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_TRAINING_APPLICATION")
-								 || (data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION")
-								 || (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
+								 || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION")|| (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") 
+								 || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -39,31 +39,29 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 
 		String code = $message.getData().getCode();
 		
-		switch (day) {
-		  case 1:
-		    System.out.println("Monday");
+		switch (code) {
+		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION": 
+		    String workflowSignalCode = "ON_SHORE";
+		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
-		  case 2:
-		    System.out.println("Tuesday");
+		case "ACT_PRI_EVENT_TRAINING_APPLICATION":
+		  	String workflowSignalCode = "TRAINING";
+		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
-		  case 3:
-		    System.out.println("Wednesday");
+		case "ACT_PRI_EVENT_MATCH_APPLICATION":
+		    String workflowSignalCode = "MATCH";
+		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
-		  case 4:
-		    System.out.println("Thursday");
+		case "ACT_PRI_EVENT_MENTORING_APPLICATION":
+		    String workflowSignalCode = "MENTORING";
+		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
-		  case 5:
-		    System.out.println("Friday");
-		    break;
-		  case 6:
-		    System.out.println("Saturday");
-		    break;
-		  case 7:
-		    System.out.println("Sunday");
+		case "ACT_PRI_EVENT_ALUMNI_APPLICATION":
+		    String workflowSignalCode = "ALUMNI";
+		    System.out.println("######## workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		}
-		String workflowSignalCode = "ALUMNI";
-
+	
 		String targetCode = $message.getData().getTargetCode();
 		System.out.println("targetCode: " +targetCode);
 
