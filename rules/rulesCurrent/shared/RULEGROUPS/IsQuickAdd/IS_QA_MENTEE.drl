@@ -83,12 +83,12 @@ rule "IS_QA_MENTEE"
 					/*String userPassword = UUID.randomUUID().toString().substring(0,10);*/
 					/* TODO HACK */
 					if (true) {
-						String userPassword = "password1";
-						userId = KeycloakUtils.updateUser(userCode,serviceToken.getToken(), serviceToken.getRealm(), email, firstname, lastname,  email, userPassword,"user", "users");
+						/*String userPassword = "password1";*/
+						userId = KeycloakUtils.updateUser(userCode,serviceToken.getToken(), serviceToken.getRealm(), email, firstname, lastname,  email, randomPW, "user", "users");
 						userId = userId.toUpperCase();
 						Answer keycloakId = new Answer(beUtils.getGennyToken().getUserCode(),newBe.getCode(),"PRI_UUID",userId);
 						beUtils.saveAnswer(keycloakId);
-						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password: " +userPassword);
+						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password: " + randomPW);
 					} else {
 					     System.out.println("KEYCLOAK USER CREATION DISABLED IN RULE IS_MENTEE");
 					}
