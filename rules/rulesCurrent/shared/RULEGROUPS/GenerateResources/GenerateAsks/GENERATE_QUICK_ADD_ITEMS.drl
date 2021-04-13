@@ -43,16 +43,13 @@ rule "GENERATE_QUICK_ADD_ITEMS"
 			Question addItemsQues = new Question("QUE_QUICK_ADD_ITEMS_GRP", "Quick Add Items", questionAttribute, true);
 			Ask addItemsAsk = new Ask(addItemsQues, sourceCode, targetCode);
 
-				Question menteeQues  = new Question("QUE_MENTEE_MENU", "Mentee", eventAttribute, true);
+				Question menteeQues  = new Question("QUE_QA_MENTEE_MENU", "Mentee", eventAttribute, true);
 				Ask menteeAsk = new Ask(menteeQues, sourceCode, targetCode);
 
-				Question mentorQues  = new Question("QUE_MENTOR_MENU", "Mentor", eventAttribute, true);
+				Question mentorQues  = new Question("QUE_QA_MENTOR_MENU", "Mentor", eventAttribute, true);
 				Ask mentorAsk = new Ask(mentorQues, sourceCode, targetCode);
 
-				Question adminQues  = new Question("QUE_ADMIN_MENU", "Admin", eventAttribute, true);
-				Ask adminAsk = new Ask(adminQues, sourceCode, targetCode);
-
-			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk };
+			Ask[] agentAddItems = { menteeAsk, mentorAsk };
 
 			addItemsAsk.setChildAsks(agentAddItems);
 			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
