@@ -39,7 +39,7 @@ rule "MOVE_BUCKET_CLICK_EVENT_MATCHED"
 
 		String code = $message.getData().getCode();
 		String workflowSignalCode = "MATCH";
-
+		System.out.println("############  code: " +code);
 		String targetCode = $message.getData().getTargetCode();
 		System.out.println("targetCode: " +targetCode);
 
