@@ -37,11 +37,11 @@ rule "IS_QA_MENTEE"
 
  	 /* Construct answer with Source, Target, Attribute Code, Value */
 
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_IS_MENTEE", "true"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS", "OFF_SHORE"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_DISABLED", "false"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS_COLOR", "#5cb85c"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_PROFILE", "Complete"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_MENTEE", "true"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS", "OFF_SHORE"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS_COLOR", "#5cb85c"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_PROFILE", "Complete"));
 
 		String target = newBe.getCode();
 
@@ -88,7 +88,7 @@ rule "IS_QA_MENTEE"
 						userId = userId.toUpperCase();
 						Answer keycloakId = new Answer(beUtils.getGennyToken().getUserCode(),newBe.getCode(),"PRI_UUID",userId);
 						beUtils.saveAnswer(keycloakId);
-						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password:" +userPassword);
+						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password: " +userPassword);
 					} else {
 					     System.out.println("KEYCLOAK USER CREATION DISABLED IN RULE IS_MENTEE");
 					}
