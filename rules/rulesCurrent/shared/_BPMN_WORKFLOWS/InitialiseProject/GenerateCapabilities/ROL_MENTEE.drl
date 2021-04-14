@@ -43,7 +43,7 @@ rule "ROL_MENTEE"
 
    	     capabilityUtils.inheritRole(role,userRole);
 
- 		 capabilityUtils.addCapabilityToRole(role,"DASHBOARD_TIMELINE",CapabilityMode.VIEW);
+ 		 /*capabilityUtils.addCapabilityToRole(role,"DASHBOARD_TIMELINE",CapabilityMode.VIEW);
   	     capabilityUtils.addCapabilityToRole(role,"READ_HOST_COMPANY",CapabilityMode.VIEW);
   	     capabilityUtils.addCapabilityToRole(role,"READ_JOURNALS",CapabilityMode.VIEW);
   	     capabilityUtils.addCapabilityToRole(role,"CREATE_JOURNALS",CapabilityMode.SELF);
@@ -54,7 +54,7 @@ rule "ROL_MENTEE"
 				 capabilityUtils.addCapabilityToRole(role,"EDIT_JOURNAL",CapabilityMode.EDIT);
 				 capabilityUtils.addCapabilityToRole(role,"ADD_JOURNAL",CapabilityMode.ADD);
 				 capabilityUtils.addCapabilityToRole(role,"APPLY",CapabilityMode.VIEW);
-				 capabilityUtils.addCapabilityToRole(role,"VIEW_AGREEMENT",CapabilityMode.VIEW);
+				 capabilityUtils.addCapabilityToRole(role,"VIEW_AGREEMENT",CapabilityMode.VIEW);*/
 
   	     role = capabilityUtils.getBeUtils().getBaseEntityByCode(role.getCode());
   	     beUtils.saveAnswer(new Answer(capabilityUtils.getBeUtils().getServiceToken().getUserCode(), role.getCode(), "PRI_WEIGHT", 200.0,false,true));
