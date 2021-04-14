@@ -42,7 +42,7 @@ rule "ROL_AGENT"
     	beUtils.saveAnswer(new Answer(beUtils.getGennyToken().getUserCode(), role.getCode(), "PRI_COLOR", "#1183C8",false,true));
 
     	capabilityUtils.inheritRole(role,user);
-		
+
    	     capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);
 
   	     role = capabilityUtils.getBeUtils().getBaseEntityByCode(role.getCode());

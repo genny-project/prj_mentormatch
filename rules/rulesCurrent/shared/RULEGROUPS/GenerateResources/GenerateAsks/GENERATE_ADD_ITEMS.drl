@@ -53,8 +53,12 @@ rule "GENERATE_ADD_ITEMS"
 				Ask adminAsk = new Ask(adminQues, sourceCode, targetCode);
 
 			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk };
+			Ask[] menteeAddItems = { };
 
 			addItemsAsk.setChildAsks(agentAddItems);
 			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
+
+			addItemsAsk.setChildAsks(menteeAddItems);
+			VertxUtils.putObject(serviceToken.getRealm(), "", "ADD_ITEMS_MENTEE", addItemsAsk, serviceToken.getToken());
 
 end
