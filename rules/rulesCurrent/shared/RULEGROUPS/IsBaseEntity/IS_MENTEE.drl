@@ -127,12 +127,11 @@ rule "IS_MENTEE"
 			String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, email, serviceToken.getToken());
 			System.out.println("token: " + token);
 
-			String url = GennySettings.projectUrl;
-			/*+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX0ZJTklTSF9JTlRFUk4=";*/
+			String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX0ZJTklTSF9JTlRFUk4=";
 			System.out.println("url: " + url);
 
-			/*url = url + "?token=" + token;
-			System.out.println("url: " + url);*/
+			url = url + "?token=" + token;
+			System.out.println("url: " + url);
 
 			String subject = "You have been registered on MentorMatch";
 			String template_id = "d-0f954dec3a8642c8bcb21b1c8344b925";
