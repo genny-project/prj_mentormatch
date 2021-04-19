@@ -34,11 +34,11 @@ rule "MOVE_BUCKET_CLICK_EVENT"
         beUtils : BaseEntityUtils( )
 
     then
-		System.out.println("###### Processing MOVE BUCKET CLICK EVENT: " + $message );
 		System.out.println(ruleDetails+" "+drools.getRule().getName()+" Processing: " + $message );
 
 		String code = $message.getData().getCode();
 		String workflowSignalCode = null;
+		
 		switch (code) {
 		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION": 
 		    workflowSignalCode = "ON_SHORE";
@@ -63,16 +63,10 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		}
 	
 		String targetCode = $message.getData().getTargetCode();
-		System.out.println("targetCode: " +targetCode);
-
-
 		output.setTypeOfResult("SIGNAL");
 		output.setResultCode("START_"+workflowSignalCode);
 		output.setTargetCode($message.getData().getTargetCode());
-
-		String workflowBeCode = $message.getData().getTargetCode();
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$ workflowBeCode: " + workflowBeCode);
-
+		
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$ targetCode: " + output.getTargetCode());
 
 		SessionFacts facts = new SessionFacts(serviceToken, userToken, output.getTargetCode());
@@ -85,23 +79,7 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 
 		if (code.equals("ACT_PRI_EVENT_ACCEPT_APPLY")) {
 
-            /*String msgText = "Congrats, you have been MATCHD for this internship.";*/
-
-			/* Change the text if not user moving their own application */
-			/*String internCode = beUtils.getBaseEntityValueAsString(targetCode, "PRI_INTERN_CODE");
-			System.out.println("internCode = " + internCode);
-			if (internCode != null) {
-				if (!userToken.getUserCode().equals(internCode)) {
-					msgText = "Application was MATCH.";
-				}
-			}*/
-
-            /*QCmdMessage msg = new QCmdMessage("TOAST", "INFO");
-            msg.setMessage(msgText);
-            msg.setToken(beUtils.getGennyToken().getToken());
-            msg.setSend(true);
-            VertxUtils.writeMsg("webcmds", msg);*/
-
+           
             /* CHANGE CARD COLOUR */
 				Answer answerColour = new Answer(serviceToken.getUserCode(), targetCode, "PRI_STATUS_COLOR", "default");
 				beUtils.saveAnswer(answerColour);
