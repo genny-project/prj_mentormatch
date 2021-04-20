@@ -30,7 +30,7 @@ rule "FILTER_TRAINING_APPLICATION"
 	when
 		userToken : GennyToken ( code != "PER_SERVICE" )
 		searchBE: SearchEntity( code matches "SBE_ON_SHORE.*" )
-		allowed: Allowed(code == "TRAINING_APPLICATION" && mode == CapabilityMode.VIEW)
+		/*allowed: Allowed(code == "TRAINING_APPLICATION" && mode == CapabilityMode.VIEW)*/
 
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
