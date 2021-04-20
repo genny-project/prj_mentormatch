@@ -30,7 +30,7 @@ rule "FILTER_MATCHED_APPLICATION"
 	when
 		userToken : GennyToken ( code != "PER_SERVICE" )
 		searchBE: SearchEntity( code matches "SBE_MENTEE_TRAINING.*" )
-		/*allowed: Allowed(code == "SHORTLIST_APPLICATION" && mode == CapabilityMode.VIEW)*/
+		allowed: Allowed(code == "MATCHED_APPLICATION" && mode == CapabilityMode.VIEW)
 
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
