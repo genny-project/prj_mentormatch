@@ -44,12 +44,12 @@ rule "GENERATE_DISPLAY_CODES"
 
 		/* PROCESS */
 		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
-
+		displayCodes.put("QUE_SELECT_MENTOR_GRP", "PROCESS");
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
 		displayCodes.put("QUE_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
-		displayCodes.put("QUE_HELPER_PORTAL_GRP", "DASHBOARD");
+		/* displayCodes.put("QUE_HELPER_PORTAL_GRP", "DASHBOARD"); */
 
 		insert(displayCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());
