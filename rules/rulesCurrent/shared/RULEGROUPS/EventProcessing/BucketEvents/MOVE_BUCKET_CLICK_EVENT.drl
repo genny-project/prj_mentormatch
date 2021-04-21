@@ -18,6 +18,7 @@ import life.genny.models.ThemeAttributeType;
 import life.genny.model.NodeStatus;
 import life.genny.utils.SessionFacts;
 import life.genny.qwanda.rule.RuleDetails;
+import life.genny.utils.DropdownUtils;
 
 rule "MOVE_BUCKET_CLICK_EVENT"
     ruleflow-group 'EventProcessing'
@@ -51,6 +52,17 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		case "ACT_PRI_EVENT_MATCH_APPLICATION":
 		    workflowSignalCode = "MATCH";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
+		    
+		    
+		    /* dropdown search here For companyRep */
+			DropdownUtils dropdown = new DropdownUtils(serviceToken);
+			dropdown.setNewSearch("Mentor Dropdown", "Fetch Mentor")
+											.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
+											.setPageStart(0)
+											.setPageSize(1000);
+											
+			/* Send the dropdown options */
+			dropdown.sendSearchResults("GRP_MENTOR_SELECTION", "LNK_ITEM", "ITEM", true, false, userToken, false);
 		    break;
 		case "ACT_PRI_EVENT_MENTORING_APPLICATION":
 		    workflowSignalCode = "MENTORING";
