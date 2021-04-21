@@ -33,7 +33,7 @@ rule "SBE_MENTOR"
      	SearchEntity searchBE = new SearchEntity("SBE_MENTOR", "Mentor")
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
-						/* .addFilter("PRI_IS_INTERN", true) */
+						.addFilter("PRI_IS_MENTOR", true)
 						/* .addFilter("PRI_DISABLED", false) */
 							
 						.addColumn("PRI_FIRSTNAME", "Name")
