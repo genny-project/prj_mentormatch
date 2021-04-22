@@ -29,7 +29,7 @@ rule "SBE_SUMMARY_MENTEE"
      	System.out.println("   Generate "+drools.getRule().getName() );
 
       SearchEntity searchBE = new SearchEntity(drools.getRule().getName(), "My Profile")
-                     			.addFilter("PRI_IS_MENTEE", true)
+                     			/*.addFilter("PRI_IS_MENTEE", true)*/
 
                               /* Columns */
                               .addColumn("PRI_NAME", "Name")
