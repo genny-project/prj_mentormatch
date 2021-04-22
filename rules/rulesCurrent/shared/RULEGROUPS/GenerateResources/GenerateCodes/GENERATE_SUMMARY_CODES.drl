@@ -41,7 +41,11 @@ rule "GENERATE_SUMMARY_CODES"
 		List<String> agentCodes = new ArrayList<String>();
 		agentCodes.add("SBE_SUMMARY_AGENTS");
 
+		List<String> menteeCodes = new ArrayList<String>();
+		menteeCodes.add("SBE_SUMMARY_MENTEE");
+
 		summaryCodes.put("SUMMARY_CODES_AGENT", agentCodes);
+		summaryCodes.put("SBE_SUMMARY_MENTEE", menteeCodes);
 
 		insert(summaryCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "SUMMARY_CODES", summaryCodes, serviceToken.getToken());

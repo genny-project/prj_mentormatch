@@ -149,7 +149,7 @@ rule "IS_MENTOR"
 
 			List<String> bccList = Arrays.asList("rahul@gada.io");
 
-			/* if (!GennySettings.projectUrl.contains("dev")) { 
+			/* if (!GennySettings.projectUrl.contains("dev")) {
 			if (true) {
 				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
 				System.out.println("Sent Email to " + email);
