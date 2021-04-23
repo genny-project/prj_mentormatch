@@ -26,8 +26,8 @@ rule "MOVE_BUCKET_CLICK_EVENT"
     no-loop
     when
 		$message : QEventMessage((data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_TRAINING_APPLICATION")
-								 || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION")|| (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") 
-								 || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
+								 || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION") || (data.code matches "ACT_PRI_EVENT_SELECT_MENTOR")
+								 || (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -39,9 +39,9 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 
 		String code = $message.getData().getCode();
 		String workflowSignalCode = null;
-		
+
 		switch (code) {
-		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION": 
+		case "ACT_PRI_EVENT_ON_SHORE_APPLICATION":
 		    workflowSignalCode = "ON_SHORE";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
@@ -52,18 +52,23 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		case "ACT_PRI_EVENT_MATCH_APPLICATION":
 		    workflowSignalCode = "MATCH";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
-		    
-		    
+			break;
+		case "ACT_PRI_EVENT_SELECT_MENTOR":
+		    workflowSignalCode = "MATCH";
+			System.out.println("########Event: ACT_PRI_EVENT_SELECT_MENTOR");
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
+
+
 		    /* dropdown search here For companyRep */
-			DropdownUtils dropdown = new DropdownUtils(serviceToken);
+			/*DropdownUtils dropdown = new DropdownUtils(serviceToken);
 			dropdown.setNewSearch("Mentor Dropdown", "Fetch Mentor")
 											.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 											.addFilter("PRI_IS_MENTOR", true)
 											.setPageStart(0)
-											.setPageSize(1000);
-											
+											.setPageSize(1000);*/
+
 			/* Send the dropdown options */
-			dropdown.sendSearchResults("GRP_MENTOR_SELECTION", "LNK_MENTOR", "ITEM", true, false, userToken, false);
+			/*dropdown.sendSearchResults("GRP_MENTOR_SELECTION", "LNK_MENTOR", "ITEM", true, false, userToken, false);*/
 		    break;
 		case "ACT_PRI_EVENT_MENTORING_APPLICATION":
 		    workflowSignalCode = "MENTORING";
@@ -74,12 +79,12 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
 		}
-	
+
 		String targetCode = $message.getData().getTargetCode();
 		output.setTypeOfResult("SIGNAL");
 		output.setResultCode("START_"+workflowSignalCode);
 		output.setTargetCode($message.getData().getTargetCode());
-		
+
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$ targetCode: " + output.getTargetCode());
 
 		SessionFacts facts = new SessionFacts(serviceToken, userToken, output.getTargetCode());
@@ -92,7 +97,7 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 
 		if (code.equals("ACT_PRI_EVENT_ACCEPT_APPLY")) {
 
-           
+
             /* CHANGE CARD COLOUR */
 				Answer answerColour = new Answer(serviceToken.getUserCode(), targetCode, "PRI_STATUS_COLOR", "default");
 				beUtils.saveAnswer(answerColour);
