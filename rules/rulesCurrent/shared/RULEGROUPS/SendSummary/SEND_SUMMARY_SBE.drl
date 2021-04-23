@@ -15,6 +15,8 @@ import life.genny.utils.TableUtils;
 import org.drools.core.spi.KnowledgeHelper;
 import life.genny.qwanda.datatype.Allowed;
 import java.util.stream.Collectors;
+import life.genny.qwanda.attribute.EntityAttribute;
+
 
 
 rule "SEND_SUMMARY_SBE"
