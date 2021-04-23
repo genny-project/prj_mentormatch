@@ -29,15 +29,16 @@ rule "SBE_MENTOR"
         serviceToken : GennyToken( code == "PER_SERVICE")
      then
      	System.out.println("   Generate "+drools.getRule().getName() );
-     	
+
      	SearchEntity searchBE = new SearchEntity("SBE_MENTOR", "Mentor")
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_IS_MENTOR", true)
 						/* .addFilter("PRI_DISABLED", false) */
-							
+
+						/* Table Columns */
 						.addColumn("PRI_FIRSTNAME", "Name")
-						
+
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Intern Profile")
 						.setPageStart(0).setPageSize(15);

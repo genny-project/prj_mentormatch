@@ -52,8 +52,8 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
 
-		/* FORM */
-		displayCodes.put("ACT_PRI_EVENT_MATCH_APPLICATION", "FORM");
+		/* dialog */
+		displayCodes.put("ACT_PRI_EVENT_SELECT_MENTOR", "DIALOG_FORM");
 
 		insert(displayCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());
