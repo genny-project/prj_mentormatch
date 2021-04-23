@@ -44,6 +44,7 @@ rule "SBE_OFF_SHORE"
 						.addColumn("PRI_NAME", "Name")
 						.addColumn("PRI_MOBILE", "Mobile")
 						.addColumn("PRI_EMAIL", "Email")
+						.addColumn("PRI_TRAINING_STATUS", "Training Status")
 
 						.addColumn("PRI_STATUS_COLOR", " ")
 						.addColumn("PRI_IMAGE_URL", " ")
