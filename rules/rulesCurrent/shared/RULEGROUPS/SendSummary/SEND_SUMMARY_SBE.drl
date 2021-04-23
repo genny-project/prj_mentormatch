@@ -27,7 +27,7 @@ rule "SEND_SUMMARY_SBE"
 		output : OutputParam( )
 		allowed: Allowed(	code == "AGENT" ||
 											code == "MENTEE" ||
-											code == "MENTOR" ||	 )
+											code == "MENTOR" )
 
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
