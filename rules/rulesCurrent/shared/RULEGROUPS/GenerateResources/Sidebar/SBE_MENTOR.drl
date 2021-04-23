@@ -30,24 +30,17 @@ rule "SBE_MENTOR"
      then
      	System.out.println("   Generate "+drools.getRule().getName() );
 
-     	SearchEntity searchBE = new SearchEntity("SBE_MENTOR", "Mentor")
+     	SearchEntity searchBE = new SearchEntity("SBE_MENTOR", "Mentors")
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_IS_MENTOR", true)
-						/* .addFilter("PRI_DISABLED", false) */
+						.setPageStart(0)
+						.setPageSize(GennySettings.defaultDropDownPageSize);
 
-						/* Table Columns */
-						.addColumn("PRI_FIRSTNAME", "Name")
-
-						/* Actions */
-						.addAction("PRI_EVENT_VIEW", "View Intern Profile")
-						.setPageStart(0).setPageSize(15);
 
 		searchBE.setRealm(serviceToken.getRealm());
-
 		insert(searchBE);
+
 		VertxUtils.putObject(serviceToken.getRealm(), "", searchBE.getCode(), searchBE, serviceToken.getToken());
-
-
 
 end
