@@ -45,7 +45,7 @@ rule "GENERATE_SUMMARY_CODES"
 		menteeCodes.add("SBE_SUMMARY_MENTEE");
 
 		summaryCodes.put("SUMMARY_CODES_AGENT", agentCodes);
-		summaryCodes.put("SBE_SUMMARY_MENTEE", menteeCodes);
+		summaryCodes.put("SUMMARY_CODES_MENTEE", menteeCodes);
 
 		insert(summaryCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "SUMMARY_CODES", summaryCodes, serviceToken.getToken());
