@@ -31,9 +31,11 @@ rule "SBE_MENTOR"
      	System.out.println("   Generate "+drools.getRule().getName() );
 
      	SearchEntity searchBE = new SearchEntity("SBE_MENTOR", "Mentors")
-						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
+						.addSort("PRI_FIRSTNAME", "Name", SearchEntity.Sort.ASC)
+
 						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_IS_MENTOR", true)
+						
 						.setPageStart(0)
 						.setPageSize(GennySettings.defaultDropDownPageSize);
 
