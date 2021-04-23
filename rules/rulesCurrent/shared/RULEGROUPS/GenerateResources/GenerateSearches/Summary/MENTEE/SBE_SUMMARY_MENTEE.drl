@@ -48,7 +48,7 @@ rule "SBE_SUMMARY_MENTEE"
                      			.addColumn("PRI_IMAGE_URL", " ")*/
 
                               /* Actions */
-                        		.addAction("PRI_EVENT_EDIT", "Edit")
+                        		/* .addAction("PRI_EVENT_EDIT", "Edit") */
 
                               /* Display Mode */
                               .setDisplayMode("my_profile")
