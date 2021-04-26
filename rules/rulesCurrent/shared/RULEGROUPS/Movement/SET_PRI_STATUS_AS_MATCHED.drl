@@ -46,7 +46,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
  		System.out.println("SET_PRI_STATUS_AS_MATCHED: Rule fired" );
 
 
- 		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","MATCHED");
+ 		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED");
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
  		beUtils.saveAnswer(answer);
 
@@ -102,71 +102,15 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 				System.out.println("ERROR: Null firstname");
 			}
 
-			/* Remove from Available bucket */
+			System.out.println("##Removing from Training Bucket##");
+
+			/* Remove from Training bucket */
 			Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
 			beUtils.saveAnswer(answerDisable);
 			System.out.println("answerDisable: " +answerDisable);
 			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", "SBE_MATCHED", beUtils);
 
 		}
-
-		/*if (assocIntern != null){
-			BaseEntity assocInternBe = beUtils.getBaseEntityByCode(assocIntern);
-			System.out.println("assocInternBe: " +assocInternBe);
-
-			String internStatus = assocInternBe.getValue("PRI_STATUS", null);
-			System.out.println("internStatus: " +internStatus);
-
-			if (internStatus.equals("AVAILABLE") || internStatus.equals("APPLIED") || internStatus.equals("SHORTLISTED") || internStatus.equals("INTERVIEWED") || internStatus.equals("OFFERED")){
-				Answer answerStatus = new Answer(userToken.getUserCode(), assocInternBe.getCode(), "PRI_STATUS", "PLACED");
-				beUtils.saveAnswer(answerStatus);
-				System.out.println("answerStatus: " +answerStatus);
-			}
-
-			String appCode = newApplication.getCode();
-        	System.out.println(appCode);
-
-        	String[] strippedAppCode = appCode.split("-");
-        	System.out.println(strippedAppCode[0]);
-
-        	String assocAppCode = "PRI_" +strippedAppCode[0];
-        	System.out.println(assocAppCode);
-
-        	Answer answerApp = new Answer(userToken.getUserCode(), assocInternBe.getCode(), assocAppCode, appCode);
-			beUtils.saveAnswer(answerApp);
-			System.out.println("answerApp: " +answerApp);
-
-
-			/* Remove from Available bucket
-			Answer answerDisable = new Answer(userToken.getUserCode(), assocInternBe.getCode(), "PRI_DISABLED", true);
-			beUtils.saveAnswer(answerDisable);
-			System.out.println("answerDisable: " +answerDisable);
-			TableUtils.moveEntity(assocInternBe.getCode(), "SBE_AVAILABLE_INTERNS", null, beUtils);
-
-		} else {
-			System.out.println("$$$ assocIntern PRI_INTERN_CODE was null $$$");
-		}
-
-
-		BaseEntity user = beUtils.getBaseEntityByCode(newApplication.getCode());
-		String name = user.getValue("PRI_INTERN_NAME",null);
-
-		String title = user.getValue("PRI_TITLE",null);
-		String assoc_hc = user.getValue("PRI_ASSOC_HC",null);
-
-
-		String endPoint = GennySettings.projectUrl + "/v7/notes";
-		String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";
-
-		String tag = "ni";
-
-		QwandaUtils.apiPostNote(endPoint, userToken.getUserCode(), tag, userToken.getUserCode(), name + " has been placed for the internship " + title + " at " + assoc_hc, serviceToken.getToken());
-
-		System.out.println("I just posted the note");
-		System.out.println("Note endPoint: " +endPoint);
-		System.out.println("Note userToken.getUserCode(): " +userToken.getUserCode());*/
-
-
 
 		retract(newApplication)
 		retract(bucketCode)
