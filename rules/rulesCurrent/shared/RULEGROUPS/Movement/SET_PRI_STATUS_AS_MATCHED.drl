@@ -49,7 +49,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
- 		associatedInternBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
+ 		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
 
  		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED");
  		beUtils.saveAnswer(answer);
