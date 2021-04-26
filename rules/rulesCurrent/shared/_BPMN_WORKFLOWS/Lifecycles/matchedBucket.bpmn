@@ -131,6 +131,7 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+        <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;>>>ENTERING MATCHED BUCKET WORKFLOW&lt;&lt;&lt;&quot;  );
 
 bucketCode = &quot;TRAINING&quot;;
@@ -228,7 +229,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
 </drools:script>
           </drools:onExit-script>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+        <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
         <bpmn2:ioSpecification id="InputOutputSpecification_1">
           <bpmn2:dataInput id="DataInput_2" itemSubjectRef="ItemDefinition_2" name="serviceToken"/>
@@ -296,7 +297,6 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_1" drools:priority="1" sourceRef="Task_6" targetRef="ScriptTask_1"/>
       <bpmn2:sequenceFlow id="SequenceFlow_2" drools:priority="1" sourceRef="ScriptTask_1" targetRef="EndEvent_6"/>
-      <bpmn2:sequenceFlow id="SequenceFlow_3" drools:priority="1" sourceRef="Task_1" targetRef="Task_6"/>
       <bpmn2:task id="Task_1" drools:taskName="AskQuestionTask" drools:displayName="Ask Question Task" drools:icon="icons/icon-info.gif" name="QUE_SELECT_MENTOR_GRP">
         <bpmn2:extensionElements>
           <drools:metaData name="elementname">
@@ -310,7 +310,6 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
           </drools:onExit-script>
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
-        <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
         <bpmn2:ioSpecification id="InputOutputSpecification_2">
           <bpmn2:dataInput id="DataInput_4" itemSubjectRef="ItemDefinition_2" name="userToken"/>
           <bpmn2:dataInput id="DataInput_5" name="questionCode"/>
@@ -392,6 +391,12 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         </bpmn2:dataOutputAssociation>
       </bpmn2:task>
       <bpmn2:sequenceFlow id="SequenceFlow_4" drools:priority="1" sourceRef="ScriptTask_3" targetRef="Task_1"/>
+      <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="Exclusive Gateway 1" gatewayDirection="Converging">
+        <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:sequenceFlow id="SequenceFlow_10" drools:priority="1" sourceRef="ScriptTask_3" targetRef="ExclusiveGateway_1"/>
+      <bpmn2:sequenceFlow id="SequenceFlow_12" drools:priority="1" sourceRef="ExclusiveGateway_1" targetRef="Task_6"/>
     </bpmn2:subProcess>
     <bpmn2:sequenceFlow id="SequenceFlow_8" drools:priority="1" sourceRef="StartEvent_2" targetRef="SubProcess_2"/>
     <bpmn2:sequenceFlow id="SequenceFlow_14" drools:priority="1" sourceRef="SubProcess_2" targetRef="EndEvent_2"/>
@@ -399,7 +404,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Process Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="matchedBucket">
       <bpmndi:BPMNShape id="BPMNShape_SubProcess_2" bpmnElement="SubProcess_2" isExpanded="true">
-        <dc:Bounds height="162.0" width="1231.0" x="280.0" y="235.0"/>
+        <dc:Bounds height="164.0" width="1231.0" x="280.0" y="235.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_1">
           <dc:Bounds height="11.0" width="59.0" x="286.0" y="238.0"/>
         </bpmndi:BPMNLabel>
@@ -447,15 +452,21 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="601.0" y="286.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="601.0" y="256.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_9">
-          <dc:Bounds height="22.0" width="109.0" x="601.0" y="300.0"/>
+          <dc:Bounds height="22.0" width="109.0" x="601.0" y="270.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="631.0" y="329.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="44.0" x="634.0" y="379.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_SubProcess_2">
         <di:waypoint xsi:type="dc:Point" x="235.0" y="316.0"/>
         <di:waypoint xsi:type="dc:Point" x="257.0" y="316.0"/>
-        <di:waypoint xsi:type="dc:Point" x="280.0" y="316.0"/>
+        <di:waypoint xsi:type="dc:Point" x="280.0" y="317.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_9"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="BPMNShape_StartEvent_3" targetElement="BPMNShape_ScriptTask_3">
@@ -465,8 +476,8 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         <bpmndi:BPMNLabel id="BPMNLabel_10"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_14" sourceElement="BPMNShape_SubProcess_2" targetElement="BPMNShape_EndEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="1511.0" y="316.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1540.0" y="316.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1511.0" y="317.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1540.0" y="317.0"/>
         <di:waypoint xsi:type="dc:Point" x="1570.0" y="316.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_11"/>
       </bpmndi:BPMNEdge>
@@ -482,17 +493,23 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         <di:waypoint xsi:type="dc:Point" x="1420.0" y="311.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_13"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_Task_1" targetElement="BPMNShape_Task_6">
-        <di:waypoint xsi:type="dc:Point" x="711.0" y="311.0"/>
-        <di:waypoint xsi:type="dc:Point" x="830.0" y="311.0"/>
-        <di:waypoint xsi:type="dc:Point" x="950.0" y="311.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_14"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ScriptTask_3" targetElement="BPMNShape_Task_1">
-        <di:waypoint xsi:type="dc:Point" x="499.0" y="311.0"/>
-        <di:waypoint xsi:type="dc:Point" x="550.0" y="311.0"/>
-        <di:waypoint xsi:type="dc:Point" x="601.0" y="311.0"/>
+        <di:waypoint xsi:type="dc:Point" x="444.0" y="286.0"/>
+        <di:waypoint xsi:type="dc:Point" x="444.0" y="281.0"/>
+        <di:waypoint xsi:type="dc:Point" x="601.0" y="281.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_15"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_ScriptTask_3" targetElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="499.0" y="311.0"/>
+        <di:waypoint xsi:type="dc:Point" x="656.0" y="311.0"/>
+        <di:waypoint xsi:type="dc:Point" x="656.0" y="329.0"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Task_6">
+        <di:waypoint xsi:type="dc:Point" x="681.0" y="354.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1005.0" y="354.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1005.0" y="336.0"/>
+        <bpmndi:BPMNLabel/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
