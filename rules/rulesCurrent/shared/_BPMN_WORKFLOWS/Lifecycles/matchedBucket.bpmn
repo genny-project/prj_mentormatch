@@ -292,7 +292,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-        <bpmn2:script>System.out.println(&quot;%%%%%%%%%%%%%%%%%%% END trainingBucket %%%%%%%%%%%%%%%%%%%&quot;);</bpmn2:script>
+        <bpmn2:script>System.out.println(&quot;%%%%%%%%%%%%%%%%%%% END matchedBucket %%%%%%%%%%%%%%%%%%%&quot;);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_1" drools:priority="1" sourceRef="Task_6" targetRef="ScriptTask_1"/>
       <bpmn2:sequenceFlow id="SequenceFlow_2" drools:priority="1" sourceRef="ScriptTask_1" targetRef="EndEvent_6"/>

@@ -39,6 +39,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("TRAINING"))
 		controlSignalCode : String(controlSignalCode.equals("MATCH"))
+		associatedMenteeBe : BaseEntity( code matches "PER_\\S+" )
 
 
      then
@@ -54,13 +55,62 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		System.out.println("SET_PRI_STATUS_AS_MATCHED: newApplication = " + newApplication);
 
 
-		TableUtils.moveEntity(newApplication.getCode(), "SBE_MENTEE_TRAINING", "SBE_MATCHED", beUtils);
+		/*TableUtils.moveEntity(newApplication.getCode(), "SBE_MENTEE_TRAINING", "SBE_MATCHED", beUtils);*/
 
 
 		/* Save status to the PER */
-		/*String assocIntern = newApplication.getValue("PRI_INTERN_CODE", null);
-		System.out.println("assocIntern: " +assocIntern);
-		if (assocIntern != null){
+		String appMentee = associatedMenteeBe.getCode();
+		System.out.println("appMentee = " + appMentee);
+
+		if (appMentee != null) {
+ 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_CODE", appMentee));
+		} else {
+			System.out.println("ERROR: Null appMentee");
+		}
+
+		String assocMentee = newApplication.getValue("PRI_MENTEE_CODE", null);
+		System.out.println("assocMentee: " +assocMentee);
+
+		if (assocMentee != null) {
+
+			String firstname = associatedMenteeBe.getValue("PRI_FIRSTNAME", null);
+ 			String lastname = associatedMenteeBe.getValue("PRI_LASTNAME", null);
+ 			String name = "";
+
+			System.out.println("firstname = " +firstname);
+			System.out.println("lastname = " +lastname);
+
+			if (firstname != null) {
+				if (lastname != null) {
+						name = firstname + " " + lastname;
+						System.out.println("name = " +name);
+
+						if (name != null) {
+
+								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
+								beUtils.saveAnswer(answer);
+
+								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
+								beUtils.saveAnswer(answer);
+						} else {
+							System.out.println("ERROR: Null name");
+						}
+				} else {
+					System.out.println("ERROR: Null lastname");
+				}
+			} else {
+				System.out.println("ERROR: Null firstname");
+			}
+
+			/* Remove from Available bucket */
+			Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
+			beUtils.saveAnswer(answerDisable);
+			System.out.println("answerDisable: " +answerDisable);
+			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", "SBE_MATCHED", beUtils);
+
+		}
+
+		/*if (assocIntern != null){
 			BaseEntity assocInternBe = beUtils.getBaseEntityByCode(assocIntern);
 			System.out.println("assocInternBe: " +assocInternBe);
 
@@ -95,18 +145,18 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		} else {
 			System.out.println("$$$ assocIntern PRI_INTERN_CODE was null $$$");
-		}*/
+		}
 
 
-		/*BaseEntity user = beUtils.getBaseEntityByCode(newApplication.getCode());
+		BaseEntity user = beUtils.getBaseEntityByCode(newApplication.getCode());
 		String name = user.getValue("PRI_INTERN_NAME",null);
 
 		String title = user.getValue("PRI_TITLE",null);
 		String assoc_hc = user.getValue("PRI_ASSOC_HC",null);
 
 
-		String endPoint = GennySettings.projectUrl + "/v7/notes";*/
-		/*String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";
+		String endPoint = GennySettings.projectUrl + "/v7/notes";
+		String endPoint = "https://internmatch-cyrus.gada.io/v7/notes";
 
 		String tag = "ni";
 
