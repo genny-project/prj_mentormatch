@@ -119,5 +119,5 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		retract(newApplication)
 		retract(bucketCode)
 		retract(controlSignalCode)
-
+		retract(associatedMenteeBe)
 end
