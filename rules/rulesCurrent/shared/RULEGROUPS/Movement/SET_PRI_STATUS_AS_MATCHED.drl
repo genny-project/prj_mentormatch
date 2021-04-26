@@ -45,9 +45,13 @@ rule "SET_PRI_STATUS_AS_MATCHED"
      then
  		System.out.println("SET_PRI_STATUS_AS_MATCHED: Rule fired" );
 
+		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
+
+		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
+ 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
+ 		associatedInternBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
 
  		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED");
- 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
  		beUtils.saveAnswer(answer);
 
 
