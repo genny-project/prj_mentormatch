@@ -88,7 +88,6 @@
     <bpmn2:property id="project" itemSubjectRef="ItemDefinition_2016" name="project"/>
     <bpmn2:property id="eventMsg" itemSubjectRef="ItemDefinition_46" name="eventMsg"/>
     <bpmn2:property id="eventMsg2" itemSubjectRef="ItemDefinition_46" name="eventMsg2"/>
-    <bpmn2:property id="codes" itemSubjectRef="ItemDefinition_2733" name="codes"/>
     <bpmn2:endEvent id="EndEvent_2" name="End cardsA">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -158,7 +157,7 @@ BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
 
 OutputParam data = (OutputParam)sessionFacts.getMessage();
 String codes = data.getTargetCode();
-kcontext.setVariable(&quot;codes&quot;, codes);
+
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ codes: &quot; + codes);
 
 newApplication = beUtils. getBaseEntityByCode(codes);
