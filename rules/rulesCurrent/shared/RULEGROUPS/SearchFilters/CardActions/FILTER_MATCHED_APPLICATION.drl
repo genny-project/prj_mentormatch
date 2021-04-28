@@ -38,7 +38,7 @@ rule "FILTER_MATCHED_APPLICATION"
 		System.out.println("userCode     :: " + userToken.getUserCode());
 		System.out.println("searchCode   :: " + searchBE.getCode());
 
-		searchBE.addDefaultAction("PRI_EVENT_MATCH_APPLICATION", "Move To Matched");
+		/* searchBE.addDefaultAction("PRI_EVENT_MATCH_APPLICATION", "Move To Matched"); */
 
 		/* Create  QDataBaseEntityMessage for SearchEntity */
 		QDataBaseEntityMessage msg = new QDataBaseEntityMessage(searchBE);
