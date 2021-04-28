@@ -35,10 +35,11 @@ rule "SET_PRI_STATUS_AS_MENTORING"
     when
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-		newApplication : BaseEntity()
+		newApplication : BaseEntity( code matches "APP_\\S+" )
 		output : OutputParam()
-		bucketCode : String(bucketCode.equals("MATCHED"))
-		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
+		bucketCode : String(bucketCode.equals("TRAINING"))
+		controlSignalCode : String(controlSignalCode.equals("MATCH"))
+		associatedMenteeBe : BaseEntity( code matches "PER_\\S+" )
 
 
      then
