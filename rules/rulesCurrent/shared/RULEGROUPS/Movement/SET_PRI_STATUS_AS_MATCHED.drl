@@ -74,10 +74,16 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		BaseEntity assocMentorPer = beUtils.quantumBe(mentorPer, "assocMentorPer");
 		System.out.println("assocMentorPer: " +assocMentorPer);
 
+		if (mentorPer != null) {
+ 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTOR_CODE", mentorPer));
+		} else {
+			System.out.println("ERROR: Null mentorPer");
+		}
+
 		String assocMentee = newApplication.getValue("PRI_MENTEE_CODE", null);
 		System.out.println("assocMentee: " +assocMentee);
 
-		if (associatedMenteeBe != null) {
+		if (associatedMenteeBe != null && assocMentorPer != null) {
 
 			String firstname = associatedMenteeBe.getValue("PRI_FIRSTNAME", null);
  			String lastname = associatedMenteeBe.getValue("PRI_LASTNAME", null);
@@ -106,6 +112,16 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 				}
 			} else {
 				System.out.println("ERROR: Null firstname");
+			}
+
+			/* Setting Mentor Values */
+
+			String mentorName = assocMentorPer.getValue("PRI_FIRSTNAME", null);
+			if (mentorName != null) {
+				answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTOR_NAME", mentorName);
+				beUtils.saveAnswer(answer);
+			} else {
+				System.out.println("ERROR: Null mentorName");
 			}
 
 			System.out.println("## Removing from Training Bucket ##");

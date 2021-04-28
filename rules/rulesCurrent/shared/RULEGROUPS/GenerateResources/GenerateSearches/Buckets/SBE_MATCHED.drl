@@ -40,7 +40,8 @@ rule "SBE_MATCHED"
 						.addFilter("PRI_DISABLED", false)
 
 						/* Columns */
-						.addColumn("PRI_NAME", "Name")
+						.addColumn("PRI_MENTEE_NAME", "Name")
+						.addColumn("PRI_MENTOR_NAME", "Name")
 						.addColumn("PRI_MOBILE", "Mobile")
 						.addColumn("PRI_EMAIL", "Email")
 
