@@ -51,7 +51,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
  		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
 
- 		beUtils.saveAnswer(answer new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED"));
 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_DISABLED", "false"));
 
 		System.out.println("SET_PRI_STATUS_AS_MATCHED: Answer = " + answer);
