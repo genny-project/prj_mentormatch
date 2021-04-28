@@ -35,7 +35,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
     when
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-		newApplication : BaseEntity()
+		newApplication : BaseEntity( code matches "APP_\\S+" )
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("TRAINING"))
 		controlSignalCode : String(controlSignalCode.equals("MATCH"))
@@ -48,8 +48,8 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
 		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
- 		BaseEntity newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
- 		BaseEntity associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
+ 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
+ 		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
 
  		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(),"PRI_STATUS","MATCHED");
  		beUtils.saveAnswer(answer);
@@ -71,7 +71,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		String assocMentee = newApplication.getValue("PRI_MENTEE_CODE", null);
 		System.out.println("assocMentee: " +assocMentee);
 
-		if (assocMentee != null) {
+		if (associatedMenteeBe != null) {
 
 			String firstname = associatedMenteeBe.getValue("PRI_FIRSTNAME", null);
  			String lastname = associatedMenteeBe.getValue("PRI_LASTNAME", null);
@@ -113,7 +113,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		} else {
 
-			System.out.println("assocMentee is NULL");
+			System.out.println("associatedMenteeBe is NULL");
 		}
 
 		retract(newApplication)
