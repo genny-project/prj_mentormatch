@@ -41,6 +41,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
      then
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
+ 		System.out.println("Current Time is "+LocalDateTime.now());
 
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
@@ -54,7 +55,19 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 
 		TableUtils.moveEntity(newApplication.getCode(), "SBE_MATCHED", "SBE_ROTARY_MENTORING", beUtils);
-
+		
+		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
+		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
+		
+		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
+		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
+		
+		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
+		if (menteeBe != null) {
+			System.out.println("Sending email to mentee for created meeting request");
+		}
+		
+		
 		retract(newApplication)
 		retract(bucketCode)
 		retract(controlSignalCode)
