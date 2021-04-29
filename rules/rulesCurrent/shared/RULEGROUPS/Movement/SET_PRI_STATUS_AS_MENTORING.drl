@@ -36,7 +36,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		newApplication : BaseEntity(code matches "APP_\\S+" )
-		associatedMenteeBe : BaseEntity(code matches "PER_\\S+" )
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("MATCHED"))
 		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
@@ -46,9 +45,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
- 		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
- 		
- 		
  		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","MENTORING");
  		beUtils.saveAnswer(answer);
 
