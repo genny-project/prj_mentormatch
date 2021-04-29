@@ -43,9 +43,13 @@ rule "SET_PRI_STATUS_AS_MENTORING"
      then
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
 
+		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
+ 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
+ 		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
+ 		
+ 		
  		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","MENTORING");
- 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
  		beUtils.saveAnswer(answer);
 
 
