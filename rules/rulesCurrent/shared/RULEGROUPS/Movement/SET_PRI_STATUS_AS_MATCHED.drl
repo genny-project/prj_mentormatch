@@ -28,6 +28,7 @@ import life.genny.utils.TableUtils;
 import life.genny.models.ThemePosition;
 import life.genny.models.ThemeAttributeType;
 import life.genny.qwandautils.GennySettings;
+import life.genny.notifications.EmailHelper;
 
 rule "SET_PRI_STATUS_AS_MATCHED"
     ruleflow-group 'Movement'
@@ -148,13 +149,15 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 				List<String> bccList = Arrays.asList("rahul@gada.io");
 
-				if (true) {
-				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
-				System.out.println("Sent Email to " + email);
-				System.out.println("bccList:: " + bccList);
-			} else {
-				System.out.println("WARNING: Email not sent because on Dev server");
-			}
+					if (true) {
+
+					EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData);
+					System.out.println("Sent Email to " + mentorEmail);
+					System.out.println("bccList:: " + bccList);
+
+					} else {
+					System.out.println("WARNING: Email not sent because on Dev server");
+				}
 
 			} else {
 				System.out.println("ERROR: Null mentorEmail");
