@@ -148,6 +148,14 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 				List<String> bccList = Arrays.asList("rahul@gada.io");
 
+				if (true) {
+				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
+				System.out.println("Sent Email to " + email);
+				System.out.println("bccList:: " + bccList);
+			} else {
+				System.out.println("WARNING: Email not sent because on Dev server");
+			}
+
 			} else {
 				System.out.println("ERROR: Null mentorEmail");
 			}
@@ -169,7 +177,13 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			beUtils.saveAnswer(answerDisable);
 			System.out.println("answerDisable: " +answerDisable);
 
-			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", "SBE_MATCHED", beUtils);
+			QDataBaseEntityMessage beMsg = new QDataBaseEntityMessage(newApplication);
+			beMsg.setToken(userToken.getToken());
+			beMsg.setReplace(true);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(beMsg));
+
+			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", null, beUtils);
+			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);
 
 		} else {
 
