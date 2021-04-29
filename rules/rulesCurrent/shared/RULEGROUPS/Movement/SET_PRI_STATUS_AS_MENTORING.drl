@@ -41,7 +41,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
      then
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
- 		System.out.println("Current Time is "+LocalDateTime.now());
 
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
