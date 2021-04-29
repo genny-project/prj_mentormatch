@@ -291,6 +291,8 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
           <bpmn2:dataInput id="DataInput_10" name="targetCode"/>
           <bpmn2:dataInput id="DataInput_11" name="liveQuestions"/>
           <bpmn2:dataInput id="DataInput_12" name="showInDrafts"/>
+          <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_1240" name="Result"/>
+          <bpmn2:dataOutput id="DataOutput_4" itemSubjectRef="ItemDefinition_1240" name="results"/>
           <bpmn2:inputSet id="_InputSet_135">
             <bpmn2:dataInputRefs>DataInput_4</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>DataInput_5</bpmn2:dataInputRefs>
@@ -302,7 +304,10 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
             <bpmn2:dataInputRefs>DataInput_11</bpmn2:dataInputRefs>
             <bpmn2:dataInputRefs>DataInput_12</bpmn2:dataInputRefs>
           </bpmn2:inputSet>
-          <bpmn2:outputSet id="_OutputSet_22"/>
+          <bpmn2:outputSet id="_OutputSet_22">
+            <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+            <bpmn2:dataOutputRefs>DataOutput_4</bpmn2:dataOutputRefs>
+          </bpmn2:outputSet>
         </bpmn2:ioSpecification>
         <bpmn2:dataInputAssociation id="_DataInputAssociation_612">
           <bpmn2:sourceRef>userToken</bpmn2:sourceRef>
@@ -341,6 +346,14 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
         <bpmn2:dataInputAssociation id="_DataInputAssociation_620">
           <bpmn2:targetRef>DataInput_12</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
+        <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+          <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+          <bpmn2:targetRef>results</bpmn2:targetRef>
+        </bpmn2:dataOutputAssociation>
+        <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
+          <bpmn2:sourceRef>DataOutput_4</bpmn2:sourceRef>
+          <bpmn2:targetRef>results</bpmn2:targetRef>
+        </bpmn2:dataOutputAssociation>
       </bpmn2:task>
       <bpmn2:sequenceFlow id="SequenceFlow_3" drools:priority="1" sourceRef="ScriptTask_3" targetRef="Task_1"/>
     </bpmn2:subProcess>
