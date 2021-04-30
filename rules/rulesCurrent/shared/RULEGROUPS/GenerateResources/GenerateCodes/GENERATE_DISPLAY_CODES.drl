@@ -42,7 +42,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_QA_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_FINISH_MENTEE", "FORM:DETAIL");
-		displayCodes.put("QUE_MENTEE_GRP", "FORM:DETAIL");
+		/*displayCodes.put("QUE_MENTEE_GRP", "FORM:DETAIL");*/
 
 		/* PROCESS */
 		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
@@ -51,7 +51,7 @@ rule "GENERATE_DISPLAY_CODES"
 
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
-		/*displayCodes.put("QUE_MENTEE_GRP", "FORM:DETAIL");*/
+		displayCodes.put("QUE_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
 
 		/* dialog */
