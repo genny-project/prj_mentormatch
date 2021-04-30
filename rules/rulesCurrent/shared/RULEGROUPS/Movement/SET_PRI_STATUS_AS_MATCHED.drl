@@ -127,7 +127,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 				String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
 				System.out.println("token: " + token);
 
-				String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX0ZJTklTSF9JTlRFUk4=";
+				String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX01FTlRPUl9BR1JFRV9UT19NRU5UT1JfR1JQ";
 				System.out.println("url: " + url);
 
 				url = url + "?token=" + token;
