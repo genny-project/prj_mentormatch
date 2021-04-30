@@ -35,7 +35,7 @@ rule "SBE_ON_SHORE"
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 
 						/* Filters */
-						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "APP_%")
+						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_STATUS", SearchEntity.StringFilter.LIKE, "ON_SHORE")
 						.addFilter("PRI_DISABLED", false)
 
@@ -43,7 +43,7 @@ rule "SBE_ON_SHORE"
 						.addColumn("PRI_NAME", "Name")
 						.addColumn("PRI_MOBILE", "Mobile")
 						.addColumn("PRI_EMAIL", "Email")
-						
+
 						/* Display Code */
 						.setDisplayMode("CARD:MAIN_2")
 
