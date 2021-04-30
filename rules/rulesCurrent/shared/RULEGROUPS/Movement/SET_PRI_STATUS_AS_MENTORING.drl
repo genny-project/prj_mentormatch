@@ -26,8 +26,8 @@ import life.genny.utils.BucketUtils;
 import life.genny.utils.TableUtils;
 import life.genny.models.ThemePosition;
 import life.genny.models.ThemeAttributeType;
-import life.genny.qwandautils.GennySettings
-import life.genny.notifications.EmailHelper
+import life.genny.qwandautils.GennySettings;
+import life.genny.notifications.EmailHelper;
 import java.util.HashMap;
 
 rule "SET_PRI_STATUS_AS_MENTORING"
