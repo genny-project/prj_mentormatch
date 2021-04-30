@@ -152,7 +152,7 @@ rule "IS_MENTEE"
 
 			/* if (!GennySettings.projectUrl.contains("dev")) { */
 			if (true) {
-				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData);
+				EmailHelper.sendGrid(beUtils, email, null, bccList, subject, template_id, templateData, true);
 				System.out.println("Sent Email to " + email);
 				System.out.println("bccList:: " + bccList);
 			} else {

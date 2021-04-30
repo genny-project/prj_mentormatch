@@ -151,7 +151,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 					if (true) {
 
-					EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData);
+					EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 					System.out.println("Sent Email to " + mentorEmail);
 					System.out.println("bccList:: " + bccList);
 

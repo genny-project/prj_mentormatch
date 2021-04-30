@@ -26,7 +26,9 @@ import life.genny.utils.BucketUtils;
 import life.genny.utils.TableUtils;
 import life.genny.models.ThemePosition;
 import life.genny.models.ThemeAttributeType;
-import life.genny.qwandautils.GennySettings;
+import life.genny.qwandautils.GennySettings
+import life.genny.notifications.EmailHelper
+import java.util.HashMap;
 
 rule "SET_PRI_STATUS_AS_MENTORING"
     ruleflow-group 'Movement'
@@ -78,7 +80,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
 						String template_id = "d-263a824859cb46b69b17ee80e8925989";
 
-						HashMap<String, String> templateData = new HashMap<String, String>();
+					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
 
@@ -92,14 +94,15 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						if (!GennySettings.projectUrl.contains("dev")) {
 
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData);
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
+
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
 								menteeEmail = "tarjnee.gandhi@outcomelife.com.au";
-								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData);
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 
