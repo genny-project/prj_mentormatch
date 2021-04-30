@@ -35,7 +35,7 @@ rule "SBE_MENTEE_TRAINING"
 						.addSort("PRI_CREATED", "Created", SearchEntity.Sort.DESC)
 
 						/* Filters */
-						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "APP_%")
+						.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
 						.addFilter("PRI_STATUS", SearchEntity.StringFilter.LIKE, "TRAINING")
 						.addFilter("PRI_DISABLED", false)
 
