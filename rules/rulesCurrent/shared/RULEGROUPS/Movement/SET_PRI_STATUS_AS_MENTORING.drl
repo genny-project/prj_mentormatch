@@ -143,7 +143,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						if (!GennySettings.projectUrl.contains("dev")) {
 				
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, internEmail, null, bccList, subject, template_id, templateData);
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData);
 						
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 						
