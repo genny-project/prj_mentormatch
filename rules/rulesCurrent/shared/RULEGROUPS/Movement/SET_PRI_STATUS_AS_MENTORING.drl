@@ -58,7 +58,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 
-		String meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
 
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
