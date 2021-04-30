@@ -39,11 +39,10 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("MATCHED"))
 		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
+		beUtils : BaseEntityUtils()
      then
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
-
-		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
-
+		
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
  		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS","MENTORING");
