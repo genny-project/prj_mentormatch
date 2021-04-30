@@ -65,6 +65,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		System.out.println("^^^^^^^^^ meetingTime = " + meetingTime);
 		
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
+		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
 		if (menteeBe != null) {
 			System.out.println("Sending email to mentee for created meeting request");
 			
