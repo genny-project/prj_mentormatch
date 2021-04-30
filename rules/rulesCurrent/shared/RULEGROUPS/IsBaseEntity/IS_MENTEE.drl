@@ -120,9 +120,9 @@ rule "IS_MENTEE"
 
 
 		String rawSendEmail = user.getValue("LNK_SEND_EMAIL", null);
-		System.out.println("rawSendEmail: " + rawSendEmail + " Sending email to: " + email);
+		System.out.println("rawSendEmail: " + rawSendEmail + ", Sending email to: " + email);
 
-		if (rawSendEmail.equals("SEL_YES")) {
+		if (rawSendEmail != null && rawSendEmail.equals("SEL_YES")) {
 
 			BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
