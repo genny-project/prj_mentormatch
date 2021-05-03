@@ -17,6 +17,7 @@ rule "AGREE_TO_MENTOR_CLICK_EVENT"
     when
 		$message : QEventMessage(data.code matches "QUE_MENTOR_AGREE_TO_MENTOR_GRP.*")
 		userToken : GennyToken (code != "PER_SERVICE" )
+		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
  		ruleDetails : RuleDetails()
     then
@@ -34,8 +35,12 @@ rule "AGREE_TO_MENTOR_CLICK_EVENT"
 		String user = userToken.getUserCode();
 		System.out.println("user: " + user);
 
+        /* Set userToken and serviceToken */
+        /*output.setUserToken(userToken);
+        output.setServiceToken(serviceToken);*/
 
-		output.setTypeOfResult("SIGNAL");
+        /* Set result */
+        output.setTypeOfResult("SIGNAL");
 		output.setResultCode("START_MENTOR_AGREE");
 
 		output.setSuitCase(key);
