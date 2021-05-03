@@ -152,7 +152,7 @@
 	System.out.println(&quot;serviceToken: &quot; + serviceToken.getCode());
 	System.out.println(&quot;userToken: &quot; + userToken.getCode());
 
-	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
+	beUtils = new BaseEntityUtils(serviceToken, userToken);
 
 	BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
 	kcontext.setVariable(&quot;targetBaseEntity&quot;, targetBaseEntity);
