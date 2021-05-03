@@ -155,7 +155,7 @@
 	beUtils = new BaseEntityUtils(serviceToken, userToken);
 
 	targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
-	kcontext.setVariable(&quot;targetBaseEntity&quot;, targetBaseEntity);
+	kcontext.setVariable(&quot;targetBaseEntity: &quot; + targetBaseEntity);
 	System.out.println(&quot;targetBaseEntity: &quot; + targetBaseEntity);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_9" drools:priority="1" sourceRef="StartEvent_4" targetRef="ScriptTask_6"/>
