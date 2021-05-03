@@ -1,0 +1,86 @@
+package life.genny.rules;
+import io.vertx.core.json.JsonObject;
+import life.genny.qwanda.message.QDataBaseEntityMessage;
+import life.genny.qwanda.message.QEventBtnClickMessage;
+import life.genny.models.GennyToken;
+import life.genny.utils.VertxUtils;
+import life.genny.utils.OutputParam;
+import life.genny.qwanda.message.QDataAskMessage;
+import life.genny.utils.BaseEntityUtils;
+import life.genny.utils.QuestionUtils;
+import life.genny.qwandautils.JsonUtils;
+import java.util.ArrayList;
+import java.util.List;
+import life.genny.qwandautils.QwandaMessage;
+import org.json.JSONObject;
+
+import life.genny.notifications.EmailHelper;
+import life.genny.qwanda.message.QScheduleMessage;
+import life.genny.notifications.SmsHelper;
+import java.util.Arrays;
+import java.time.ZoneOffset;
+import life.genny.qwandautils.QwandaUtils;
+import life.genny.qwandautils.KeycloakUtils;
+
+
+rule "MEETING_REMINDER_EVENT"
+	ruleflow-group 'Movement'
+	salience 2
+	no-loop
+	when
+		userToken : GennyToken (code != "PER_SERVICE" )
+		serviceToken : GennyToken( code == "PER_SERVICE")
+		newApplication: BaseEntity()
+		output : OutputParam( )
+		beUtils : BaseEntityUtils()
+		controlSignalCode : String(controlSignalCode.equals("SCHEDULE_MEETING"))
+	then
+		System.out.println(drools.getRule().getName() + " : Rule fired" );
+		System.out.println("Current Time is "+LocalDateTime.now());
+		
+		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
+		
+		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
+		
+		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
+		
+		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
+		
+		System.out.println("################## START Shleemy ##################");
+		
+		/* String shleemyEndPoint = GennySettings.projectUrl+"/api/schedule";
+		System.out.println("shleemyEndPoint: "+shleemyEndPoint);
+	
+		QEventMessage msgQAMeetingOrange = null;
+		
+		System.out.println("Setting schedule");
+		
+		msgQAMeetingOrange = new QEventMessage("TEST_EVT", "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE");
+		msgQAMeetingOrange.getData().setTargetCode(newApplication.getCode());
+		msgQAMeetingOrange.setToken(userToken.getToken());
+		String[] rxList = new String[2];
+		rxList[0] = "SUPERUSER";
+		rxList[1] = userToken.getUserCode();
+		msgQAMeetingOrange.setRecipientCodeArray(rxList); */
+		
+		/* Set trigger times */
+		/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+    
+   	 	LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+    	String prettyNow = dtf.format(now);
+    	System.out.println("The current date and time is ~ " + prettyNow);
+		
+    	LocalDateTime orangeTimer = now.plusHours(48);
+		String prettyOrange = dtf.format(orangeTimer);
+		System.out.println("The Orange timer is set for ~ " + prettyOrange);
+		
+		String orangeCode = newBe.getCode() + "_INTERN_COMPLETE_PROFILE_48HR";
+		System.out.println("orangeCode " + orangeCode); */
+		
+		
+		
+		
+		
+		retract(controlSignalCode);
+		retract(newApplication);
+	end
