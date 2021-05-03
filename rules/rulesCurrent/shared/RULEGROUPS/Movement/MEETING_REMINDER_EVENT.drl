@@ -82,7 +82,8 @@ rule "MEETING_REMINDER_EVENT"
 		
     	
     	
-		String prettyOrange = dtf.format(now);
+		LocalDateTime orangeTimer = now.plusMinutes(1);
+		String prettyOrange = dtf.format(orangeTimer);
 		System.out.println("The Orange timer is set for ~ " + prettyOrange);
 		
 		String orangeCode = "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
