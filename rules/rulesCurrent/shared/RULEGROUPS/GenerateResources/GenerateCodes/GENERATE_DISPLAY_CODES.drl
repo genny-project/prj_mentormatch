@@ -42,13 +42,11 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_QA_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_FINISH_MENTEE", "FORM:DETAIL");
-		/*displayCodes.put("QUE_MENTEE_GRP", "FORM:DETAIL");*/
+		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "FORM:DETAIL");
 
 		/* PROCESS */
 		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
 		displayCodes.put("QUE_SELECT_MENTOR_GRP", "PROCESS");
-		displayCodes.put("QUE_SELECT_MENTOR_GRP", "PROCESS");
-		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "PROCESS");
 
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
