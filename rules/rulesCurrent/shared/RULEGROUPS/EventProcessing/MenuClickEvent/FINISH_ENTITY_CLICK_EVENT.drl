@@ -23,11 +23,11 @@ rule "FINISH_ENTITY_CLICK_EVENT"
 
 		System.out.println(drools.getRule().getName() + " - Rule fired");
 
-		/* QUE_FINISH_INTERN */
-		
+		/* QUE_FINISH_MENTOR */
+
 		String code = $message.getData().getCode();
 		System.out.println("code: " +code);
-		
+
 		String key = StringUtils.removeStart(code,"QUE_FINISH_");
 		System.out.println("key: " +key);
 
@@ -35,10 +35,10 @@ rule "FINISH_ENTITY_CLICK_EVENT"
 			key = "FRESH_" + key;
 			System.out.println("key: " + key);
 		}
-		
+
 		String user = userToken.getUserCode();
 		System.out.println("user: " + user);
-		
+
 
 		output.setTypeOfResult("SIGNAL");
 		output.setResultCode("START_ADD_ENTITY");
@@ -48,7 +48,7 @@ rule "FINISH_ENTITY_CLICK_EVENT"
 		/* targetCode is the BaseEntity we want to finish */
 		output.setTargetCode(user);
 
-		
+
 		System.out.println("**************************************************");
 		System.out.println("TypeOfResult: "  + output.getTypeOfResult());
 		System.out.println("ResultCode: "    + output.getResultCode());
