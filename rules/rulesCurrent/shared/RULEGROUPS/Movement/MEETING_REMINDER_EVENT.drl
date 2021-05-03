@@ -60,6 +60,7 @@ rule "MEETING_REMINDER_EVENT"
 		System.out.println("################## START Shleemy ##################");
 				
 		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 		
 		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
     	String prettyNow = dtf.format(now);
