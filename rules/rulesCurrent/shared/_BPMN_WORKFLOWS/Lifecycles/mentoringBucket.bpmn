@@ -367,7 +367,7 @@ System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot;
             <drools:metaValue><![CDATA[MEETING_REMINDER_EVENT]]></drools:metaValue>
           </drools:metaData>
           <drools:onEntry-script scriptFormat="http://www.java.com/java">
-            <drools:script>System.out.println(&quot;##### MEETING_REMINDER_EVENT Rule Task Started ####&quot;)</drools:script>
+            <drools:script>System.out.println(&quot;##### MEETING_REMINDER_EVENT Rule Task Started ####&quot;);</drools:script>
           </drools:onEntry-script>
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
