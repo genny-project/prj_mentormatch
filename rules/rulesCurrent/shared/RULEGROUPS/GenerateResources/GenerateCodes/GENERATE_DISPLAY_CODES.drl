@@ -48,6 +48,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_TAB_BUCKET_VIEW", "PROCESS");
 		displayCodes.put("QUE_SELECT_MENTOR_GRP", "PROCESS");
 		displayCodes.put("QUE_SELECT_MENTOR_GRP", "PROCESS");
+		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "PROCESS");
 
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
