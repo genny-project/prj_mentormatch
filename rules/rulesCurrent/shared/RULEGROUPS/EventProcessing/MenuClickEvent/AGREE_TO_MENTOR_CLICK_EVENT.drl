@@ -10,12 +10,12 @@ import life.genny.qwanda.message.QCmdMessage;
 import life.genny.utils.VertxUtils;
 
 
-rule "FINISH_ENTITY_CLICK_EVENT"
+rule "AGREE_TO_MENTOR_CLICK_EVENT"
     ruleflow-group 'EventProcessing'
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "QUE_FINISH_.*")
+		$message : QEventMessage(data.code matches "QUE_MENTOR_AGREE_TO_MENTOR_GRP.*")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		output : OutputParam( )
  		ruleDetails : RuleDetails()
@@ -28,15 +28,15 @@ rule "FINISH_ENTITY_CLICK_EVENT"
 		String code = $message.getData().getCode();
 		System.out.println("code: " +code);
 
-		String key = StringUtils.removeStart(code,"QUE_FINISH_");
-		System.out.println("key: " + key);
+		String key = StringUtils.removeStart(code, "QUE_MENTOR_AGREE_TO_MENTOR_GRP");
+		System.out.println("key: " +key);
 
 		String user = userToken.getUserCode();
 		System.out.println("user: " + user);
 
 
 		output.setTypeOfResult("SIGNAL");
-		output.setResultCode("START_ADD_ENTITY");
+		output.setResultCode("START_MENTOR_AGREE");
 
 		output.setSuitCase(key);
 		output.setAskSourceCode(user);
