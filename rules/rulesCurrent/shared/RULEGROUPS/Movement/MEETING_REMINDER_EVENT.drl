@@ -47,15 +47,16 @@ rule "MEETING_REMINDER_EVENT"
 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 		
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
+		System.out.println("menteeBe "+menteeBe);
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		
 		System.out.println("menteeBe "+menteeBe);
-		if (menteeBe != null) {
+		/*if (menteeBe != null) {
                 LocalDateTime meetingTime = menteeBe.getValue("PRI_MEETING_START_DATETIME", null);
 				System.out.println("meetingTime: " + meetingTime);
 				
     			System.out.println("### The Orange timer ~ " + meetingTime.plusHours(-24));
-		}
+		} */
 		System.out.println("################## START Shleemy ##################");
 		
 		String shleemyEndPoint = GennySettings.projectUrl+"/api/schedule";
