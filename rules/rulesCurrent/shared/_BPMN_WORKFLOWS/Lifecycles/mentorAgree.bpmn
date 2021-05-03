@@ -147,7 +147,7 @@
 
 /* Getting Target BaseEntity */
 
-BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
+targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
 kcontext.setVariable(&quot;targetBaseEntity&quot;, targetBaseEntity);
 System.out.println(&quot;targetBaseEntity: &quot; + targetBaseEntity);</bpmn2:script>
       </bpmn2:scriptTask>
