@@ -41,14 +41,12 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
    		$message : QEventMessage(data.code == "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE")
    		userToken : GennyToken  ()
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-
+		beUtils : BaseEntityUtils ()
      then
  		System.out.println(drools.getRule().getName() + " : Rule fired" );
  		System.out.println("Current Time is "+LocalDateTime.now());
+		String targetCode = $message.getData().getTargetCode();
+		System.out.println("targetCode: " +targetCode);	
  		
- 		
-		
 		retract($message)
-
-
 end
