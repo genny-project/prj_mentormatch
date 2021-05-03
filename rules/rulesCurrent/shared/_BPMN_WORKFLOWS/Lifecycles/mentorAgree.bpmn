@@ -146,10 +146,17 @@
 	System.out.println(&quot;sourceCode: &quot; + sourceCode);
 
 /* Getting Target BaseEntity */
+	serviceToken = (GennyToken)sessionFacts.getServiceToken();
+	userToken = (GennyToken)sessionFacts.getUserToken();
 
-targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
-kcontext.setVariable(&quot;targetBaseEntity&quot;, targetBaseEntity);
-System.out.println(&quot;targetBaseEntity: &quot; + targetBaseEntity);</bpmn2:script>
+	System.out.println(&quot;serviceToken: &quot; + serviceToken.getCode());
+	System.out.println(&quot;userToken: &quot; + userToken.getCode());
+
+	BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
+
+	BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
+	kcontext.setVariable(&quot;targetBaseEntity&quot;, targetBaseEntity);
+	System.out.println(&quot;targetBaseEntity: &quot; + targetBaseEntity);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_9" drools:priority="1" sourceRef="StartEvent_4" targetRef="ScriptTask_6"/>
       <bpmn2:scriptTask id="ScriptTask_7" name="End Mentor Agree" scriptFormat="http://www.java.com/java">
