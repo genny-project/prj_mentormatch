@@ -56,27 +56,12 @@ rule "MEETING_REMINDER_EVENT"
 				
     			System.out.println("### The Orange timer ~ " + meetingTime.plusHours(-24));
 		} */
+		
 		System.out.println("################## START Shleemy ##################");
+				
+		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
 		
-		String shleemyEndPoint = GennySettings.projectUrl+"/api/schedule";
-		System.out.println("shleemyEndPoint: "+shleemyEndPoint);
-	
-		QEventMessage msgQAMeetingOrange = null;
-		
-		System.out.println("Setting schedule");
-		
-		msgQAMeetingOrange = new QEventMessage("TEST_EVT", "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE");
-		msgQAMeetingOrange.getData().setTargetCode(newApplication.getCode());
-		msgQAMeetingOrange.setToken(userToken.getToken());
-		String[] rxList = new String[2];
-		rxList[0] = "SUPERUSER";
-		rxList[1] = userToken.getUserCode();
-		msgQAMeetingOrange.setRecipientCodeArray(rxList); 
-		
-		/* Set trigger times */
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
-    
-   	 	LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
     	String prettyNow = dtf.format(now);
     	System.out.println("The current date and time is ~ " + prettyNow);
 		
@@ -86,22 +71,7 @@ rule "MEETING_REMINDER_EVENT"
 		String prettyOrange = dtf.format(orangeTimer);
 		System.out.println("The Orange timer is set for ~ " + prettyOrange);
 		
-		String orangeCode = "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
-		System.out.println("orangeCode " + orangeCode); 
-		
-		
-		System.out.println("Orange schedule set: " +msgQAMeetingOrange);
-		
-		System.out.println("################## Schedule Orange Shleemy ##################");
-		
-		QScheduleMessage scheduleOrange = new QScheduleMessage(orangeCode, JsonUtils.toJson(msgQAMeetingOrange), userToken.getUserCode(), "project", orangeTimer, userToken.getRealm());
-		System.out.println("msgQAMeetingOrange" + scheduleOrange);
-		
-		try {
-			QwandaUtils.apiPostEntity(shleemyEndPoint, JsonUtils.toJson(scheduleOrange), userToken.getToken());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
+		ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, newApplication.getCode())
 		
 		System.out.println("################## END Shleemy ##################");
 		
