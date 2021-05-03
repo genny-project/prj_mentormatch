@@ -53,6 +53,8 @@ rule "MEETING_REMINDER_EVENT"
 		if (menteeBe != null) {
                 LocalDateTime meetingTime = menteeBe.getValue("PRI_MEETING_START_DATETIME", null);
 				System.out.println("meetingTime: " + meetingTime);
+				
+    			System.out.println("### The Orange timer ~ " + meetingTime.plusHours(-24));
 		}
 		System.out.println("################## START Shleemy ##################");
 		
@@ -78,8 +80,7 @@ rule "MEETING_REMINDER_EVENT"
     	String prettyNow = dtf.format(now);
     	System.out.println("The current date and time is ~ " + prettyNow);
 		
-    	LocalDateTime orangeTimer = meetingTime.plusHours(-24);
-    	System.out.println("### The Orange timer ~ " + orangeTimer);
+    	
     	
 		String prettyOrange = dtf.format(now);
 		System.out.println("The Orange timer is set for ~ " + prettyOrange);
