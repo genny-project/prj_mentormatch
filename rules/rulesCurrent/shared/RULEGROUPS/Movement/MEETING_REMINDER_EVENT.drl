@@ -46,18 +46,11 @@ rule "MEETING_REMINDER_EVENT"
 		
 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 		
-		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
-		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
+		String meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
 		
-		System.out.println("menteeBe "+menteeBe);
-		/*if (menteeBe != null) {
-                LocalDateTime meetingTime = menteeBe.getValue("PRI_MEETING_START_DATETIME", null);
-				System.out.println("meetingTime: " + meetingTime);
-				
-    			System.out.println("### The Orange timer ~ " + meetingTime.plusHours(-24));
-		} */
-		
+	
 		System.out.println("################## START Shleemy ##################");
+		System.out.println("meetingTime : " + meetingTime);
 				
 		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
 		
