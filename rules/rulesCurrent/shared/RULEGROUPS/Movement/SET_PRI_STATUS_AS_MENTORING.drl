@@ -88,8 +88,8 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        templateData.put("meetingTime", meetingTime);
-                        templateData.put("meetingType", meetingType);
+                        templateData.put("MeetingTime", meetingTime);
+                        templateData.put("MeetingType", meetingType);
                         
 
                         System.out.println("-------- EMAIL DATA --------");
@@ -120,7 +120,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					System.out.println("ERROR Null Mentee email");
 				}
 			}
-			/* Email to mentor for created meeting request*/
+			/* Email to mentor created meeting request*/
 
 		if (mentorBe != null) {
 			System.out.println("Sending email to mentor for meeting request");
@@ -140,6 +140,8 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
+                        templateData.put("MeetingTime", meetingTime);
+                        templateData.put("MeetingType", meetingType);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
