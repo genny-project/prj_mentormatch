@@ -95,8 +95,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
                         templateData.put("Mentee", menteeName);
                         templateData.put("MeetingTime", meetingTimeStr);
-                        templateData.put("MeetingType", meetingType);
-                        
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -147,7 +145,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
                         templateData.put("Mentor", mentorName);
                         templateData.put("MeetingTime", meetingTimeStr);
-                        templateData.put("MeetingType", meetingType);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
