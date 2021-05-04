@@ -209,10 +209,10 @@
           </drools:metaData>
           <drools:onEntry-script scriptFormat="http://www.java.com/java">
             <drools:script>System.out.println(&quot;###### Inside The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);
-System.out.println(&quot;Script: serviceToken: &quot; + serviceToken.getCode());
-System.out.println(&quot;Script: userToken: Code:: &quot; + userToken.getCode());
-System.out.println(&quot;Script: userToken: &quot; + userToken.getToken());
-System.out.println(&quot;Script: mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());</drools:script>
+System.out.println(&quot;TASK: serviceToken: &quot; + serviceToken.getCode());
+System.out.println(&quot;TASK: userToken: Code:: &quot; + userToken.getCode());
+System.out.println(&quot;TASK: userToken: &quot; + userToken.getToken());
+System.out.println(&quot;TASK: mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());</drools:script>
           </drools:onEntry-script>
           <drools:onExit-script scriptFormat="http://www.java.com/java">
             <drools:script>System.out.println(&quot;###### Exiting The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);</drools:script>
