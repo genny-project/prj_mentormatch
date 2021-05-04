@@ -70,7 +70,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
 		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
-		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
+		System.out.println("^^^^^^^^^ meetingType = " + meetingType.equals("SEL_MEETING_ZOOM"));
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
