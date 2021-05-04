@@ -89,8 +89,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
 						String template_id = "d-263a824859cb46b69b17ee80e8925989";
 
-						
-
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
