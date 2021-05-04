@@ -52,8 +52,18 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 		BaseEntity newApplication = beUtils.getBaseEntityByCode(targetCode);
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
+		
+		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+		String meetingTimeStr = dtf.format(meetingTime);
+		
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
+		
+		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
+		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
+		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
 		
 		if (menteeBe != null) {
 			System.out.println("Sending email remind to mentee for meeting");
@@ -73,6 +83,7 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
+                        templateData.put("MeetingTime", meetingTimeStr);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -121,6 +132,7 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
+                        templateData.put("MeetingTime", meetingTimeStr);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -149,8 +161,5 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 					System.out.println("ERROR Null Mentor email");
 				}
 		}
-		
-		
- 		
 		retract($message)
 end
