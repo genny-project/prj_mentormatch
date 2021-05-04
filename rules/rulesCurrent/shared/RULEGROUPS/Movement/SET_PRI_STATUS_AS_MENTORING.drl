@@ -29,6 +29,7 @@ import life.genny.models.ThemeAttributeType;
 import life.genny.qwandautils.GennySettings;
 import life.genny.notifications.EmailHelper;
 import java.util.HashMap;
+import java.time.LocalDateTime;
 
 rule "SET_PRI_STATUS_AS_MENTORING"
     ruleflow-group 'Movement'
@@ -58,10 +59,14 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
-
-
+		
+		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+		String meetingType = newApplication.getValue("LNK_MEETING_TYPE", null);
+		
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
+		System.out.println("^^^^^^^^^ meetingTime = " + meetingTime);
+		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
@@ -83,6 +88,9 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
+                        templateData.put("meetingTime", meetingTime);
+                        templateData.put("meetingType", meetingType);
+                        
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
