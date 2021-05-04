@@ -27,6 +27,7 @@ import life.genny.qwanda.message.QScheduleMessage;
 import life.genny.notifications.SmsHelper;
 import java.util.Arrays;
 import java.time.ZoneOffset;
+import java.time.LocalDateTime;
 
 
 rule "MEETING_REMINDER_EVENT"
@@ -46,7 +47,7 @@ rule "MEETING_REMINDER_EVENT"
 		
 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 		
-		String meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
 		
 	
 		System.out.println("################## START Shleemy ##################");
