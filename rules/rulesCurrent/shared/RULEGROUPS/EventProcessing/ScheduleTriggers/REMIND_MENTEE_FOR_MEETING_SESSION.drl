@@ -46,9 +46,10 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
      then
  		System.out.println(drools.getRule().getName() + " : Rule fired" );
  		System.out.println("Current Time is "+LocalDateTime.now());
-		String newApplication = $message.getData().getTargetCode();
-		System.out.println("newApplication: " +newApplication);	
+		String targetCode = $message.getData().getTargetCode();
+		System.out.println("targetCode: " +targetCode);	
 		
+		BaseEntity newApplication = beUtils.getBaseEntityByCode(targetCode);
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
