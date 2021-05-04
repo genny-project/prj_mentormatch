@@ -53,7 +53,7 @@ rule "MEETING_REMINDER_EVENT"
 		System.out.println("################## START Shleemy ##################");
 		System.out.println("meetingTime : " + meetingTime);
 				
-		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING_REMINDER_24HRS_BEFORE";
+		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING";
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 		
@@ -61,7 +61,7 @@ rule "MEETING_REMINDER_EVENT"
     	String prettyNow = dtf.format(now);
     	System.out.println("The current date and time is ~ " + prettyNow);
     	
-		LocalDateTime orangeTimer = now.plusMinutes(1);
+		LocalDateTime orangeTimer = now.plusMinutes(3);
 		String prettyOrange = dtf.format(orangeTimer);
 		System.out.println("The Orange timer is set for ~ " + prettyOrange);
 		
