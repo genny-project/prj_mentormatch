@@ -88,7 +88,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        templateData.put("MeetingTime", meetingTime);
+                        /* templateData.put("MeetingTime", meetingTime); */
                         templateData.put("MeetingType", meetingType);
                         
 
@@ -140,7 +140,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
-                        templateData.put("MeetingTime", meetingTime);
+                        /* templateData.put("MeetingTime", meetingTime); */
                         templateData.put("MeetingType", meetingType);
 
                         System.out.println("-------- EMAIL DATA --------");
