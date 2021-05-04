@@ -67,8 +67,8 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 
 				if (menteeEmail != null) {
 
-						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
-						String template_id = "d-263a824859cb46b69b17ee80e8925989";
+						String subject = "Reminder: Your upcoming MentorMatch mentoring session is tomorrow!";
+						String template_id = "d-0ad1e70fb59a4e9dbcd4ecd34d05f6e4";
 
 					    HashMap<String, String> templateData = new HashMap<>();
 
@@ -115,8 +115,8 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 
 				if (mentorEmail != null) {
 
-						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
-						String template_id = "d-7d617d2240dd4ec980306f0ec2102d01";
+						String subject = "Reminder: Your upcoming MentorMatch mentoring session is tomorrow!";
+						String template_id = "d-d269d66e59a647f3a791a7b3309475b1";
 
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
