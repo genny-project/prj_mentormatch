@@ -179,9 +179,10 @@
 	serviceToken = (GennyToken)sessionFacts.getServiceToken();
 	userToken = (GennyToken)sessionFacts.getUserToken();
 
-	System.out.println(&quot;serviceToken: &quot; + serviceToken.getCode());
-	System.out.println(&quot;userToken: &quot; + userToken.getCode());
-	System.out.println(&quot;mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());
+	System.out.println(&quot;Script: serviceToken: &quot; + serviceToken.getCode());
+	System.out.println(&quot;Script: userToken: Code:: &quot; + userToken.getCode());
+	System.out.println(&quot;Script: userToken: &quot; + userToken.getToken());
+	System.out.println(&quot;Script: mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());
 
 	beUtils = new BaseEntityUtils(serviceToken, userToken);
 
@@ -207,7 +208,11 @@
             <drools:metaValue><![CDATA[QUE_MENTOR_AGREE_TO_MENTOR_GRP]]></drools:metaValue>
           </drools:metaData>
           <drools:onEntry-script scriptFormat="http://www.java.com/java">
-            <drools:script>System.out.println(&quot;###### Inside The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);</drools:script>
+            <drools:script>System.out.println(&quot;###### Inside The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);
+System.out.println(&quot;Script: serviceToken: &quot; + serviceToken.getCode());
+System.out.println(&quot;Script: userToken: Code:: &quot; + userToken.getCode());
+System.out.println(&quot;Script: userToken: &quot; + userToken.getToken());
+System.out.println(&quot;Script: mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());</drools:script>
           </drools:onEntry-script>
           <drools:onExit-script scriptFormat="http://www.java.com/java">
             <drools:script>System.out.println(&quot;###### Exiting The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);</drools:script>
