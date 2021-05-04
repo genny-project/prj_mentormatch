@@ -1,0 +1,19 @@
+import org.drools.core.process.core.datatype.impl.type.StringDataType;
+[
+  // the NotificationHub work item
+  // genny-rules/src/main/java/life/genny/jbpm/customworkitemhandlers/NotificationHubWorkItemHandler.java
+  [
+    "name" : "NotificationHub",
+    "parameters" : [
+      "notificationType" : new StringDataType(),
+      "templateID" : new StringDataType(),
+      "recipient" : new StringDataType(),
+      "cc" : new StringDataType(),
+      "bcc" : new StringDataType(),
+      "templateData" : new Map<String,ContextList>(),
+      "userToken"  : new GennyToken()
+    ],
+    "displayName" : "NotificationHub",
+    "icon" : "icons/icon-info.gif"
+  ]
+]
