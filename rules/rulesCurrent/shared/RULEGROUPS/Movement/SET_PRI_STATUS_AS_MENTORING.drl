@@ -61,11 +61,15 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 		
 		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+		String meetingTimeStr = dtf.format(meetingTime);
+		
 		String meetingType = newApplication.getValue("LNK_MEETING_TYPE", null);
 		
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
-		System.out.println("^^^^^^^^^ meetingTime = " + meetingTime);
+		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
 		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
@@ -85,10 +89,12 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
 						String template_id = "d-263a824859cb46b69b17ee80e8925989";
 
+						
+
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        /* templateData.put("MeetingTime", meetingTime); */
+                        templateData.put("MeetingTime", meetingTimeStr);
                         templateData.put("MeetingType", meetingType);
                         
 
@@ -140,7 +146,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
-                        /* templateData.put("MeetingTime", meetingTime); */
+                        templateData.put("MeetingTime", meetingTimeStr);
                         templateData.put("MeetingType", meetingType);
 
                         System.out.println("-------- EMAIL DATA --------");
