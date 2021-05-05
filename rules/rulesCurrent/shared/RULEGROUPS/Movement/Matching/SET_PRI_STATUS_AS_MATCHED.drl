@@ -42,7 +42,6 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		controlSignalCode : String(controlSignalCode.equals("MATCH"))
 		targetBaseEntity : BaseEntity( code matches "PER_\\S+" )
 
-
      then
  		System.out.println("SET_PRI_STATUS_AS_MATCHED: Rule fired" );
 
@@ -50,6 +49,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
+		System.out.println("SET_PRI_STATUS_AS_MATCHED: targetBaseEntity = " + newApplication);
 
 		/* Get APP Code */
 		String newApplicationCode = "";
@@ -61,19 +61,23 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 
-		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS", "MATCHED");
-		beUtils.saveAnswer(answer);
-		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_DISABLED", "false"));
-
-		System.out.println("SET_PRI_STATUS_AS_MATCHED: Answer = " + answer);
-		System.out.println("SET_PRI_STATUS_AS_MATCHED: newApplication = " + newApplication);
+		/* Get Mentee Details */
+		String associatedMenteeBeCode = beUtils.quantumStrip(newApplication, "PRI_MENTEE_CODE", "associatedMenteeBeCode");
+		BaseEntity associatedMenteeBe = beUtils.quantumBe(associatedMenteeBeCode, "associatedMenteeBe");
 
 		if (newApplication != null) {
+
+			Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS", "MATCHED");
+			beUtils.saveAnswer(answer);
+			beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_DISABLED", "false"));
+
+			System.out.println("SET_PRI_STATUS_AS_MATCHED: Answer = " + answer);
+			System.out.println("SET_PRI_STATUS_AS_MATCHED: newApplication = " + newApplication);
 
 			System.out.println("## Removing from Training Bucket ##");
 
 			/* Remove from Training bucket */
-			/*Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
+			Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
 			beUtils.saveAnswer(answerDisable);
 			System.out.println("answerDisable: " +answerDisable);
 
@@ -83,7 +87,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(beMsg));
 
 			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", null, beUtils);
-			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);*/
+			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);
 
 		} else {
 			System.out.println("newApplication is NULL");
