@@ -157,7 +157,7 @@
           </drools:metaData>
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
-        <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+        <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;%%%%%%%%%%%%%%%%%%% START MENTOR AGREE WORKFLOW %%%%%%%%%%%%%%%%%%%&quot;);
 
 /* Gather Key and construct Question Code */
@@ -178,6 +178,9 @@
 /* Getting Target BaseEntity */
 	serviceToken = (GennyToken)sessionFacts.getServiceToken();
 	userToken = (GennyToken)sessionFacts.getUserToken();
+
+    kcontext.setVariable(&quot;serviceToken&quot;, serviceToken);
+	kcontext.setVariable(&quot;userToken&quot;, userToken);
 
 	System.out.println(&quot;Script: serviceToken: &quot; + serviceToken.getCode());
 	System.out.println(&quot;Script: userToken: Code:: &quot; + userToken.getCode());
@@ -218,7 +221,7 @@ System.out.println(&quot;TASK: mentorAgree:: userToken UserCode: &quot; + userTo
             <drools:script>System.out.println(&quot;###### Exiting The ASK QUESTION TASK :: QUE_MENTOR_AGREE_TO_MENTOR_GRP QUESTION&quot;);</drools:script>
           </drools:onExit-script>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+        <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
         <bpmn2:ioSpecification id="InputOutputSpecification_2">
           <bpmn2:dataInput id="DataInput_13" itemSubjectRef="ItemDefinition_2" name="userToken"/>
@@ -300,8 +303,22 @@ System.out.println(&quot;TASK: mentorAgree:: userToken UserCode: &quot; + userTo
           <bpmn2:targetRef>results</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="SequenceFlow_3" drools:priority="1" sourceRef="ScriptTask_6" targetRef="Task_2"/>
       <bpmn2:sequenceFlow id="SequenceFlow_4" drools:priority="1" sourceRef="Task_2" targetRef="ScriptTask_7"/>
+      <bpmn2:scriptTask id="ScriptTask_1" name="Test" scriptFormat="http://www.java.com/java">
+        <bpmn2:extensionElements>
+          <drools:metaData name="elementname">
+            <drools:metaValue><![CDATA[Test]]></drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+        <bpmn2:script>System.out.println(&quot;TEST: serviceToken: &quot; + serviceToken.getCode());
+System.out.println(&quot;TEST: userToken: Code:: &quot; + userToken.getCode());
+System.out.println(&quot;TEST: userToken: &quot; + userToken.getToken());
+System.out.println(&quot;TEST: mentorAgree:: userToken UserCode: &quot; + userToken.getUserCode());</bpmn2:script>
+      </bpmn2:scriptTask>
+      <bpmn2:sequenceFlow id="SequenceFlow_1" drools:priority="1" sourceRef="ScriptTask_6" targetRef="ScriptTask_1"/>
+      <bpmn2:sequenceFlow id="SequenceFlow_2" drools:priority="1" sourceRef="ScriptTask_1" targetRef="Task_2"/>
     </bpmn2:subProcess>
     <bpmn2:sequenceFlow id="SequenceFlow_8" drools:priority="1" sourceRef="StartEvent_2" targetRef="SubProcess_2"/>
     <bpmn2:sequenceFlow id="SequenceFlow_7" drools:priority="1" sourceRef="SubProcess_2" targetRef="EndEvent_2"/>
@@ -345,15 +362,21 @@ System.out.println(&quot;TASK: mentorAgree:: userToken UserCode: &quot; + userTo
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ScriptTask_7" bpmnElement="ScriptTask_7" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="940.0" y="274.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="1180.0" y="274.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_7">
-          <dc:Bounds height="11.0" width="73.0" x="958.0" y="293.0"/>
+          <dc:Bounds height="11.0" width="73.0" x="1198.0" y="293.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Task_2" bpmnElement="Task_2" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="720.0" y="274.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="960.0" y="274.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_8">
+          <dc:Bounds height="22.0" width="105.0" x="962.0" y="288.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="ScriptTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="710.0" y="274.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="105.0" x="722.0" y="288.0"/>
+          <dc:Bounds height="11.0" width="17.0" x="756.0" y="293.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_SubProcess_2">
@@ -375,21 +398,27 @@ System.out.println(&quot;TASK: mentorAgree:: userToken UserCode: &quot; + userTo
         <bpmndi:BPMNLabel id="BPMNLabel_10"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_18" bpmnElement="SequenceFlow_18" sourceElement="BPMNShape_ScriptTask_7" targetElement="BPMNShape_EndEvent_6">
-        <di:waypoint xsi:type="dc:Point" x="1050.0" y="299.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1255.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1290.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1375.0" y="299.0"/>
         <di:waypoint xsi:type="dc:Point" x="1460.0" y="299.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_11"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ScriptTask_6" targetElement="BPMNShape_Task_2">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Task_2" targetElement="BPMNShape_ScriptTask_7">
+        <di:waypoint xsi:type="dc:Point" x="1070.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1125.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1180.0" y="299.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_12"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_ScriptTask_6" targetElement="BPMNShape_ScriptTask_1">
         <di:waypoint xsi:type="dc:Point" x="590.0" y="299.0"/>
-        <di:waypoint xsi:type="dc:Point" x="655.0" y="299.0"/>
-        <di:waypoint xsi:type="dc:Point" x="720.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="650.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="710.0" y="299.0"/>
         <bpmndi:BPMNLabel/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Task_2" targetElement="BPMNShape_ScriptTask_7">
-        <di:waypoint xsi:type="dc:Point" x="830.0" y="299.0"/>
-        <di:waypoint xsi:type="dc:Point" x="885.0" y="299.0"/>
-        <di:waypoint xsi:type="dc:Point" x="940.0" y="299.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ScriptTask_1" targetElement="BPMNShape_Task_2">
+        <di:waypoint xsi:type="dc:Point" x="820.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="890.0" y="299.0"/>
+        <di:waypoint xsi:type="dc:Point" x="960.0" y="299.0"/>
         <bpmndi:BPMNLabel/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
