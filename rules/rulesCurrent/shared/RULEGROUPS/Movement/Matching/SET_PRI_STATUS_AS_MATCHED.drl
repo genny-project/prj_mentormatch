@@ -52,13 +52,14 @@ rule "SET_PRI_STATUS_AS_MATCHED"
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
 
 		/* Get APP Code */
-
-		String newApplication = "";
+		String newApplicationCode = "";
 
 		if (targetBaseEntity.getCode() != null) {
-			newApplication = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
-			System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication: " + newApplication);
+			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplicationCode: " + newApplicationCode);
 		}
+
+		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 
 		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS", "MATCHED");
 		beUtils.saveAnswer(answer);
@@ -72,7 +73,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			System.out.println("## Removing from Training Bucket ##");
 
 			/* Remove from Training bucket */
-			Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
+			/*Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
 			beUtils.saveAnswer(answerDisable);
 			System.out.println("answerDisable: " +answerDisable);
 
@@ -82,7 +83,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(beMsg));
 
 			TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_MENTEE_TRAINING", null, beUtils);
-			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);
+			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);*/
 
 		} else {
 			System.out.println("newApplication is NULL");
