@@ -79,15 +79,11 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 			/* SEND EMAIL */
                 String menteeEmail = menteeBe.getValue("PRI_EMAIL", null);
-				System.out.println("menteeEmail: " + menteeEmail);
-
 				String menteeName = menteeBe.getValue("PRI_NAME", null);
-				System.out.println("menteeName: " + menteeName);
-
 				if (menteeEmail != null) {
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
-						String template_id = "d-263a824859cb46b69b17ee80e8925989";
+						String template_id = "d-3d5a56f4c7a9449690898696c4e46fa9";
 
 					    HashMap<String, String> templateData = new HashMap<>();
 
@@ -104,16 +100,13 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
 								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
-
-
-								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
 								menteeEmail = "tarjnee.gandhi@outcomelife.com.au";
 								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
-
-								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
 							System.out.println("WARNING: Email not sent because on Dev server");
 						}
@@ -136,7 +129,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 				if (mentorEmail != null) {
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
-						String template_id = "d-7d617d2240dd4ec980306f0ec2102d01";
+						String template_id = "d-8df9d4b9362e4b38a0cd2f0de576ac48";
 
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
@@ -154,14 +147,14 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
-								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
 								mentorEmail = "tarjnee.gandhi@outcomelife.com.au";
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
-								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
 							System.out.println("WARNING: Email not sent because on Dev server");
 						}
