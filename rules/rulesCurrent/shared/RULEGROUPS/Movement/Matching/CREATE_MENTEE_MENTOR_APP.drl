@@ -30,7 +30,7 @@ import life.genny.models.ThemeAttributeType;
 import life.genny.qwandautils.GennySettings;
 import life.genny.notifications.EmailHelper;
 
-rule "SET_PRI_STATUS_AS_MATCHED"
+rule "CREATE_MENTEE_MENTOR_APP"
     ruleflow-group 'Movement'
     no-loop true
     salience 1
@@ -44,7 +44,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		associatedMenteeBe : BaseEntity( code matches "PER_\\S+" )
 
      then
- 		System.out.println("SET_PRI_STATUS_AS_MATCHED: Rule fired" );
+ 		System.out.println("CREATE_MENTEE_MENTOR_APP: Rule fired" );
 
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
@@ -102,7 +102,8 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 								Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
 								beUtils.saveAnswer(answer);
-
+		                        beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name));
+                                
 								/*answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
 								beUtils.saveAnswer(answer);*/
 						} else {
