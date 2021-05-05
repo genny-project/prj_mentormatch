@@ -37,11 +37,10 @@ rule "SET_PRI_STATUS_AS_MATCHED"
     when
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-		newApplication : BaseEntity( code matches "APP_\\S+" )
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("TRAINING"))
 		controlSignalCode : String(controlSignalCode.equals("MATCH"))
-		associatedMenteeBe : BaseEntity( code matches "PER_\\S+" )
+		targetBaseEntity : BaseEntity( code matches "PER_\\S+" )
 
 
      then
@@ -50,8 +49,13 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
 		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
- 		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
- 		associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMenteeBe.getCode());
+ 		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
+
+		/* Get APP Code */
+		if (targetBaseEntity.getCode() != null) {
+			String newApplication = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication: " + newApplication);
+		}
 
 		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS", "MATCHED");
 		beUtils.saveAnswer(answer);
@@ -60,71 +64,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		System.out.println("SET_PRI_STATUS_AS_MATCHED: Answer = " + answer);
 		System.out.println("SET_PRI_STATUS_AS_MATCHED: newApplication = " + newApplication);
 
-		/* Save status to the PER */
-		String appMentee = associatedMenteeBe.getCode();
-		System.out.println("appMentee = " + appMentee);
-
-		if (appMentee != null) {
- 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_CODE", appMentee));
-		} else {
-			System.out.println("ERROR: Null appMentee");
-		}
-
-		/* Getting Mentor & Mentee values */
-
-		String mentorPer = beUtils.quantumStrip(newApplication, "LNK_SELECT_MENTOR", "mentorPer");
-		BaseEntity assocMentorPer = beUtils.quantumBe(mentorPer, "assocMentorPer");
-		System.out.println("assocMentorPer: " +assocMentorPer);
-
-		if (mentorPer != null) {
- 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTOR_CODE", mentorPer));
-		} else {
-			System.out.println("ERROR: Null mentorPer");
-		}
-
-		String assocMentee = newApplication.getValue("PRI_MENTEE_CODE", null);
-		System.out.println("assocMentee: " +assocMentee);
-
-		if (associatedMenteeBe != null && assocMentorPer != null) {
-
-			String firstname = associatedMenteeBe.getValue("PRI_FIRSTNAME", null);
- 			String lastname = associatedMenteeBe.getValue("PRI_LASTNAME", null);
- 			String name = "";
-
-			System.out.println("firstname = " +firstname);
-			System.out.println("lastname = " +lastname);
-
-			if (firstname != null) {
-				if (lastname != null) {
-						name = firstname + " " + lastname;
-						System.out.println("name = " +name);
-
-						if (name != null) {
-
-								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
-								beUtils.saveAnswer(answer);
-
-								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
-								beUtils.saveAnswer(answer);
-						} else {
-							System.out.println("ERROR: Null name");
-						}
-				} else {
-					System.out.println("ERROR: Null lastname");
-				}
-			} else {
-				System.out.println("ERROR: Null firstname");
-			}
-
-			/* Setting Mentor Values */
-
-			String mentorName = assocMentorPer.getValue("PRI_FIRSTNAME", null);
-			if (mentorName != null) {
-				answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTOR_NAME", mentorName);
-				beUtils.saveAnswer(answer);
-			} else {
-				System.out.println("ERROR: Null mentorName");
-			}
+		if (newApplication != null) {
 
 			System.out.println("## Removing from Training Bucket ##");
 
@@ -142,12 +82,10 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);
 
 		} else {
-
-			System.out.println("associatedMenteeBe is NULL");
+			System.out.println("newApplication is NULL");
 		}
 
-		retract(newApplication)
+		retract(targetBaseEntity)
 		retract(bucketCode)
 		retract(controlSignalCode)
-		retract(associatedMenteeBe)
 end

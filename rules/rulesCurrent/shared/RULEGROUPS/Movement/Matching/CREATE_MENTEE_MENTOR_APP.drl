@@ -116,6 +116,15 @@ rule "CREATE_MENTEE_MENTOR_APP"
 				System.out.println("ERROR: Null firstname");
 			}
 
+			/* Setting Mentor Values */
+			String mentorName = assocMentorPer.getValue("PRI_FIRSTNAME", null);
+			if (mentorName != null) {
+				answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTOR_NAME", mentorName);
+				beUtils.saveAnswer(answer);
+			} else {
+				System.out.println("ERROR: Null mentorName");
+			}
+
 			/* Saving APP code in PER Mentor */
 			if (newApplication.getCode() != null) {
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), assocMentorPer.getCode(), "PRI_APP_LNK_CODE", newApplication.getCode()));
@@ -173,4 +182,8 @@ rule "CREATE_MENTEE_MENTOR_APP"
 
         }
 
+	retract(newApplication)
+	retract(associatedMenteeBe)
+	retract(bucketCode)
+	retract(controlSignalCode)
 end
