@@ -63,6 +63,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		/* Get Mentee Details */
 		String associatedMenteeBeCode = beUtils.quantumStrip(newApplication, "PRI_MENTEE_CODE", "associatedMenteeBeCode");
+		System.out.println("SET_PRI_STATUS_AS_MATCHED:: associatedMenteeBeCode: " + associatedMenteeBeCode);
 		BaseEntity associatedMenteeBe = beUtils.quantumBe(associatedMenteeBeCode, "associatedMenteeBe");
 
 		if (newApplication != null) {
