@@ -103,7 +103,7 @@ rule "CREATE_MENTEE_MENTOR_APP"
 								Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
 								beUtils.saveAnswer(answer);
 		                        beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name));
-                                
+
 								/*answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
 								beUtils.saveAnswer(answer);*/
 						} else {
@@ -114,6 +114,14 @@ rule "CREATE_MENTEE_MENTOR_APP"
 				}
 			} else {
 				System.out.println("ERROR: Null firstname");
+			}
+
+			/* Saving APP code in PER Mentor */
+			if (newApplication.getCode() != null) {
+				beUtils.saveAnswer(new Answer(userToken.getUserCode(), assocMentorPer.getCode(), "PRI_APP_LNK_CODE", newApplication.getCode()));
+
+				String assocAppMentor = assocMentorPer.getValue("PRI_APP_LNK_CODE", null);
+				System.out.println("assocAppMentor: " + assocAppMentor);
 			}
 
             /* Send Invite Email to Mentor */
