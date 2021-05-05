@@ -116,53 +116,6 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 				System.out.println("ERROR: Null firstname");
 			}
 
-			/* Send Invite Email to Mentor */
-			String mentorEmail = assocMentorPer.getValue("PRI_EMAIL", null);
-
-			if (mentorEmail != null) {
-				System.out.println("Sending invite to " + mentorEmail);
-
-				BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
-
-				String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
-				System.out.println("token: " + token);
-
-				String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX01FTlRPUl9BR1JFRV9UT19NRU5UT1JfR1JQ";
-				System.out.println("url: " + url);
-
-				url = url + "?token=" + token;
-				System.out.println("url: " + url);
-
-				String subject = "You have been registered on MentorMatch";
-				String template_id = "d-0f954dec3a8642c8bcb21b1c8344b925";
-
-				System.out.println("email: " + mentorEmail);
-				System.out.println("subject: " + subject);
-				System.out.println("template_id: " + template_id);
-				/*System.out.println("randomPW: " + randomPW);*/
-
-
-				HashMap<String, String> templateData = new HashMap<String, String>();
-				templateData.put("Mentee", firstname);
-				/*templateData.put("pw", randomPW);*/
-				templateData.put("url", url);
-
-				List<String> bccList = Arrays.asList("rahul@gada.io");
-
-					if (true) {
-
-					EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
-					System.out.println("Sent Email to " + mentorEmail);
-					System.out.println("bccList:: " + bccList);
-
-					} else {
-					System.out.println("WARNING: Email not sent because on Dev server");
-				}
-
-			} else {
-				System.out.println("ERROR: Null mentorEmail");
-			}
-
 			/* Setting Mentor Values */
 
 			String mentorName = assocMentorPer.getValue("PRI_FIRSTNAME", null);
