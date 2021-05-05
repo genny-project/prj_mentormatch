@@ -100,10 +100,10 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 						if (name != null) {
 
-								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
+								Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_NAME", name);
 								beUtils.saveAnswer(answer);
 
-								answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
+								Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_NAME", name);
 								beUtils.saveAnswer(answer);
 						} else {
 							System.out.println("ERROR: Null name");
