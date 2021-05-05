@@ -120,7 +120,7 @@ rule "CREATE_MENTEE_MENTOR_APP"
 			if (newApplication.getCode() != null) {
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), assocMentorPer.getCode(), "PRI_APP_LNK_CODE", newApplication.getCode()));
 
-				String assocAppMentor = assocMentorPer.getValue("PRI_APP_LNK_CODE", null);
+				String assocAppMentor = beUtils.quantumStrip(assocMentorPer, "PRI_APP_LNK_CODE", "assocAppMentor");
 				System.out.println("assocAppMentor: " + assocAppMentor);
 			}
 
