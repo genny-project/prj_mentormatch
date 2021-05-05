@@ -49,7 +49,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		/* Refresh the BaseEntity because mysterious reasons told to me by Chris... */
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
-		System.out.println("SET_PRI_STATUS_AS_MATCHED: targetBaseEntity = " + newApplication);
+		System.out.println("SET_PRI_STATUS_AS_MATCHED: targetBaseEntity = " + targetBaseEntity);
 
 		/* Get APP Code */
 		String newApplicationCode = "";
