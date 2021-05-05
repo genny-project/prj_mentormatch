@@ -52,8 +52,11 @@ rule "SET_PRI_STATUS_AS_MATCHED"
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
 
 		/* Get APP Code */
+
+		String newApplication = "";
+
 		if (targetBaseEntity.getCode() != null) {
-			String newApplication = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			newApplication = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
 			System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication: " + newApplication);
 		}
 
