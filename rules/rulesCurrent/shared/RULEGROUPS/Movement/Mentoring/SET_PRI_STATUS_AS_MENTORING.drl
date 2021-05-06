@@ -132,7 +132,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
 						String template_id = "d-8df9d4b9362e4b38a0cd2f0de576ac48";
 						
-						String urlParentCode = "QUE_FAKE_PARENT"
+						String urlParentCode = "QUE_FAKE_PARENT";
                 		String urlCode = "ACT_MENTOR_MEETING_AGREE";
 
                 		/* Encode each section of the url */
