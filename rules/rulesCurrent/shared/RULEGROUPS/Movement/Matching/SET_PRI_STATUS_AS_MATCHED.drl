@@ -105,7 +105,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 			System.out.println("## Mentor has picked SEL_NO ##");
 
-			menteeEmail = beUtils.quantumStrip(associatedMenteeBe, "PRI_EMAIL", "menteeEmail");
+			String menteeEmail = beUtils.quantumStrip(associatedMenteeBe, "PRI_EMAIL", "menteeEmail");
 			System.out.println("SET_PRI_STATUS_AS_MATCHED:: menteeEmail: " + menteeEmail);
 
 			if (menteeEmail != null) {
