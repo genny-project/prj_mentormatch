@@ -64,11 +64,9 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		String meetingTimeStr = dtf.format(meetingTime);
 		
 		String meetingType = newApplication.getValue("LNK_MEETING_TYPE", null);
+		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
-		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
-		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
-		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		if (menteeBe != null) {
@@ -85,7 +83,6 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        templateData.put("MeetingTime", meetingTimeStr);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
