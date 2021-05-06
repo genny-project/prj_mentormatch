@@ -69,8 +69,9 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		/* Check if Mentor has agreed */
 		String mentorResponse = beUtils.quantumStrip(targetBaseEntity, "LNK_AGREE_TO_MENTOR", "mentorResponse");
 		System.out.println("SET_PRI_STATUS_AS_MATCHED:: mentorResponse: " + mentorResponse);
+		System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication: " + newApplication.getCode());
 
-		if (newApplication != null && mentorResponse=="SEL_YES") {
+		if (newApplication.getCode() != null && mentorResponse=="SEL_YES") {
 
 			System.out.println("## Removing from Training Bucket ##");
 
@@ -79,14 +80,14 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			beUtils.saveAnswer(answer);
 			beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_DISABLED", "false"));
 
-			System.out.println("SET APP PRI_STATUS AS MATCHED: Answer = " + answer);
-			System.out.println("SET APP PRI_STATUS AS MATCHED: newApplication = " + newApplication);
+			System.out.println("SET_PRI_STATUS_AS_MATCHED:: Answer = " + answer);
+			System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication = " + newApplication);
 
 			Answer answerDisable = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_DISABLED", true);
 			beUtils.saveAnswer(answerDisable);
 
-			System.out.println("DISABLE PER: Answer = " + answerDisable);
-			System.out.println("DISABLE PER: associatedMenteeBe = " + associatedMenteeBe.getCode());
+			System.out.println("SET_PRI_STATUS_AS_MATCHED::DISABLE PER: Answer = " + answerDisable);
+			System.out.println("SET_PRI_STATUS_AS_MATCHED::DISABLE PER: associatedMenteeBe = " + associatedMenteeBe.getCode());
 
 			QDataBaseEntityMessage beMsg = new QDataBaseEntityMessage(newApplication);
 			beMsg.setToken(userToken.getToken());
@@ -97,7 +98,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			TableUtils.moveEntity(newApplication.getCode(), null, "SBE_MATCHED", beUtils);
 
 		} else {
-			System.out.println("newApplication is NULL");
+			System.out.println("newApplication is NULL or not SEL_YES");
 		}
 
 		retract(targetBaseEntity)
