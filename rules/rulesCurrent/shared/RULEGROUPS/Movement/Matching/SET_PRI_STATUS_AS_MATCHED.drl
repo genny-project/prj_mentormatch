@@ -71,7 +71,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 		System.out.println("SET_PRI_STATUS_AS_MATCHED:: mentorResponse: " + mentorResponse);
 		System.out.println("SET_PRI_STATUS_AS_MATCHED:: newApplication: " + newApplication.getCode());
 
-		if (newApplication.getCode() != null && mentorResponse.equals("SEL_YES") {
+		if (newApplication.getCode() != null && mentorResponse.equals("SEL_YES")) {
 
 			System.out.println("## Removing from Training Bucket ##");
 
