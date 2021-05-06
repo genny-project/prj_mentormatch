@@ -131,20 +131,29 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
 						String template_id = "d-8df9d4b9362e4b38a0cd2f0de576ac48";
-						String confirmMeetingUrl = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX01FTlRPUl9NRUVUSU5HX1RJTUVfR1JQ";
+						
+						String urlParentCode = "QUE_FAKE_PARENT"
+                		String urlCode = "ACT_MENTOR_MEETING_AGREE";
+
+                		/* Encode each section of the url */
+                		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
+                		urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
+            
+                		String url = GennySettings.projectUrl+"/home/"+urlParentCode+"/"+urlCode;
+                		System.out.println("url: " + url);
 
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
                         templateData.put("MeetingTime", meetingTimeStr);
-                        templateData.put("url", confirmMeetingUrl);
+                        templateData.put("url", url);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
 						System.out.println("template_id: " +template_id);
 						System.out.println("email: " + mentorEmail);
 						System.out.println("Mentor: " +mentorName);
-						System.out.println("url: " + confirmMeetingUrl);
+						System.out.println("url: " + url);
 						System.out.println("----------------------------");
 
 						if (!GennySettings.projectUrl.contains("dev")) {
