@@ -108,6 +108,9 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			String menteeEmail = beUtils.quantumStrip(associatedMenteeBe, "PRI_EMAIL", "menteeEmail");
 			System.out.println("SET_PRI_STATUS_AS_MATCHED:: menteeEmail: " + menteeEmail);
 
+			String menteeFirstName = beUtils.quantumStrip(associatedMenteeBe, "PRI_FIRSTNAME", "menteeFirstName");
+			System.out.println("SET_PRI_STATUS_AS_MATCHED:: menteeFirstName: " + menteeFirstName);
+
 			if (menteeEmail != null) {
                 System.out.println("Sending email saying Mentor rejected to " + menteeEmail);
 
@@ -132,7 +135,7 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 
                 HashMap<String, String> templateData = new HashMap<String, String>();
-                templateData.put("Mentee", firstname);
+                templateData.put("Mentee", menteeFirstName);
                 /*templateData.put("pw", randomPW);*/
                 templateData.put("url", url);
 
