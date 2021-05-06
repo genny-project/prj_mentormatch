@@ -42,7 +42,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_QA_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_FINISH_MENTEE", "FORM:DETAIL");
-		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "FORM:DETAIL");
+		displayCodes.put("ACT_MENTOR_AGREE_TO_MENTOR", "FORM:DETAIL");
 		displayCodes.put("ACT_MENTOR_MEETING_AGREE", "FORM:DETAIL");
 
 		/* PROCESS */

@@ -144,7 +144,14 @@ rule "CREATE_MENTEE_MENTOR_APP"
                 String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
                 System.out.println("token: " + token);
 
-                String url = GennySettings.projectUrl+"/home/UVVFX0ZBS0VfUEFSRU5U/UVVFX01FTlRPUl9BR1JFRV9UT19NRU5UT1JfR1JQ";
+				String urlParentCode = "QUE_FAKE_PARENT";
+				String urlCode = "ACT_MENTOR_AGREE_TO_MENTOR";
+
+				/* Encode each section of the url */
+				urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
+				urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
+
+				String url = GennySettings.projectUrl+"/home/"+urlParentCode+"/"+urlCode;
                 System.out.println("url: " + url);
 
                 url = url + "?token=" + token;
