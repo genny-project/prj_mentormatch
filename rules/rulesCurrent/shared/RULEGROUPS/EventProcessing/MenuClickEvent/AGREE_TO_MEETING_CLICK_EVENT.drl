@@ -15,7 +15,7 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "QUE_MENTOR_MEETING_TIME_GRP.*")
+		$message : QEventMessage(data.code matches "ACT_MENTOR_MEETING_AGREE")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -27,7 +27,7 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		String code = $message.getData().getCode();
 		System.out.println("code: " +code);
 
-		String key = StringUtils.removeStart(code, "QUE_MENTOR_MEETING_TIME_GRP");
+		String key = StringUtils.removeStart(code, "ACT_MENTOR_MEETING_AGREE");
 		System.out.println("key: " +key);
 
 		String user = userToken.getUserCode();
