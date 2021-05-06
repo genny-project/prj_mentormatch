@@ -56,27 +56,9 @@
   <bpmn2:itemDefinition id="ItemDefinition_103" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_104" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_105" isCollection="false" structureRef="Object"/>
-  <bpmn2:itemDefinition id="ItemDefinition_15" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_16" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_18" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_19" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_20" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_21" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_122" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_124" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_125" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_126" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_127" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_128" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_129" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_130" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_131" isCollection="false"/>
   <bpmn2:itemDefinition id="ItemDefinition_278" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_279" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_280" isCollection="false" structureRef="Object"/>
-  <bpmn2:itemDefinition id="ItemDefinition_336" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_337" isCollection="false"/>
-  <bpmn2:itemDefinition id="ItemDefinition_338" isCollection="false"/>
   <bpmn2:itemDefinition id="ItemDefinition_425" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_426" isCollection="false" structureRef="Object"/>
   <bpmn2:itemDefinition id="ItemDefinition_427" isCollection="false" structureRef="Object"/>
@@ -89,7 +71,7 @@
   <bpmn2:signal id="Signal_7" name="START_ADD_ENTITY"/>
   <bpmn2:signal id="Signal_1" name="START_POST_CREATION"/>
   <bpmn2:signal id="Signal_2" name="START_AGREE_TO_MEETING"/>
-  <bpmn2:process id="mentorAgree" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Default Process" isExecutable="true">
+  <bpmn2:process id="agreeToMeeting" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Default Process" isExecutable="true">
     <bpmn2:extensionElements>
       <drools:import name="life.genny.models.GennyToken"/>
       <drools:import name="life.genny.utils.SessionFacts"/>
@@ -113,7 +95,7 @@
     </bpmn2:extensionElements>
     <bpmn2:property id="userToken" itemSubjectRef="ItemDefinition_2" name="userToken"/>
     <bpmn2:property id="serviceToken" itemSubjectRef="ItemDefinition_2" name="serviceToken"/>
-    <bpmn2:property id="sessionFacts" name="sessionFacts"/>
+    <bpmn2:property id="sessionFacts" itemSubjectRef="ItemDefinition_954" name="sessionFacts"/>
     <bpmn2:property id="results" itemSubjectRef="ItemDefinition_1240" name="results"/>
     <bpmn2:property id="targetBaseEntity" itemSubjectRef="ItemDefinition_2016" name="targetBaseEntity"/>
     <bpmn2:property id="key" itemSubjectRef="ItemDefinition_2733" name="key"/>
@@ -336,7 +318,7 @@ System.out.println(&quot;dynamicCards: controlSignalCode = &quot; + controlSigna
     <bpmn2:sequenceFlow id="SequenceFlow_7" drools:priority="1" sourceRef="SubProcess_2" targetRef="EndEvent_2"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Process Diagram">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="mentorAgree">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="agreeToMeeting">
       <bpmndi:BPMNShape id="BPMNShape_SubProcess_2" bpmnElement="SubProcess_2" isExpanded="true">
         <dc:Bounds height="264.0" width="1351.0" x="180.0" y="166.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_1">
