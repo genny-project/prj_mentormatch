@@ -31,7 +31,7 @@ import life.genny.notifications.EmailHelper;
 import java.util.HashMap;
 import java.time.LocalDateTime;
 
-rule "SET_PRI_STATUS_AS_MENTORING"
+rule "MEETING_REQUEST_NOTIFICATION"
     ruleflow-group 'Movement'
     no-loop true
     salience 1
@@ -41,22 +41,17 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		newApplication : BaseEntity(code matches "APP_\\S+" )
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("MATCHED"))
-		controlSignalCode : String(controlSignalCode.equals("MENTORING"))
+		controlSignalCode : String(controlSignalCode.equals("MEETING_REQUEST_NOTIFICATION"))
 		beUtils : BaseEntityUtils()
      then
- 		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
+ 		System.out.println("MEETING_REQUEST_NOTIFICATION: Rule fired" );
 
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
- 		Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_STATUS","MENTORING");
- 		beUtils.saveAnswer(answer);
-
-		System.out.println("SET_PRI_STATUS_AS_MENTORING: Answer = " + answer);
 		System.out.println("SET_PRI_STATUS_AS_MENTORING: newApplication = " + newApplication);
 
-
-		TableUtils.moveEntity(newApplication.getCode(), "SBE_MATCHED", "SBE_ROTARY_MENTORING", beUtils);
-
+		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
+		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 		
 		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
 		
@@ -64,13 +59,16 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 		String meetingTimeStr = dtf.format(meetingTime);
 		
 		String meetingType = newApplication.getValue("LNK_MEETING_TYPE", null);
-		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
+		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
+		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
+		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
+		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
 		if (menteeBe != null) {
-			System.out.println("Sending email to mentee for accepting meeting request");
+			System.out.println("Sending email to mentee for created meeting request");
 
 			/* SEND EMAIL */
                 String menteeEmail = menteeBe.getValue("PRI_EMAIL", null);
@@ -83,6 +81,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
+                        templateData.put("MeetingTime", meetingTimeStr);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -109,6 +108,67 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 					System.out.println("ERROR Null Mentee email");
 				}
 			}
+			/* Email to mentor created meeting request*/
+
+		if (mentorBe != null) {
+			System.out.println("Sending email to mentor for meeting request");
+
+			/* SEND EMAIL */
+                String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
+				System.out.println("mentorEmail: " + mentorEmail);
+
+				String mentorName = mentorBe.getValue("PRI_NAME", null);
+				System.out.println("mentorName: " + mentorName);
+
+				if (mentorEmail != null) {
+
+						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
+						String template_id = "d-8df9d4b9362e4b38a0cd2f0de576ac48";
+						
+						String urlParentCode = "QUE_FAKE_PARENT";
+                		String urlCode = "ACT_MENTOR_MEETING_AGREE";
+
+                		/* Encode each section of the url */
+                		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
+                		urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
+            
+                		String url = GennySettings.projectUrl+"/home/"+urlParentCode+"/"+urlCode;
+                		System.out.println("url: " + url);
+
+						HashMap<String, String> templateData = new HashMap<String, String>();
+
+                        templateData.put("Mentor", mentorName);
+                        templateData.put("MeetingTime", meetingTimeStr);
+                        templateData.put("url", url);
+
+                        System.out.println("-------- EMAIL DATA --------");
+                        System.out.println("subject: " +subject);
+						System.out.println("template_id: " +template_id);
+						System.out.println("email: " + mentorEmail);
+						System.out.println("Mentor: " +mentorName);
+						System.out.println("url: " + url);
+						System.out.println("----------------------------");
+
+						if (!GennySettings.projectUrl.contains("dev")) {
+
+								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+						} else {
+								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								mentorEmail = "tarjnee.gandhi@outcomelife.com.au";
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+							System.out.println("WARNING: Email not sent because on Dev server");
+						}
+				} else {
+					System.out.println("ERROR Null Mentor email");
+				}
+		}
 
 		retract(newApplication)
 		retract(bucketCode)
