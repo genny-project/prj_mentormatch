@@ -101,6 +101,10 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 			System.out.println("newApplication is NULL or not SEL_YES");
 		}
 
+		if (newApplication.getCode() != null && mentorResponse.equals("SEL_NO")) {
+			System.out.println("## Mentor has picked SEL_NO ##");
+		}
+
 		retract(targetBaseEntity)
 		retract(bucketCode)
 		retract(controlSignalCode)
