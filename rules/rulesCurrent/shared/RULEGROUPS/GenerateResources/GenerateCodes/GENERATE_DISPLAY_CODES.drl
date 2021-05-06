@@ -52,6 +52,8 @@ rule "GENERATE_DISPLAY_CODES"
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
 		displayCodes.put("QUE_MENTEE_GRP", "DASHBOARD");
+		displayCodes.put("QUE_MENTOR_GRP", "DASHBOARD");
+		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_MENTOR_MEETING_TIME_GRP", "DASHBOARD");
 

@@ -46,7 +46,6 @@ rule "SBE_MATCHED"
 						.addColumn("PRI_EMAIL", "Email")
 
 						/* Display Code */
-						.setDisplayMode("CARD:MAIN_3")
 
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Profile")
