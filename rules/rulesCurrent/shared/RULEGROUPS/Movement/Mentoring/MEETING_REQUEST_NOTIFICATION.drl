@@ -48,7 +48,6 @@ rule "MEETING_REQUEST_NOTIFICATION"
 
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
-		System.out.println("SET_PRI_STATUS_AS_MENTORING: Answer = " + answer);
 		System.out.println("SET_PRI_STATUS_AS_MENTORING: newApplication = " + newApplication);
 
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
