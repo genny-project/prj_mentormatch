@@ -145,7 +145,7 @@ rule "CREATE_MENTEE_MENTOR_APP"
                 System.out.println("token: " + token);
 
 				String urlParentCode = "QUE_FAKE_PARENT";
-				String urlCode = "QUE_MENTOR_AGREE_TO_MENTOR_GRP";
+				String urlCode = "ACT_MENTOR_AGREE_TO_MENTOR";
 
 				/* Encode each section of the url */
 				urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
