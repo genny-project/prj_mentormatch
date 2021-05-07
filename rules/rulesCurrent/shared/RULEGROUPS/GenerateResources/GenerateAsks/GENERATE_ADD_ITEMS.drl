@@ -52,7 +52,11 @@ rule "GENERATE_ADD_ITEMS"
 				Question adminQues  = new Question("QUE_ADMIN_MENU", "Admin", eventAttribute, true);
 				Ask adminAsk = new Ask(adminQues, sourceCode, targetCode);
 
-			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk };
+				/* This is temporary */
+				Question trainingQues  = new Question("QUE_MENTEE_TRAINING_MODULE_ONE_MENU", "Training", eventAttribute, true);
+				Ask trainingQuesAsk = new Ask(adminQues, sourceCode, targetCode);
+
+			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk, trainingQuesAsk };
 			Ask[] menteeAddItems = { };
 
 			addItemsAsk.setChildAsks(agentAddItems);
