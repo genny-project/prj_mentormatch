@@ -40,13 +40,13 @@ rule "SBE_MATCHED"
 						.addFilter("PRI_DISABLED", false)
 
 						/* Columns */
-						.addColumn("PRI_MENTEE_NAME", "Name")
-						.addColumn("PRI_MENTOR_NAME", "Name")
-						.addColumn("PRI_MOBILE", "Mobile")
-						.addColumn("PRI_EMAIL", "Email")
+						.addColumn("PRI_MENTEE_NAME", "Mentee Name")
+						.addColumn("PRI_MENTOR_NAME", "Mentor Name")
+						.addColumn("PRI_MENTEE_EMAIL", "Email")
+						.addColumn("PRI_MENTEE_MOBILE", "Mobile")
 
 						/* Display Code */
-
+						.setDisplayMode("CARD:MAIN_4")
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Profile")
 						.setPageStart(0).setPageSize(15);
