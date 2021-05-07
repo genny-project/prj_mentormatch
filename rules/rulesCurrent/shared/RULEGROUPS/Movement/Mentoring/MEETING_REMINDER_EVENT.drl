@@ -37,21 +37,29 @@ rule "MEETING_REMINDER_EVENT"
 	when
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken( code == "PER_SERVICE")
-		newApplication: BaseEntity()
+		targetBaseEntity : BaseEntity( code matches "PER_\\S+" )
 		output : OutputParam( )
 		controlSignalCode : String(controlSignalCode.equals("SCHEDULE_MEETING"))
+		beUtils : BaseEntityUtils()
 	then
 		System.out.println(drools.getRule().getName() + " : Rule fired" );
 		
-		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
-		
-		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
+		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
+		System.out.println("MEETING_REMINDER_EVENT:: targetBaseEntityCode: " + targetBaseEntity.getCode());
+ 		
+ 		String newApplicationCode = null;
+ 		
+ 		if (targetBaseEntity.getCode() != null) {
+			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			System.out.println("MEETING_REMINDER_EVENT:: newApplicationCode: " + newApplicationCode);
+		}
+
+		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
 		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
 		
-	
 		System.out.println("################## START Shleemy ##################");
-		System.out.println("meetingTime : " + meetingTime);
+		System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);
 				
 		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING";
 		
@@ -59,12 +67,12 @@ rule "MEETING_REMINDER_EVENT"
 		
 		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
     	String prettyNow = dtf.format(now);
-    	System.out.println("The current date and time is ~ " + prettyNow);
+    	System.out.println("MEETING_REMINDER_EVENT :: The current date and time is ~ " + prettyNow);
     	
     	/* LocalDateTime orangeTimer = meetingTime.minusHours(24); */
 		LocalDateTime orangeTimer = now.plusSeconds(20);
 		String prettyOrange = dtf.format(orangeTimer);
-		System.out.println("The Orange timer is set for ~ " + prettyOrange);
+		System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
 		
 		ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, newApplication.getCode());
 		
