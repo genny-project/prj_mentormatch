@@ -54,7 +54,7 @@ rule "GENERATE_ADD_ITEMS"
 
 				/* This is temporary */
 				Question trainingQues  = new Question("QUE_MENTEE_TRAINING_MODULE_ONE_MENU", "Training", eventAttribute, true);
-				Ask trainingQuesAsk = new Ask(adminQues, sourceCode, targetCode);
+				Ask trainingQuesAsk = new Ask(trainingQues, sourceCode, targetCode);
 
 			Ask[] agentAddItems = { menteeAsk, mentorAsk, adminAsk, trainingQuesAsk };
 			Ask[] menteeAddItems = { };
