@@ -86,8 +86,12 @@ rule "CREATE_MENTEE_MENTOR_APP"
 
 		if (associatedMenteeBe != null && assocMentorPer != null) {
 
+		/* Setting Application values */
+
 			String firstname = associatedMenteeBe.getValue("PRI_FIRSTNAME", null);
  			String lastname = associatedMenteeBe.getValue("PRI_LASTNAME", null);
+			String menteeMobile = associatedMenteeBe.getValue("PRI_MOBILE", null);
+			String menteeEmail = associatedMenteeBe.getValue("PRI_EMAIL", null);
  			String name = "";
 
 			System.out.println("firstname = " +firstname);
@@ -114,6 +118,20 @@ rule "CREATE_MENTEE_MENTOR_APP"
 				}
 			} else {
 				System.out.println("ERROR: Null firstname");
+			}
+
+			if (menteeMobile != null) {
+				Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_MOBILE", menteeMobile);
+				beUtils.saveAnswer(answer);
+			} else {
+				System.out.println("ERROR: Null menteeMobile");
+			}
+
+			if (menteeEmail != null) {
+				Answer answer = new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTEE_EMAIL", menteeEmail);
+				beUtils.saveAnswer(answer);
+			} else {
+				System.out.println("ERROR: Null menteeEmail");
 			}
 
 			/* Setting Mentor Values */
