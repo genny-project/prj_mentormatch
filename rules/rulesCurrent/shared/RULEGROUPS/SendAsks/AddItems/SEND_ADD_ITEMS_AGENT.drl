@@ -39,6 +39,7 @@ rule "SEND_ADD_ITEMS_AGENT"
 
 		/* get the addItems ask from cache */
 		Ask addItemsAsk = VertxUtils.getObject(serviceToken.getRealm(), "", "ADD_ITEMS_AGENT", Ask.class, serviceToken.getToken());
+		System.out.println("addItemsAsk = " + addItemsAsk.toString());
 
 		if(addItemsAsk == null){
 			System.out.println("addItemsAsk is not in cache");
