@@ -88,8 +88,8 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 				String menteeName = associatedMenteeBe.getValue("PRI_NAME", null);
 				if (menteeEmail != null) {
 
-						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
-						String template_id = "d-3d5a56f4c7a9449690898696c4e46fa9";
+						String subject = "Congratulation!! Your mentor confirms the meeting.";
+						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
 
 					    HashMap<String, String> templateData = new HashMap<>();
 

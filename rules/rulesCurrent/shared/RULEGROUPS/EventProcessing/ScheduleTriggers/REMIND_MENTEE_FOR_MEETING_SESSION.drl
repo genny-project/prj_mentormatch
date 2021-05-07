@@ -101,8 +101,7 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
-								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								menteeEmail = "tarjnee.gandhi@outcomelife.com.au";
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
 								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
@@ -143,14 +142,13 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 
 						if (!GennySettings.projectUrl.contains("dev")) {
 
-								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
 								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								mentorEmail = "tarjnee.gandhi@outcomelife.com.au";
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
