@@ -47,6 +47,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: Rule fired" );
 
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
+ 		System.out.println("SET_PRI_STATUS_AS_MENTORING: targetBaseEntity = " + targetBaseEntity);
  		
  		String newApplicationCode = null;
  		
@@ -108,8 +109,7 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
-								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								menteeEmail = "tarjnee.gandhi@outcomelife.com.au";
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
 								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
 								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
 
