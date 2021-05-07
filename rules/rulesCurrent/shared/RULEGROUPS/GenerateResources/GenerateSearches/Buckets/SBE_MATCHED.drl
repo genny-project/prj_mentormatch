@@ -46,7 +46,7 @@ rule "SBE_MATCHED"
 						.addColumn("PRI_MENTEE_MOBILE", "Mobile")
 
 						/* Display Code */
-
+						.setDisplayMode("CARD:MAIN_4")
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Profile")
 						.setPageStart(0).setPageSize(15);
