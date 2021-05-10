@@ -28,6 +28,7 @@ import life.genny.notifications.SmsHelper;
 import java.util.Arrays;
 import java.time.ZoneOffset;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 rule "MEETING_REMINDER_EVENT"
@@ -69,8 +70,8 @@ rule "MEETING_REMINDER_EVENT"
     	String prettyNow = dtf.format(now);
     	System.out.println("MEETING_REMINDER_EVENT :: The current date and time is ~ " + prettyNow);
     	
-    	/* LocalDateTime orangeTimer = meetingTime.minusHours(24); */
-		LocalDateTime orangeTimer = now.plusSeconds(20);
+    	LocalDateTime orangeTimer = meetingTime.minusHours(24);
+		/* LocalDateTime orangeTimer = now.plusSeconds(20); */
 		String prettyOrange = dtf.format(orangeTimer);
 		System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
 		
