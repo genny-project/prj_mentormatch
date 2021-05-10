@@ -33,6 +33,7 @@ import life.genny.models.ThemeAttributeType;
 import life.genny.qwandautils.GennySettings;
 import life.genny.notifications.EmailHelper;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 rule "REMIND_MENTEE_FOR_MEETING_SESSION"
     ruleflow-group 'EventProcessing'
