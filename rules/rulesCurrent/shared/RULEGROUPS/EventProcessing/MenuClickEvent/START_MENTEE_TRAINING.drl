@@ -34,8 +34,8 @@ rule "START_MENTEE_TRAINING"
 		System.out.println("user: " + user);
 
         /* Set result */
-        /*output.setTypeOfResult("SIGNAL");
-		output.setResultCode("START_AGREE_TO_MEETING");
+        output.setTypeOfResult("SIGNAL");
+		output.setResultCode("START_MENTEE_TRAINING");
 
 		output.setSuitCase(key);
 		output.setAskSourceCode(user);
@@ -48,7 +48,7 @@ rule "START_MENTEE_TRAINING"
 		System.out.println("SuitCase: "      + output.getSuitCase());
 		System.out.println("AskSourceCode: " + output.getAskSourceCode());
 		System.out.println("TargetCode: "    + output.getTargetCode());
-		System.out.println("**************************************************");*/
+		System.out.println("**************************************************");
 
 		retract( $message);
 	end
