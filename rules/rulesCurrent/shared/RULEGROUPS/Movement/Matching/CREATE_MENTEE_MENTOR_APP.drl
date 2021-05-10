@@ -9,7 +9,7 @@ import life.genny.utils.OutputParam;
 import life.genny.qwandautils.KeycloakUtils;
 import java.util.List;
 import java.util.ArrayList;
-import org.apache.commons.codec.binary.Base64;
+import java.util.Base64;
 import io.vertx.core.json.JsonObject;
 import life.genny.qwanda.message.QDataBaseEntityMessage;
 import life.genny.qwanda.message.QEventBtnClickMessage;
