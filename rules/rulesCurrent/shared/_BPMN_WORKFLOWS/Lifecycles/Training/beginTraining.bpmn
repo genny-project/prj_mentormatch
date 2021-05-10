@@ -146,6 +146,7 @@ kcontext.setVariable(&quot;userToken&quot;, userToken);
 kcontext.setVariable(&quot;serviceToken&quot;, serviceToken);
 System.out.println(&quot;userToken: &quot; +userToken.getCode());
 System.out.println(&quot;serviceToken: &quot; +serviceToken.getCode());
+System.out.println(&quot;userTokenCode: &quot; +userToken.getUserCode());
 
 
 processId = kcontext.getProcessInstance().getId();
