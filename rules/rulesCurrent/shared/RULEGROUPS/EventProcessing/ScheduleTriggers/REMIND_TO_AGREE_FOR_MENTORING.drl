@@ -62,10 +62,6 @@ rule "REMIND_TO_AGREE_FOR_MENTORING"
 		
 		BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
-        String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
-        System.out.println("token: " + token);
-		
-
 		if (mentorBe != null) {
 			System.out.println("#### Sending email to agree to mentoring ####");
 
@@ -84,6 +80,9 @@ rule "REMIND_TO_AGREE_FOR_MENTORING"
 						String urlParentCode = "QUE_FAKE_PARENT";
                 		String urlCode = "ACT_MENTOR_MENTORING_AGREE";
 
+					 	String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
+       					System.out.println("token: " + token);
+       					
                 		/* Encode each section of the url */
                 		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
                 		urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
