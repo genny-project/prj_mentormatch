@@ -54,7 +54,7 @@ rule "SET_PRI_STATUS_AS_TRAINING"
 		System.out.println("SET_PRI_STATUS_AS_TRAINING: associatedMenteeBe = " + associatedMenteeBe);
 
 
-		TableUtils.moveEntity(newApplication.getCode(), "SBE_ON_SHORE", "SBE_MENTEE_TRAINING", beUtils);
+		TableUtils.moveEntity(associatedMenteeBe.getCode(), "SBE_ON_SHORE", "SBE_MENTEE_TRAINING", beUtils);
 
 
 		/* Save status to the PER */
@@ -118,7 +118,7 @@ rule "SET_PRI_STATUS_AS_TRAINING"
 
 
 
-		retract(newApplication)
+		retract(associatedMenteeBe)
 		retract(bucketCode)
 		retract(controlSignalCode)
 
