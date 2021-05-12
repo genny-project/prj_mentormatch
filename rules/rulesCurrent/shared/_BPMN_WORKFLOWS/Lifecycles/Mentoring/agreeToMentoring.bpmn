@@ -290,7 +290,7 @@ mentorResponseBe = beUtils.getBaseEntityByCode(mentorResponseBe.getCode());
 
 System.out.println(&quot;###MENTORRESPONSE_CODE ###&quot; + mentorResponseBe.getCode());
 
-String mentorResponse = mentorResponseBe.getValue(&quot;LNK_MENTOR_AGREE_TO_MENTORING&quot;, null);
+mentorResponse = mentorResponseBe.getValue(&quot;LNK_MENTOR_AGREE_TO_MENTORING&quot;, null);
 
 
 System.out.println(&quot;###mentorResponse ###&quot; + mentorResponse);
