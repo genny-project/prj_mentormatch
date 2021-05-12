@@ -291,6 +291,7 @@ mentorResponseBe = beUtils.getBaseEntityByCode(mentorResponseBe.getCode());
 System.out.println(&quot;###MENTORRESPONSE_CODE ###&quot; + mentorResponseBe.getCode());
 
 mentorResponse = mentorResponseBe.getValue(&quot;LNK_MENTOR_AGREE_TO_MENTORING&quot;, null);
+kcontext.setVariable(&quot;mentorResponse&quot;, mentorResponse);
 
 
 System.out.println(&quot;###mentorResponse ###&quot; + mentorResponse);
