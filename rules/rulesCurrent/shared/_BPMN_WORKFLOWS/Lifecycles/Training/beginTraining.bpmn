@@ -89,7 +89,6 @@
     <bpmn2:property id="eventMsg" itemSubjectRef="ItemDefinition_46" name="eventMsg"/>
     <bpmn2:property id="eventMsg2" itemSubjectRef="ItemDefinition_46" name="eventMsg2"/>
     <bpmn2:property id="submitCode" itemSubjectRef="ItemDefinition_2733" name="submitCode"/>
-    <bpmn2:property id="beUtils" itemSubjectRef="ItemDefinition_2143" name="beUtils"/>
     <bpmn2:endEvent id="EndEvent_2" name="End cardsA">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
