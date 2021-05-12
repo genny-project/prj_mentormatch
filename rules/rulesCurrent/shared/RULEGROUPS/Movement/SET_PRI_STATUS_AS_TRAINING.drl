@@ -35,7 +35,7 @@ rule "SET_PRI_STATUS_AS_TRAINING"
     when
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-		newApplication : BaseEntity()
+		associatedMenteeBe : BaseEntity()
 		output : OutputParam()
 		bucketCode : String(bucketCode.equals("ON_SHORE"))
 		controlSignalCode : String(controlSignalCode.equals("TRAINING"))
@@ -45,13 +45,13 @@ rule "SET_PRI_STATUS_AS_TRAINING"
  		System.out.println("SET_PRI_STATUS_AS_TRAINING: Rule fired" );
 
 
- 		Answer answer = new Answer(userToken.getUserCode(),newApplication.getCode(),"PRI_STATUS","TRAINING");
+ 		Answer answer = new Answer(userToken.getUserCode(),associatedMenteeBe.getCode(),"PRI_STATUS","TRAINING");
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
  		beUtils.saveAnswer(answer);
 
 
 		System.out.println("SET_PRI_STATUS_AS_TRAINING: Answer = " + answer);
-		System.out.println("SET_PRI_STATUS_AS_TRAINING: newApplication = " + newApplication);
+		System.out.println("SET_PRI_STATUS_AS_TRAINING: associatedMenteeBe = " + associatedMenteeBe);
 
 
 		TableUtils.moveEntity(newApplication.getCode(), "SBE_ON_SHORE", "SBE_MENTEE_TRAINING", beUtils);
