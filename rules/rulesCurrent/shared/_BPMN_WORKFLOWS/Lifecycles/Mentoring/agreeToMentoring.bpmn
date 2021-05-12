@@ -272,7 +272,7 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ targetBe: &quot; + target
 
 BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
 
-mentorResponseBe = beUtils.getBaseEntityByCode(mentorResponse.getCode());
+mentorResponseBe = beUtils.getBaseEntityByCode(mentorResponseBe.getCode());
 
 String mentorResponse = mentorResponseBe.getValue(&quot;LNK_MENTOR_AGREE_TO_MENTORING&quot;, null);
 
