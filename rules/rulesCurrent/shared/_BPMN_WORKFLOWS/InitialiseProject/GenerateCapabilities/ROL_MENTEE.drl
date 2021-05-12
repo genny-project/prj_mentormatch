@@ -37,32 +37,24 @@ rule "ROL_MENTEE"
      then
      	System.out.println("   Generate "+drools.getRule().getName() );
 
-   	     BaseEntity role = capabilityUtils.getBeUtils().create(drools.getRule().getName(),WordUtils.capitalize(drools.getRule().getName().substring(4)));
+   	    BaseEntity role = capabilityUtils.getBeUtils().create(drools.getRule().getName(),WordUtils.capitalize(drools.getRule().getName().substring(4)));
 
-   	     beUtils.saveAnswer(new Answer(beUtils.getGennyToken().getUserCode(), role.getCode(), "PRI_COLOR", "#096F09",false,true));
+   	    beUtils.saveAnswer(new Answer(beUtils.getGennyToken().getUserCode(), role.getCode(), "PRI_COLOR", "#096F09",false,true));
 
    	     capabilityUtils.inheritRole(role,userRole);
 
- 		 /*capabilityUtils.addCapabilityToRole(role,"DASHBOARD_TIMELINE",CapabilityMode.VIEW);
-  	     capabilityUtils.addCapabilityToRole(role,"READ_HOST_COMPANY",CapabilityMode.VIEW);
-  	     capabilityUtils.addCapabilityToRole(role,"READ_JOURNALS",CapabilityMode.VIEW);
-  	     capabilityUtils.addCapabilityToRole(role,"CREATE_JOURNALS",CapabilityMode.SELF);
-  	     capabilityUtils.addCapabilityToRole(role,"READ_INTERNSHIPS",CapabilityMode.VIEW);
-
-				 capabilityUtils.addCapabilityToRole(role,"WITHDRAW_APPLICATION",CapabilityMode.VIEW);
-				 capabilityUtils.addCapabilityToRole(role,"VIEW_JOURNAL",CapabilityMode.VIEW);
-				 capabilityUtils.addCapabilityToRole(role,"EDIT_JOURNAL",CapabilityMode.EDIT);
-				 capabilityUtils.addCapabilityToRole(role,"ADD_JOURNAL",CapabilityMode.ADD);
-				 capabilityUtils.addCapabilityToRole(role,"APPLY",CapabilityMode.VIEW);
-				 capabilityUtils.addCapabilityToRole(role,"VIEW_AGREEMENT",CapabilityMode.VIEW);*/
+ 		 capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);
+		 capabilityUtils.addCapabilityToRole(role,"TRAINING_APPLICATION", CapabilityMode.VIEW);
+		 capabilityUtils.addCapabilityToRole(role,"MATCHED_APPLICATION", CapabilityMode.VIEW);
+		 capabilityUtils.addCapabilityToRole(role,"MENTORING_APPLICATION", CapabilityMode.VIEW);
+		 capabilityUtils.addCapabilityToRole(role,"ALUMNI_APPLICATION", CapabilityMode.VIEW);
 
   	     role = capabilityUtils.getBeUtils().getBaseEntityByCode(role.getCode());
-  	     beUtils.saveAnswer(new Answer(capabilityUtils.getBeUtils().getServiceToken().getUserCode(), role.getCode(), "PRI_WEIGHT", 200.0,false,true));
 
- 		 insert(role);
+		beUtils.saveAnswer(new Answer(capabilityUtils.getBeUtils().getServiceToken().getUserCode(), role.getCode(), "PRI_WEIGHT", 200.0,false,true));
 
-  		 VertxUtils.writeCachedJson(capabilityUtils.getBeUtils().getServiceToken().getRealm(), role.getCode(), JsonUtils.toJson(role), capabilityUtils.getBeUtils().getServiceToken().getToken());
+ 		insert(role);
 
-
+  		VertxUtils.writeCachedJson(capabilityUtils.getBeUtils().getServiceToken().getRealm(), role.getCode(), JsonUtils.toJson(role), capabilityUtils.getBeUtils().getServiceToken().getToken());
 
 end

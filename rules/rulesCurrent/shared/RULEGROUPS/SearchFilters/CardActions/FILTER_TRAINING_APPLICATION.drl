@@ -30,7 +30,7 @@ rule "FILTER_TRAINING_APPLICATION"
 	when
 		userToken : GennyToken ( code != "PER_SERVICE" )
 		searchBE: SearchEntity( code matches "SBE_ON_SHORE.*" )
-		/*allowed: Allowed(code == "TRAINING_APPLICATION" && mode == CapabilityMode.VIEW)*/
+		allowed: Allowed(code == "TRAINING_APPLICATION" && mode == CapabilityMode.VIEW)
 
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
@@ -39,6 +39,7 @@ rule "FILTER_TRAINING_APPLICATION"
 		System.out.println("searchCode   :: " + searchBE.getCode());
 
 		searchBE.addDefaultAction("PRI_EVENT_TRAINING_APPLICATION", "Move To Training");
+		searchBE.addAction("PRI_EVENT_START_MENTEE_TRAINING", "Start Training");
 
 		/* Create  QDataBaseEntityMessage for SearchEntity */
 		QDataBaseEntityMessage msg = new QDataBaseEntityMessage(searchBE);

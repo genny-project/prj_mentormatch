@@ -43,11 +43,11 @@ rule "ROL_AGENT"
 
     	capabilityUtils.inheritRole(role,user);
 
-   	     capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);
+   	     /*capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);
 		 capabilityUtils.addCapabilityToRole(role,"TRAINING_APPLICATION", CapabilityMode.VIEW);
 		 capabilityUtils.addCapabilityToRole(role,"MATCHED_APPLICATION", CapabilityMode.VIEW);
 		 capabilityUtils.addCapabilityToRole(role,"MENTORING_APPLICATION", CapabilityMode.VIEW);
-		 capabilityUtils.addCapabilityToRole(role,"ALUMNI_APPLICATION", CapabilityMode.VIEW);
+		 capabilityUtils.addCapabilityToRole(role,"ALUMNI_APPLICATION", CapabilityMode.VIEW);*/
 
   	     role = capabilityUtils.getBeUtils().getBaseEntityByCode(role.getCode());
 
