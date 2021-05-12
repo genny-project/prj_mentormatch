@@ -303,6 +303,8 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ newApplication: &quot; + 
         <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;%%%%%%%%%%%%%%%%%%% PRI_TRAINING_UPDATE %%%%%%%%%%%%%%%%%%%&quot;);
 
+BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
+
 if (associatedMenteeBe != null) {
  	beUtils.saveAnswer(new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), &quot;PRI_TRAINING_STATUS&quot;, &quot;COMPLETE&quot;));
 } else {
