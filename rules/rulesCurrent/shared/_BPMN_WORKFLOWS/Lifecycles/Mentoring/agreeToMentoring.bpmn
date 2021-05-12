@@ -143,6 +143,18 @@ targetBe = beUtils. getBaseEntityByCode(codes);
 kcontext.setVariable(&quot;targetBe&quot;, targetBe);
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ targetBe: &quot; + targetBe);
 
+uuid = UUID.randomUUID();
+kcontext.setVariable(&quot;uuid&quot;, uuid);
+System.out.println(&quot;uuid: &quot; + uuid);
+
+
+String newCode = &quot;RSP_&quot;+uuid;
+newCode = newCode.toUpperCase();
+mentorReponseBe = beUtils.create(newCode, newCode);
+kcontext.setVariable(&quot;mentorReponseBe&quot;, mentorReponseBe);
+System.out.println(&quot;mentorReponseBe = &quot; + mentorReponseBe);
+
+
 
 
 
@@ -234,7 +246,7 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ targetBe: &quot; + target
           <bpmn2:targetRef>DataInput_7</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
         <bpmn2:dataInputAssociation id="_DataInputAssociation_616">
-          <bpmn2:sourceRef>targetBe</bpmn2:sourceRef>
+          <bpmn2:sourceRef>mentorResponseBe</bpmn2:sourceRef>
           <bpmn2:targetRef>DataInput_8</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
         <bpmn2:dataInputAssociation id="_DataInputAssociation_617">
