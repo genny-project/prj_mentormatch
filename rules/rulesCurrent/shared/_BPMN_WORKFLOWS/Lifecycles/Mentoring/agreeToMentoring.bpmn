@@ -150,9 +150,9 @@ System.out.println(&quot;uuid: &quot; + uuid);
 
 String newCode = &quot;RSP_&quot;+uuid;
 newCode = newCode.toUpperCase();
-mentorReponseBe = beUtils.create(newCode, newCode);
-kcontext.setVariable(&quot;mentorReponseBe&quot;, mentorReponseBe);
-System.out.println(&quot;mentorReponseBe = &quot; + mentorReponseBe);
+mentorResponseBe = beUtils.create(newCode, newCode);
+kcontext.setVariable(&quot;mentorResponseBe&quot;, mentorResponseBe);
+System.out.println(&quot;mentorResponseBe = &quot; + mentorResponseBe);
 
 
 
