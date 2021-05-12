@@ -282,9 +282,20 @@ System.out.println(&quot;mentorResponseBe = &quot; + mentorResponseBe);
         <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;### Check Response Task called ###&quot;);
 
-System.out.println(&quot;###MENTORRESPONSE_CODE ###&quot; + mentorResponseBe.getCode());
 
 BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
+
+mentorResponseBe = beUtils.getBaseEntityByCode(mentorResponseBe.getCode());
+
+
+System.out.println(&quot;###MENTORRESPONSE_CODE ###&quot; + mentorResponseBe.getCode());
+
+String mentorResponse = mentorResponseBe.getValue(&quot;LNK_MENTOR_AGREE_TO_MENTORING&quot;, null);
+
+
+System.out.println(&quot;###mentorResponse ###&quot; + mentorResponse);
+
+
 </bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_6" drools:priority="1" sourceRef="Task_1" targetRef="ScriptTask_2"/>
