@@ -306,7 +306,7 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ newApplication: &quot; + 
 BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
 
 if (associatedMenteeBe != null) {
- 	beUtils.saveAnswer(new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), &quot;PRI_TRAINING_STATUS&quot;, &quot;COMPLETE&quot;));
+ 	beUtils.saveAnswer(new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), &quot;PRI_MENTEE_TRAINING_STATUS&quot;, &quot;COMPLETE&quot;));
 } else {
 	System.out.println(&quot;ERROR: Null associatedMenteeBe&quot;);
 }</bpmn2:script>
