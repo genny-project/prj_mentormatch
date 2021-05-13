@@ -80,7 +80,7 @@ rule "NOTIFICATION_TO_MENTEE_AGREE_FOR_MENTORING"
 				String menteeName = associatedMenteeBe.getValue("PRI_NAME", null);
 				System.out.println("menteeName: " + menteeName);
 
-				if (meteeEmail != null) {
+				if (menteeEmail != null) {
 
 						String subject = "Confirm to Mentoring To mentee";
 						String template_id = "d-63786d09af264ade844f10d7eb02252c";
