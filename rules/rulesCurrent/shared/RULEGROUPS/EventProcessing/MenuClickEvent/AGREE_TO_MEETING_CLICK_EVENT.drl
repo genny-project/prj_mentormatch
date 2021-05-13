@@ -43,7 +43,6 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		    workflowSignalCode = "START_AGREE_TO_MENTORING";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
-		}
 		case "ACT_MENTEE_MENTORING_AGREE":
 		    workflowSignalCode = "START_AGREE_TO_MENTORING_MENTEE";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
