@@ -148,8 +148,6 @@ menteeResponseBe = beUtils.create(newCode, newCode);
 kcontext.setVariable(&quot;menteeResponseBe&quot;, menteeResponseBe);
 System.out.println(&quot;menteeResponseBe = &quot; + menteeResponseBe);
 
-beUtils.saveAnswer(new Answer(userToken.getUserCode(), menteeResponseBe.getCode(), &quot;PRI_USER_CODE&quot;, userToken.getUserCode()));
-
 
 
 </bpmn2:script>
