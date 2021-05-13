@@ -131,5 +131,6 @@ rule "NOTIFICATION_TO_MENTEE_AGREE_FOR_MENTORING"
 					System.out.println("ERROR Null Mentee email");
 				}
 		}
-		retract($message)
+		retract(targetBaseEntity)
+		retract(controlSignalCode)
 end
