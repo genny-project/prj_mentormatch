@@ -15,8 +15,7 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_MENTOR_MEETING_AGREE" || data.code matches "ACT_MENTOR_MENTORING_AGREE" 
-								|| data.code matches "ACT_MENTEE_MENTORING_AGREE")
+		$message : QEventMessage(data.code matches "ACT_MENTOR_MEETING_AGREE" || data.code matches "ACT_MENTOR_MENTORING_AGREE" || data.code matches "ACT_MENTEE_MENTORING_AGREE")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
