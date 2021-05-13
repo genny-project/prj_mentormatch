@@ -38,8 +38,8 @@ rule "FILTER_TRAINING_APPLICATION"
 		System.out.println("userCode     :: " + userToken.getUserCode());
 		System.out.println("searchCode   :: " + searchBE.getCode());
 
-		/*searchBE.addDefaultAction("PRI_EVENT_TRAINING_APPLICATION", "Move To Training");
-		searchBE.addAction("PRI_EVENT_START_MENTEE_TRAINING", "Start Training");*/
+		searchBE.addDefaultAction("PRI_EVENT_TRAINING_APPLICATION", "Move To Training");
+		searchBE.addAction("PRI_EVENT_START_MENTEE_TRAINING", "Start Training");
 
 		/* Create  QDataBaseEntityMessage for SearchEntity */
 		QDataBaseEntityMessage msg = new QDataBaseEntityMessage(searchBE);
