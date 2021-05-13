@@ -313,22 +313,7 @@ System.out.println(&quot;###mentorResponse ###&quot; + mentorResponse);
 controlSignalCode = &quot;SEND_NOTIFICATION_TO_MENTEE&quot;;
 kcontext.setVariable(&quot;controlSignalCode&quot;, controlSignalCode);
 System.out.println(&quot;dynamicCards: controlSignalCode = &quot; + controlSignalCode);
-
-BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
-BaseEntity mentorBe = beUtils.getBaseEntityByCode(userToken.getUserCode());
-System.out.println(&quot;### Inside agree to mentor flow :: mentorBe ::&quot; + mentorBe);
-
-String applicationBe = mentorBe.getValue(&quot;PRI_APP_LNK_CODE&quot;, null);
-System.out.println(&quot;### Inside agree to mentor flow :: applicationBe ::&quot; + applicationBe);
-
-String menteeBe = applicationBe.getValue(&quot;PRI_MENTEE_CODE&quot;, null);
-System.out.println(&quot;### Inside agree to mentor flow :: menteeBe ::&quot; + menteeBe);
-
-String menteeName = menteeBe.getValue(&quot;PRI_FIRSTNAME&quot;, null);
-System.out.println(&quot;### Inside agree to mentor flow :: menteeName ::&quot; + menteeName);
-
-String menteeEmail = menteeBe.getValue(&quot;PRI_EMAIL&quot;, null);
-System.out.println(&quot;### Inside agree to mentor flow :: menteeEmail ::&quot; + menteeEmail);</bpmn2:script>
+</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_13" drools:priority="1" name="AGREE_TO_MENTOR" sourceRef="ExclusiveGateway_3" targetRef="ScriptTask_4">
         <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2" language="http://www.java.com/java">return(mentorResponse.equals(&quot;SEL_YES&quot;));</bpmn2:conditionExpression>
