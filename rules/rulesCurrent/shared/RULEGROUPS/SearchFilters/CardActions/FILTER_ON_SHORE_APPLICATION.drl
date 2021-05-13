@@ -30,7 +30,7 @@ rule "FILTER_ON_SHORE_APPLICATION"
 	when
 		userToken : GennyToken ( code != "PER_SERVICE" )
 		searchBE: SearchEntity( code matches "SBE_OFF_SHORE.*" )
-		allowed: Allowed(code == "ON_SHORE_APPLICATION" && mode == CapabilityMode.VIEW)
+		/*allowed: Allowed(code == "ON_SHORE_APPLICATION" && mode == CapabilityMode.VIEW)*/
 
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
@@ -46,5 +46,5 @@ rule "FILTER_ON_SHORE_APPLICATION"
 		payload.add(msg);
 
 		drools.getKnowledgeRuntime().setGlobal("payload", payload);
-		retract(allowed);
+		/*retract(allowed);*/
 end
