@@ -38,7 +38,7 @@ rule "FILTER_MENTORING_APPLICATION"
 		System.out.println("userCode     :: " + userToken.getUserCode());
 		System.out.println("searchCode   :: " + searchBE.getCode());
 
-		searchBE.addDefaultAction("PRI_EVENT_MENTORING_APPLICATION", "Schedule Meeting");
+		searchBE.addDefaultAction("PRI_EVENT_MENTORING_APPLICATION", "Request to Catchup");
 
 		/* Create  QDataBaseEntityMessage for SearchEntity */
 		QDataBaseEntityMessage msg = new QDataBaseEntityMessage(searchBE);
