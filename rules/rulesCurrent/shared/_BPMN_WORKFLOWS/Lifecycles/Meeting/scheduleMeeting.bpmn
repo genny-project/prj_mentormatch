@@ -162,11 +162,11 @@ System.out.println(&quot;Setup :: mentorBeCode :: &quot; + mentorBeCode);
 BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
 
-String menteeEmail = menteeBe.getValue(&quot;PRI_EMAIL&quot;, null);
+menteeEmail = menteeBe.getValue(&quot;PRI_EMAIL&quot;, null);
 String menteeName = menteeBe.getValue(&quot;PRI_NAME&quot;, null);
 
 
-String mentorEmail = mentorBe.getValue(&quot;PRI_EMAIL&quot;, null);
+mentorEmail = mentorBe.getValue(&quot;PRI_EMAIL&quot;, null);
 String mentorName = mentorBe.getValue(&quot;PRI_NAME&quot;, null);
 
 System.out.println(&quot;Setup :: menteeEmail :: &quot; + menteeEmail);
