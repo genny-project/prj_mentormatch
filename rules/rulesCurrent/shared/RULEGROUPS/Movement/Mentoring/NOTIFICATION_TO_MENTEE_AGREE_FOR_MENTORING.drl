@@ -62,25 +62,22 @@ rule "NOTIFICATION_TO_MENTEE_AGREE_FOR_MENTORING"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");	
 		
-		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
-		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
+		String associatedMenteeBeCode = beUtils.quantumStrip(newApplication, "PRI_MENTEE_CODE", "associatedMenteeBeCode");
 		
-		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
-		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
+		System.out.println("SET_PRI_STATUS_AS_MENTORING:: associatedMenteeBeCode: " + associatedMenteeBeCode);
 		
-		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
-		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
+		BaseEntity associatedMenteeBe = beUtils.quantumBe(associatedMenteeBeCode, "associatedMenteeBe");	
 		
 		BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
-		if (menteeBe != null) {
+		if (associatedMenteeBe != null) {
 			System.out.println("#### Sending email to mentee to agree for mentoring ####");
 
 			/* SEND EMAIL */
-                String meteeEmail = menteeBe.getValue("PRI_EMAIL", null);
-				System.out.println("meteeEmail: " + meteeEmail);
+                String menteeEmail = associatedMenteeBe.getValue("PRI_EMAIL", null);
+				System.out.println("menteeEmail: " + menteeEmail);
 
-				String menteeName = menteeBe.getValue("PRI_NAME", null);
+				String menteeName = associatedMenteeBe.getValue("PRI_NAME", null);
 				System.out.println("menteeName: " + menteeName);
 
 				if (meteeEmail != null) {
@@ -91,7 +88,7 @@ rule "NOTIFICATION_TO_MENTEE_AGREE_FOR_MENTORING"
 						String urlParentCode = "QUE_FAKE_PARENT";
                 		String urlCode = "ACT_MENTEE_MENTORING_AGREE";
 
-					 	String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, meteeEmail, serviceToken.getToken());
+					 	String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, menteeEmail, serviceToken.getToken());
        					System.out.println("token: " + token);
        					
                 		/* Encode each section of the url */
