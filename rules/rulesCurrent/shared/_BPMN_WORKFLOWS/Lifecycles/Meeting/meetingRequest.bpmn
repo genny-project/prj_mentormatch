@@ -115,7 +115,7 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-        <bpmn2:script>System.out.println(&quot;#### meetingRequest :: Setup Started ###);
+        <bpmn2:script>System.out.println(&quot;#### meetingRequest :: Setup Started ###&quot;);
 
 controlSignalCode = &quot;MEETING_REQUEST_NOTIFICATION&quot;;
 kcontext.setVariable(&quot;controlSignalCode&quot;, controlSignalCode);
@@ -159,7 +159,7 @@ kcontext.setVariable(&quot;newApplicationBe&quot;, newApplicationBe);
 
 
 
-System.out.println(&quot;#### meetingRequest :: Setup Endeded ###);
+System.out.println(&quot;#### meetingRequest :: Setup Endeded ### &quot;);
 
 
 </bpmn2:script>
