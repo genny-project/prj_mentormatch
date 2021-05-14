@@ -15,7 +15,8 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_MENTOR_MEETING_AGREE" || data.code matches "ACT_MENTOR_MENTORING_AGREE" || data.code matches "ACT_MENTEE_MENTORING_AGREE")
+		$message : QEventMessage(data.code matches "ACT_MENTOR_MEETING_AGREE" || data.code matches "ACT_MENTOR_MENTORING_AGREE" || data.code matches "ACT_MENTEE_MENTORING_AGREE" 
+								|| data.code matches "ACT_MEETING_REQUEST")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
@@ -26,9 +27,6 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 
 		String code = $message.getData().getCode();
 		System.out.println("code: " +code);
-
-		String key = StringUtils.removeStart(code, "ACT_MENTOR_MEETING_AGREE");
-		System.out.println("key: " +key);
 
 		String user = userToken.getUserCode();
 		System.out.println("user: " + user);
@@ -47,13 +45,15 @@ rule "AGREE_TO_MEETING_CLICK_EVENT"
 		    workflowSignalCode = "START_AGREE_TO_MENTORING_MENTEE";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
+		case "ACT_MEETING_REQUEST":
+		    workflowSignalCode = "START_MEETING_REQUEST";
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
+		    break;
 		}
 		
         /* Set result */
         output.setTypeOfResult("SIGNAL");
 		output.setResultCode(workflowSignalCode);
-
-		output.setSuitCase(key);
 		output.setAskSourceCode(user);
 		output.setTargetCode(user);
 	
