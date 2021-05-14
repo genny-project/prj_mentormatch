@@ -50,7 +50,7 @@ rule "SBE_MENTEE_TRAINING"
 
 						/* Actions */
 						.addAction("PRI_EVENT_VIEW", "View Profile")
-						.addAction("PRI_EVENT_SELECT_MENTOR", "Select Mentor")
+						/*.addAction("PRI_EVENT_SELECT_MENTOR", "Select Mentor")*/
 						.setPageStart(0).setPageSize(15);
 
 		searchBE.setRealm(serviceToken.getRealm());
