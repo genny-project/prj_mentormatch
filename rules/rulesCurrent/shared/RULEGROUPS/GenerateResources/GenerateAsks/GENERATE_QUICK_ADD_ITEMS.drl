@@ -50,8 +50,12 @@ rule "GENERATE_QUICK_ADD_ITEMS"
 				Ask mentorAsk = new Ask(mentorQues, sourceCode, targetCode);
 
 			Ask[] agentAddItems = { menteeAsk, mentorAsk };
+			Ask[] menteeAddItems = { };
 
 			addItemsAsk.setChildAsks(agentAddItems);
 			VertxUtils.putObject(serviceToken.getRealm(), "", "QUICK_ADD_ITEMS_AGENT", addItemsAsk, serviceToken.getToken());
+
+			addItemsAsk.setChildAsks(menteeAddItems);
+			VertxUtils.putObject(serviceToken.getRealm(), "", "QUICK_ADD_ITEMS_MENTEE", addItemsAsk, serviceToken.getToken());
 
 end
