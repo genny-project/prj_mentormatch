@@ -46,7 +46,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
 			
-			String mentorCode = beUtils.quantumStrip(newApplication, "PRI_MENTOR_CODE", "mentorCode");
+			String mentorCode = beUtils.quantumStrip(applicationBe, "PRI_MENTOR_CODE", "mentorCode");
 		
 			System.out.println(drools.getRule().getName() + " :: mentorCode: " + mentorCode);
 		
