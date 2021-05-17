@@ -16,51 +16,34 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_CONFIRM_MEETING")
+		$message : QEventMessage(data.code matches "ACT_CONFIRM_MEETING" || data.code matches "ACT_PRI_PRIMARY_AVAILABILITY" || data.code matches "ACT_PRI_SECONDARY_AVAILABILITY" ||
+								data.code matches "ACT_TERTIARY_AVAILABILITY")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
-		output : OutputParam( )
  		beUtils : BaseEntityUtils()
     then
 
 		System.out.println(drools.getRule().getName() + " - Rule fired");
+		
+		String code = $message.getData().getCode();
+		
+		if(code != "ACT_CONFIRM_MEETING" )
+		{
+			System.out.println(drools.getRule().getName() + " :: code: " + code);
+			
+			String applicationCode = $message.getData().getTargetCode();
+			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
+			
+			String menteeCode = $message.getData().getSourceCode();
+			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
+			
+			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
 
-		String targetCode = userToken.getUserCode();
-		System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
-		
-		BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
-		
-		String newApplicationCode = null;
- 		
- 		if (targetCode != null) {
-			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
-			System.out.println(drools.getRule().getName() + " :: newApplicationCode: " + newApplicationCode);
+ 			Answer answer = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
+ 			beUtils.saveAnswer(answer);
+			
+			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
 		}
-
-		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
-		String[] allAvailibility = new String[3];
-		
-		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
-		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
-		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
-		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
-		String primaryAvlStr = dtf.format(primaryAvl);
-		String secondaryAvlStr = dtf.format(secondaryAvl);
-		String tertiaryAvlStr = dtf.format(tertiaryAvl);
-		
-			
-			allAvailibility[0] = primaryAvlStr;
-			allAvailibility[1] = secondaryAvlStr;
-			allAvailibility[2] = tertiaryAvlStr;
-			
-		/* Send BE to the FE */
-			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
-			msg.setToken(userToken.getToken());
-			msg.setReplace(true);
-			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
-			
-			
 		retract($message);
 	end
