@@ -44,10 +44,20 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
 		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
 			
-		/* Send BE to the FE 
-			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newBe);
+			allAvailibility[0] = primaryAvl;
+			allAvailibility[1] = secondaryAvl;
+			allAvailibility[2] = tertiaryAvl;
+			
+		/* Send BE to the FE */
+			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
 			msg.setToken(userToken.getToken());
 			msg.setReplace(true);
-			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));*/
-		retract( $message);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
+			
+			QDataBaseEntityMessage msgMatches = new QDataBaseEntityMessage(allAvailibility);
+			msgMatches.setToken(userToken.getToken());
+			msgMatches.setReplace(true);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msgMatches));
+			
+		retract($message);
 	end
