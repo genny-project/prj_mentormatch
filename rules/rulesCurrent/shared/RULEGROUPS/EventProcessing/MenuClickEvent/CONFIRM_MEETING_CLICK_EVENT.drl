@@ -39,7 +39,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
-		String[] allAvailibility = new BaseEntity[3];
+		String[] allAvailibility = new String[3];
 		
 		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
 		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
@@ -60,6 +60,13 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 			msg.setToken(userToken.getToken());
 			msg.setReplace(true);
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
+			
+			QDataBaseEntityMessage msgMatches = new QDataBaseEntityMessage(allAvailibility);
+			msgMatches.setToken(userToken.getToken());
+			msgMatches.setReplace(true);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msgMatches));
+
+
 			
 			
 		retract($message);
