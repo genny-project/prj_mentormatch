@@ -61,10 +61,6 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 			msg.setReplace(true);
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
 			
-			QDataBaseEntityMessage msgMatches = new QDataBaseEntityMessage(allAvailibility);
-			msgMatches.setToken(userToken.getToken());
-			msgMatches.setReplace(true);
-			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msgMatches));
 			
 		retract($message);
 	end
