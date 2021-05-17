@@ -16,8 +16,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		salience 2
     no-loop
     when
-		$message : QEventMessage(data.code matches "ACT_CONFIRM_MEETING" || data.code matches "ACT_PRI_PRIMARY_AVAILABILITY" || data.code matches "ACT_PRI_SECONDARY_AVAILABILITY" ||
-								data.code matches "ACT_TERTIARY_AVAILABILITY")
+		$message : QEventMessage(data.code matches "ACT_CONFIRM_MEETING")
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
  		beUtils : BaseEntityUtils()
@@ -26,151 +25,41 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		System.out.println(drools.getRule().getName() + " - Rule fired");
 		
 		String code = $message.getData().getCode();
+		String targetCode = userToken.getUserCode();
+		System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
 		
-		if(!(code.equals("ACT_CONFIRM_MEETING")))
-		{
-			System.out.println(drools.getRule().getName() + " :: code: " + code);
-			
-			String applicationCode = $message.getData().getTargetCode();
-			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
-			
-			String menteeCode = $message.getData().getSourceCode();
-			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
-			
-			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
-
- 			Answer answer = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
- 			beUtils.saveAnswer(answer);
-			
-			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
-			
-			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
-			
-			String mentorCode = beUtils.quantumStrip(applicationBe, "PRI_MENTOR_CODE", "mentorCode");
+		BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
 		
-			System.out.println(drools.getRule().getName() + " :: mentorCode: " + mentorCode);
-		
-			BaseEntity mentorBe = beUtils.quantumBe(mentorCode, "mentorBe");
-			
-			String availabilityCode = code.substring(4);
-			
-			if (menteeBe != null) {
-			System.out.println("Sending email to mentee for accepting meeting request");
-
-			/* SEND EMAIL */
-                String menteeEmail = menteeBe.getValue("PRI_EMAIL", null);
-				String menteeName = menteeBe.getValue("PRI_NAME", null);
-				if (menteeEmail != null) {
-
-						String subject = "Confirming meeting with mentee";
-						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
-
-					    HashMap<String, String> templateData = new HashMap<>();
-
-                        templateData.put("Mentee", menteeName);
-
-                        System.out.println("-------- EMAIL DATA --------");
-                        System.out.println("subject: " +subject);
-						System.out.println("template_id: " +template_id);
-						System.out.println("email: " + menteeEmail);
-						System.out.println("Mentee: " +menteeName);
-						System.out.println("----------------------------");
-
-						if (!GennySettings.projectUrl.contains("dev")) {
-
-								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
-								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-						} else {
-								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
-								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-							System.out.println("WARNING: Email not sent because on Dev server");
-						}
-				} else {
-					System.out.println("ERROR Null Mentee email");
-				}
-			}
-			if (mentorBe != null) {
-			System.out.println("Sending email to mentor for accepting meeting request");
-
-			/* SEND EMAIL */
-                String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
-				String mentorName = mentorBe.getValue("PRI_NAME", null);
-				if (mentorEmail != null) {
-
-						String subject = "Confirming meeting with mentee";
-						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
-
-					    HashMap<String, String> templateData = new HashMap<>();
-
-                        templateData.put("Mentor", mentorName);
-
-                        System.out.println("-------- EMAIL DATA --------");
-                        System.out.println("subject: " +subject);
-						System.out.println("template_id: " +template_id);
-						System.out.println("email: " + mentorEmail);
-						System.out.println("Mentor: " +mentorName);
-						System.out.println("----------------------------");
-
-						if (!GennySettings.projectUrl.contains("dev")) {
-
-								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
-								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-						} else {
-								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
-								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
-								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-							System.out.println("WARNING: Email not sent because on Dev server");
-						}
-				} else {
-					System.out.println("ERROR Null Mentee email");
-				}
-			}
+		String newApplicationCode = null;
+ 		
+ 		if (targetCode != null) {
+			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			System.out.println(drools.getRule().getName() + " :: newApplicationCode: " + newApplicationCode);
 		}
-		else
-		{
 
-			String targetCode = userToken.getUserCode();
-			System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
+		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
+		
+		String[] allAvailibility = new String[3];
+		
+		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
+		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
+		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+		String primaryAvlStr = dtf.format(primaryAvl);
+		String secondaryAvlStr = dtf.format(secondaryAvl);
+		String tertiaryAvlStr = dtf.format(tertiaryAvl);
+		
 			
-			BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
+			allAvailibility[0] = primaryAvlStr;
+			allAvailibility[1] = secondaryAvlStr;
+			allAvailibility[2] = tertiaryAvlStr;
 			
-			String newApplicationCode = null;
-	 		
-	 		if (targetCode != null) {
-				newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
-				System.out.println(drools.getRule().getName() + " :: newApplicationCode: " + newApplicationCode);
-			}
-	
-			BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
-			
-			String[] allAvailibility = new String[3];
-			
-			LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
-			LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
-			LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
-			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
-			String primaryAvlStr = dtf.format(primaryAvl);
-			String secondaryAvlStr = dtf.format(secondaryAvl);
-			String tertiaryAvlStr = dtf.format(tertiaryAvl);
-			
-				
-				allAvailibility[0] = primaryAvlStr;
-				allAvailibility[1] = secondaryAvlStr;
-				allAvailibility[2] = tertiaryAvlStr;
-				
-			/* Send BE to the FE */
-				QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
-				msg.setToken(userToken.getToken());
-				msg.setReplace(true);
-				VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
+		/* Send BE to the FE */
+			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
+			msg.setToken(userToken.getToken());
+			msg.setReplace(true);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
 		
 		}
 		
