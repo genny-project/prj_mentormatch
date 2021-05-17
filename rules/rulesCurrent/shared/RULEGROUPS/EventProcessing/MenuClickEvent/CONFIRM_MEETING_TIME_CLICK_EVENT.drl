@@ -9,9 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import life.genny.qwanda.message.QCmdMessage;
 import life.genny.utils.VertxUtils;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
-rule "CONFIRM_MEETING_CLICK_EVENT"
+rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
     ruleflow-group 'EventProcessing'
 		salience 2
     no-loop
@@ -52,6 +54,12 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 			BaseEntity mentorBe = beUtils.quantumBe(mentorCode, "mentorBe");
 			
 			String availabilityCode = code.substring(4);
+			System.out.println(drools.getRule().getName() + " :: availabilityCode: " + availabilityCode);
+			
+			LocalDateTime meetingTime = beUtils.quantumStrip(applicationBe, availabilityCode, "meetingTime");
+			String meetingTimeStr = dtf.format(meetingTime);
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
