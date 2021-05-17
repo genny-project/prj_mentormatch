@@ -51,7 +51,75 @@ rule "SEND_EMAIL_TO_SCHEDULE_MEETING"
 
 		System.out.println(drools.getRule().getName() + " :: newApplication = " + newApplication);
 
+		String menteeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
+		String mentorCode = newApplication.getValue("PRI_MENTOR_CODE", null);
+ 		
+ 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeCode);
+		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorCode);
 		
+		BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
+
+		if (menteeBe != null) {
+			System.out.println("#### Sending email to mentee to confirm meeting timings ####");
+
+			/* SEND EMAIL */
+                String menteeEmail = menteeBe.getValue("PRI_EMAIL", null);
+				System.out.println(drools.getRule().getName() + " :: menteeEmail: " + menteeEmail);
+
+				String menteeName = menteeBe.getValue("PRI_NAME", null);
+				System.out.println(drools.getRule().getName() + " :: menteeName: " + menteeName);
+
+				if (menteeEmail != null) {
+
+						String subject = "Your mentor provided availability.";
+						String template_id = "d-3d5a56f4c7a9449690898696c4e46fa9";
+						
+						String urlParentCode = "QUE_FAKE_PARENT";
+                		String urlCode = "ACT_CONFIRM_MEETING";
+
+					 	String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, menteeEmail, serviceToken.getToken());
+       					System.out.println("token: " + token);
+       					
+                		/* Encode each section of the url */
+                		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
+                		urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
+            
+                		String url = GennySettings.projectUrl+"/home/"+urlParentCode+"/"+urlCode;
+                		
+                		url = url + "?token=" + token;
+                		System.out.println("url: " + url);
+
+						HashMap<String, String> templateData = new HashMap<String, String>();
+
+                        templateData.put("Mentee", menteeName);
+                        templateData.put("url", url);
+
+                        System.out.println("-------- EMAIL DATA --------");
+                        System.out.println("subject: " +subject);
+						System.out.println("template_id: " +template_id);
+						System.out.println("email: " + menteeEmail);
+						System.out.println("Mentee: " +menteeName);
+						System.out.println("----------------------------");
+
+						if (!GennySettings.projectUrl.contains("dev")) {
+
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
+
+								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
+
+						} else {
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
+
+								System.out.println("Email Sent To ||| " + mentorEmail + " Subject: " + subject + "||| template_id: " + template_id);
+
+							System.out.println("WARNING: Email not sent because on Dev server");
+						}
+				} else {
+					System.out.println("ERROR Null Mentee email");
+				}
+		}
 		retract(newApplication)
 		retract(controlSignalCode)
 
