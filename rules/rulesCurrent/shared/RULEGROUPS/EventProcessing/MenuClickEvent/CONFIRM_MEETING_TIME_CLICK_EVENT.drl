@@ -36,7 +36,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
 			
 			String menteeCode = $message.getData().getSourceCode();
-			System.out.println(drools.getRule().getName() + " :: applicationCode: " + applicationCode);
+			System.out.println(drools.getRule().getName() + " :: menteeCode: " + menteeCode);
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
 
@@ -57,7 +57,9 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: availabilityCode: " + availabilityCode);
 			
 			LocalDateTime meetingTime = applicationBe.getValue(availabilityCode, null);
-			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+			String meetingTimeStr = dtf.format(meetingTime);
+			System.out.println(drools.getRule().getName() + " :: meetingTimeStr: " + meetingTimeStr);
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
@@ -73,6 +75,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 				    HashMap<String, String> templateData = new HashMap<>();
 
                     templateData.put("Mentee", menteeName);
+                    templateData.put("Meetingtime", meetingTimeStr);
 
                     System.out.println("-------- EMAIL DATA --------");
                     System.out.println("subject: " +subject);
@@ -112,6 +115,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 				    HashMap<String, String> templateData = new HashMap<>();
 
                     templateData.put("Mentor", mentorName);
+                    templateData.put("Meetingtime", meetingTimeStr);
 
                     System.out.println("-------- EMAIL DATA --------");
                     System.out.println("subject: " +subject);
@@ -138,5 +142,23 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			}
 		}
 		
+		System.out.println("################## START Shleemy ##################");
+		System.out.println(drools.getRule().getName() + " ::  meetingTime : " + meetingTime);
+				
+		String scheduleMsgCode = applicationCode + "_SCHEDULE_MEETING";
+		
+		
+		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+    	String prettyNow = dtf.format(now);
+    	System.out.println("MEETING_REMINDER_EVENT :: The current date and time is ~ " + prettyNow);
+    	
+    	/*LocalDateTime orangeTimer = meetingTime.minusHours(24); */
+		 LocalDateTime orangeTimer = now.plusSeconds(20); 
+		String prettyOrange = dtf.format(orangeTimer);
+		System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
+		
+		ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, applicationCode);
+		
+		System.out.println("################## END Shleemy ##################");
 		retract($message);
 	end
