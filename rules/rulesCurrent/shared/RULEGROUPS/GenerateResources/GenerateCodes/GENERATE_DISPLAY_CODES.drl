@@ -56,6 +56,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTOR_MENTORING_GRP", "PROCESS");
 		displayCodes.put("QUE_MENTEE_MENTORING_GRP", "PROCESS");
 		displayCodes.put("QUE_MEETING_REQUEST_GRP", "PROCESS");
+		displayCodes.put("ACT_PRI_PRIMARY_AVAILABILITY", "PROCESS");
 
 		/* DASHBOARD */
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
