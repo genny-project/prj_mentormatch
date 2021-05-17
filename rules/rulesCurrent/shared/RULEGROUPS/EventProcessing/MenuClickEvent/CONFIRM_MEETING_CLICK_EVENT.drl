@@ -27,7 +27,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		
 		String code = $message.getData().getCode();
 		
-		if(code != "ACT_CONFIRM_MEETING" )
+		if(!(code.equal("ACT_CONFIRM_MEETING")))
 		{
 			System.out.println(drools.getRule().getName() + " :: code: " + code);
 			
@@ -43,6 +43,48 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
  			beUtils.saveAnswer(answer);
 			
 			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
+			
+			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
+			
+			if (menteeBe != null) {
+			System.out.println("Sending email to mentee for accepting meeting request");
+
+			/* SEND EMAIL */
+                String menteeEmail = menteeBe.getValue("PRI_EMAIL", null);
+				String menteeName = menteeBe.getValue("PRI_NAME", null);
+				if (menteeEmail != null) {
+
+						String subject = "Confirming meeting with mentee";
+						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
+
+					    HashMap<String, String> templateData = new HashMap<>();
+
+                        templateData.put("Mentee", menteeName);
+
+                        System.out.println("-------- EMAIL DATA --------");
+                        System.out.println("subject: " +subject);
+						System.out.println("template_id: " +template_id);
+						System.out.println("email: " + menteeEmail);
+						System.out.println("Mentee: " +menteeName);
+						System.out.println("----------------------------");
+
+						if (!GennySettings.projectUrl.contains("dev")) {
+
+								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+						} else {
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, menteeEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ menteeEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+							System.out.println("WARNING: Email not sent because on Dev server");
+						}
+				} else {
+					System.out.println("ERROR Null Mentee email");
+				}
+			}
 		}
 		
 		retract($message);
