@@ -24,11 +24,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 
 		System.out.println(drools.getRule().getName() + " - Rule fired");
 
-		String user = userToken.getUserCode();
-		System.out.println(drools.getRule().getName() + " :: user: " + user);
-		
-		
-		String targetCode = $message.getData().getTargetCode();
+		String targetCode = userToken.getUserCode();
 		System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
 		
 		BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
@@ -42,6 +38,16 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
+		BaseEntity[] allAvailibility = new BaseEntity[3];
+		
+		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
+		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
+		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
 			
+		/* Send BE to the FE 
+			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newBe);
+			msg.setToken(userToken.getToken());
+			msg.setReplace(true);
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));*/
 		retract( $message);
 	end
