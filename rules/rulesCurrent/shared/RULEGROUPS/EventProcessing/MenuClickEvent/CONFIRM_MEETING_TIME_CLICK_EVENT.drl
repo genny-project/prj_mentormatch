@@ -56,11 +56,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			String availabilityCode = code.substring(4);
 			System.out.println(drools.getRule().getName() + " :: availabilityCode: " + availabilityCode);
 			
-			LocalDateTime meetingTime = beUtils.quantumStrip(applicationBe, availabilityCode, "meetingTime");
+			String meetingTime = beUtils.quantumStrip(applicationBe, availabilityCode, "meetingTime");
 			
-			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
-			String meetingTimeStr = dtf.format(meetingTime);
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
