@@ -50,12 +50,22 @@ rule "SEND_EMAIL_TO_SCHEDULE_MEETING"
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
 		System.out.println(drools.getRule().getName() + " :: newApplication = " + newApplication);
-
+		
+		
 		String menteeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorCode = newApplication.getValue("PRI_MENTOR_CODE", null);
  		
  		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorCode);
+		
+		/* Saving APP code in PER Mentor */
+			if (newApplication.getCode() != null) {
+				beUtils.saveAnswer(new Answer(userToken.getUserCode(), menteeBe.getCode(), "PRI_APP_LNK_CODE", newApplication.getCode()));
+
+				String assocAppMentee = beUtils.quantumStrip(assocMentorPer, "PRI_APP_LNK_CODE", "assocAppMentor");
+				System.out.println("assocAppMentee: " + assocAppMentee);
+			}
+		
 		
 		BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
