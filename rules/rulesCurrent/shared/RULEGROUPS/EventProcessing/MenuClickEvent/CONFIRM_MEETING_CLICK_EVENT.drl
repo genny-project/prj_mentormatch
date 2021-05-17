@@ -46,6 +46,14 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
 			
+			String mentorCode = beUtils.quantumStrip(newApplication, "PRI_MENTOR_CODE", "mentorCode");
+		
+			System.out.println(drools.getRule().getName() + " :: mentorCode: " + mentorCode);
+		
+			BaseEntity mentorBe = beUtils.quantumBe(mentorCode, "mentorBe");
+			
+			String availabilityCode = code.substring(4);
+			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
 
@@ -85,6 +93,85 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 					System.out.println("ERROR Null Mentee email");
 				}
 			}
+			if (mentorBe != null) {
+			System.out.println("Sending email to mentor for accepting meeting request");
+
+			/* SEND EMAIL */
+                String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
+				String mentorName = mentorBe.getValue("PRI_NAME", null);
+				if (mentorEmail != null) {
+
+						String subject = "Confirming meeting with mentee";
+						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
+
+					    HashMap<String, String> templateData = new HashMap<>();
+
+                        templateData.put("Mentor", mentorName);
+
+                        System.out.println("-------- EMAIL DATA --------");
+                        System.out.println("subject: " +subject);
+						System.out.println("template_id: " +template_id);
+						System.out.println("email: " + mentorEmail);
+						System.out.println("Mentor: " +mentorName);
+						System.out.println("----------------------------");
+
+						if (!GennySettings.projectUrl.contains("dev")) {
+
+								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+						} else {
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+
+							System.out.println("WARNING: Email not sent because on Dev server");
+						}
+				} else {
+					System.out.println("ERROR Null Mentee email");
+				}
+			}
+		}
+		else
+		{
+
+			String targetCode = userToken.getUserCode();
+			System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
+			
+			BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
+			
+			String newApplicationCode = null;
+	 		
+	 		if (targetCode != null) {
+				newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+				System.out.println(drools.getRule().getName() + " :: newApplicationCode: " + newApplicationCode);
+			}
+	
+			BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
+			
+			String[] allAvailibility = new String[3];
+			
+			LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
+			LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
+			LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+			String primaryAvlStr = dtf.format(primaryAvl);
+			String secondaryAvlStr = dtf.format(secondaryAvl);
+			String tertiaryAvlStr = dtf.format(tertiaryAvl);
+			
+				
+				allAvailibility[0] = primaryAvlStr;
+				allAvailibility[1] = secondaryAvlStr;
+				allAvailibility[2] = tertiaryAvlStr;
+				
+			/* Send BE to the FE */
+				QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
+				msg.setToken(userToken.getToken());
+				msg.setReplace(true);
+				VertxUtils.writeMsg("webcmds", JsonUtils.toJson(msg));
+		
 		}
 		
 		retract($message);
