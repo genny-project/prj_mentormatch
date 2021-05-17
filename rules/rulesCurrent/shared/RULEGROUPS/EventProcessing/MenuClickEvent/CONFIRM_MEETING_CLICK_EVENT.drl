@@ -8,6 +8,7 @@ import life.genny.utils.OutputParam;
 import org.apache.commons.lang3.StringUtils;
 import life.genny.qwanda.message.QCmdMessage;
 import life.genny.utils.VertxUtils;
+import java.time.format.DateTimeFormatter;
 
 
 rule "CONFIRM_MEETING_CLICK_EVENT"
@@ -38,15 +39,21 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
-		BaseEntity[] allAvailibility = new BaseEntity[3];
+		String[] allAvailibility = new BaseEntity[3];
 		
 		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
 		LocalDateTime secondaryAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
 		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+		String primaryAvlStr = dtf.format(primaryAvl);
+		String secondaryAvlStr = dtf.format(secondaryAvl);
+		String tertiaryAvlStr = dtf.format(tertiaryAvl);
+		
 			
-			allAvailibility[0] = primaryAvl;
-			allAvailibility[1] = secondaryAvl;
-			allAvailibility[2] = tertiaryAvl;
+			allAvailibility[0] = primaryAvlStr;
+			allAvailibility[1] = secondaryAvlStr;
+			allAvailibility[2] = tertiaryAvlStr;
 			
 		/* Send BE to the FE */
 			QDataBaseEntityMessage msg = new QDataBaseEntityMessage(newApplication);
