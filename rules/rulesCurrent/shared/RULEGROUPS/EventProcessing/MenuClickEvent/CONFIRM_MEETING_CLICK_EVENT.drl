@@ -31,7 +31,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		String targetCode = $message.getData().getTargetCode();
 		System.out.println(drools.getRule().getName() + " :: targetCode: " + targetCode);
 		
-		targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
+		BaseEntity targetBaseEntity = beUtils.getBaseEntityByCode(targetCode);
 		
 		String newApplicationCode = null;
  		
