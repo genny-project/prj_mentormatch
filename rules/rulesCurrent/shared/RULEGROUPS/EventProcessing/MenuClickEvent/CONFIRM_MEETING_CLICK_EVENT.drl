@@ -27,7 +27,7 @@ rule "CONFIRM_MEETING_CLICK_EVENT"
 		
 		String code = $message.getData().getCode();
 		
-		if(!(code.equal("ACT_CONFIRM_MEETING")))
+		if(!(code.equals("ACT_CONFIRM_MEETING")))
 		{
 			System.out.println(drools.getRule().getName() + " :: code: " + code);
 			
