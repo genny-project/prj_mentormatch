@@ -106,7 +106,7 @@ rule "SEND_EMAIL_TO_SCHEDULE_MEETING"
                 		String agenda = newApplication.getValue("PRI_MEETING_AGENDA", null);
                 		String note = newApplication.getValue("PRI_MEETING_NOTE", null);
                 		
-                		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+                		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, E, hh:mm:ss a");
 						String primaryAvlStr = dtf.format(primaryAvl);
 						String secondAvlStr = dtf.format(secondAvl);
 						String tertiaryAvlStr = dtf.format(tertiaryAvl);
