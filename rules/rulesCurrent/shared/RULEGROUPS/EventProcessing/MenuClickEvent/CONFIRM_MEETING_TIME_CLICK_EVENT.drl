@@ -63,8 +63,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			
 			LocalDateTime meetingTime = applicationBe.getValue(availabilityCode, null);
 			
-			Answer meetingTimeAns = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_START_DATETIME", meetingTimeStr);
- 			beUtils.saveAnswer(meetingTimeAns);
+		/*	Answer meetingTimeAns = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_START_DATETIME", meetingTimeStr);
+ 			beUtils.saveAnswer(meetingTimeAns); */
  			
 			
 			
