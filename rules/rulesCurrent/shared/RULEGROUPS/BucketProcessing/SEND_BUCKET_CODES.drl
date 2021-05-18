@@ -23,7 +23,9 @@ rule "SEND_BUCKET_CODES"
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken( code == "PER_SERVICE")
 		output : OutputParam( )
-
+		allowed: Allowed(	code == "AGENT" ||
+											code == "MENTOR" ||
+											code == "MENTEE" )
 	then
 		System.out.println(drools.getRule().getName() + " triggered");
 		Boolean cache = true;
