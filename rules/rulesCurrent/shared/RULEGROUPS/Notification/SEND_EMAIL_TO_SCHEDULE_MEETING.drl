@@ -117,7 +117,7 @@ rule "SEND_EMAIL_TO_SCHEDULE_MEETING"
                         templateData.put("availability1", primaryAvlStr);
                         templateData.put("availability2", secondAvlStr);
                         templateData.put("availability3", tertiaryAvlStr);
-                        templateData.put("duration", meetinDuration);
+                        templateData.put("duration", meetingDuration);
                         templateData.put("agenda", agenda);
                         templateData.put("note", note);
                         templateData.put("url", url);
