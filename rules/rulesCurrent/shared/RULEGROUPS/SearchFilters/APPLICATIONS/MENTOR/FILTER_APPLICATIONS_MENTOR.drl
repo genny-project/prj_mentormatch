@@ -33,7 +33,7 @@ rule "FILTER_APPLICATIONS_MENTOR"
 		searchBE: SearchEntity( code matches "SBE_APPLIED_APPLICATION.*" ||
 														code matches "SBE_OFF_SHORE.*" ||
 														code matches "SBE_ON_SHORE.*" ||
-														code matches "SBE_MENTOR_TRAINING.*" ||
+														code matches "SBE_MENTEE_TRAINING.*" ||
 														code matches "SBE_MATCHED.*" ||
 														code matches "SBE_ROTARY_MENTORING.*" ||
 														code matches "SBE_COMPLETED.*" )
