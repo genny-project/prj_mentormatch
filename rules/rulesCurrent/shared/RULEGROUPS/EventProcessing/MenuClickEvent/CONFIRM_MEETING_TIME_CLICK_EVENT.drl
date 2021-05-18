@@ -40,8 +40,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
 
- 			Answer updateStatus = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
- 			beUtils.saveAnswer(updateStatus);
+ 			Answer answer = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
+ 			beUtils.saveAnswer(answer);
  			
 			
 			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
