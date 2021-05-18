@@ -60,8 +60,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			
 			LocalDateTime meetingTime = applicationBe.getValue(availabilityCode, null);
 			
-			Answer meetingTime = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_START_DATETIME", meetingTime);
- 			beUtils.saveAnswer(meetingTime);
+			Answer meetingTimeAns = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_START_DATETIME", meetingTime);
+ 			beUtils.saveAnswer(meetingTimeAns);
  			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 			String meetingTimeStr = dtf.format(meetingTime);
