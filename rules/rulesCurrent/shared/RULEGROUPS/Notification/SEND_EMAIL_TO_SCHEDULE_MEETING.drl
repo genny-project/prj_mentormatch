@@ -98,10 +98,28 @@ rule "SEND_EMAIL_TO_SCHEDULE_MEETING"
                 		
                 		url = url + "?token=" + token;
                 		System.out.println("url: " + url);
+                		
+                		LocalDateTime primaryAvl = newApplication.getValue("PRI_PRIMARY_AVAILABILITY", null);
+                		LocalDateTime secondAvl = newApplication.getValue("PRI_SECONDARY_AVAILABILITY", null);
+                		LocalDateTime tertiaryAvl = newApplication.getValue("PRI_TERTIARY_AVAILABILITY", null);
+                		String meetingDuration = newApplication.getValue("LNK_MEETING_DURATION", null);
+                		String agenda = newApplication.getValue("PRI_MEETING_AGENDA", null);
+                		String note = newApplication.getValue("PRI_MEETING_NOTE", null);
+                		
+                		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+						String primaryAvlStr = dtf.format(primaryAvl);
+						String secondAvlStr = dtf.format(secondAvl);
+						String tertiaryAvlStr = dtf.format(tertiaryAvl);
 
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentee", menteeName);
+                        templateData.put("availability1", primaryAvlStr);
+                        templateData.put("availability2", secondAvlStr);
+                        templateData.put("availability3", tertiaryAvlStr);
+                        templateData.put("duration", meetinDuration);
+                        templateData.put("agenda", agenda);
+                        templateData.put("note", note);
                         templateData.put("url", url);
 
                         System.out.println("-------- EMAIL DATA --------");
