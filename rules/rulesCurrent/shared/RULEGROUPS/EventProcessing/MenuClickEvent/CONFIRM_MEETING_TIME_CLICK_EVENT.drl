@@ -40,8 +40,10 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
 
- 			Answer answer = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
- 			beUtils.saveAnswer(answer);
+ 			Answer updateStatus = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
+ 			beUtils.saveAnswer(updateStatus);
+ 			
+ 			
 			
 			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
 			
@@ -57,6 +59,10 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: availabilityCode: " + availabilityCode);
 			
 			LocalDateTime meetingTime = applicationBe.getValue(availabilityCode, null);
+			
+			Answer meetingTime = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_START_DATETIME", meetingTime);
+ 			beUtils.saveAnswer(meetingTime);
+ 			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 			String meetingTimeStr = dtf.format(meetingTime);
 			System.out.println(drools.getRule().getName() + " :: meetingTimeStr: " + meetingTimeStr);
