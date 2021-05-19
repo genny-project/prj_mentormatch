@@ -23,13 +23,12 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
  		beUtils : BaseEntityUtils()
+ 		output : OutputParam( )
     then
 
-		System.out.println(drools.getRule().getName() + " - Rule fired");
+			System.out.println(drools.getRule().getName() + " - Rule fired");
 		
-		String code = $message.getData().getCode();
-		
-	
+			String code = $message.getData().getCode();
 			System.out.println(drools.getRule().getName() + " :: code: " + code);
 			
 			String applicationCode = $message.getData().getTargetCode();
@@ -39,7 +38,6 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: menteeCode: " + menteeCode);
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
-
  			beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
  			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
@@ -58,7 +56,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			String meetingTimeStr = dtf.format(meetingTime);
 			System.out.println(drools.getRule().getName() + " :: meetingTimeStr: " + meetingTimeStr);
 			
-			beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_TIME", meetingTimeStr);
+			/*beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_TIME", meetingTimeStr); */
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
@@ -96,50 +94,61 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 
 						System.out.println("WARNING: Email not sent because on Dev server");
 					}
-			} else {
+				} else {
 				System.out.println("ERROR Null Mentee email");
+				}
 			}
-		}
-		if (mentorBe != null) {
-		System.out.println("Sending email to mentor for accepting meeting request");
-
-		/* SEND EMAIL */
-            String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
-			String mentorName = mentorBe.getValue("PRI_NAME", null);
-			if (mentorEmail != null) {
-
-					String subject = "Confirming meeting with mentee";
-					String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
-
-				    HashMap<String, String> templateData = new HashMap<>();
-
-                    templateData.put("Mentor", mentorName);
-                    templateData.put("Meetingtime", meetingTimeStr);
-
-                    System.out.println("-------- EMAIL DATA --------");
-                    System.out.println("subject: " +subject);
-					System.out.println("template_id: " +template_id);
-					System.out.println("email: " + mentorEmail);
-					System.out.println("Mentor: " +mentorName);
-					System.out.println("----------------------------");
-
-					if (!GennySettings.projectUrl.contains("dev")) {
-
-							List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
-							EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
-							System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-					} else {
-							List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
-							EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
-							System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
-
-						System.out.println("WARNING: Email not sent because on Dev server");
-					}
-			} else {
-				System.out.println("ERROR Null Mentee email");
+			
+			if (mentorBe != null) {
+			System.out.println("Sending email to mentor for accepting meeting request");
+	
+			/* SEND EMAIL */
+	            String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
+				String mentorName = mentorBe.getValue("PRI_NAME", null);
+				if (mentorEmail != null) {
+	
+						String subject = "Confirming meeting with mentee";
+						String template_id = "d-25aafd3bd7e54b8eb84c3cf29cd9d917";
+	
+					    HashMap<String, String> templateData = new HashMap<>();
+	
+	                    templateData.put("Mentor", mentorName);
+	                    templateData.put("Meetingtime", meetingTimeStr);
+	
+	                    System.out.println("-------- EMAIL DATA --------");
+	                    System.out.println("subject: " +subject);
+						System.out.println("template_id: " +template_id);
+						System.out.println("email: " + mentorEmail);
+						System.out.println("Mentor: " +mentorName);
+						System.out.println("----------------------------");
+	
+						if (!GennySettings.projectUrl.contains("dev")) {
+	
+								List<String> bccList = Arrays.asList("internmatch@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+	
+						} else {
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
+								System.out.println("Email Sent ||| email: "+ mentorEmail + " ||| Subject: " + subject + "||| template_id: " + template_id);
+	
+							System.out.println("WARNING: Email not sent because on Dev server");
+						}
+				} else {
+					System.out.println("ERROR Null Mentee email");
+				}
 			}
-		}
+		
+		
+		output.setTypeOfResult("SIGNAL");
+		output.setResultCode("START_AGREE_TO_MEETING");
+		output.setAskSourceCode(menteeCode);
+		output.setTargetCode(menteeCode);
+		output.setSuitCase(availabilityCode);
+		
+		System.out.println(drools.getRule().getName() + " :: START SIGNAL: " +workflowSignalCode);
+		
 		
 		System.out.println("################## START Shleemy ##################");
 		System.out.println(drools.getRule().getName() + " ::  meetingTime : " + meetingTime);
