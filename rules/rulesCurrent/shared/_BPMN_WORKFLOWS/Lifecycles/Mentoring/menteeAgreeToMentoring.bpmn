@@ -33,7 +33,7 @@
   <bpmn2:signal id="Signal_7" name="START_ON_SHORE"/>
   <bpmn2:signal id="Signal_8" name="signature"/>
   <bpmn2:signal id="Signal_9" name="START_MOVE"/>
-  <bpmn2:signal id="Signal_10" name="START_MENTEE_AGREE_TO_MENTORING"/>
+  <bpmn2:signal id="Signal_10" name="START_AGREE_TO_MENTORING_MENTEE"/>
   <bpmn2:process id="menteeAgreeToMentoring" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Default Process" isExecutable="true">
     <bpmn2:extensionElements>
       <drools:import name="life.genny.models.GennyToken"/>
@@ -55,7 +55,7 @@
     </bpmn2:extensionElements>
     <bpmn2:property id="userToken" itemSubjectRef="ItemDefinition_2" name="userToken"/>
     <bpmn2:property id="serviceToken" itemSubjectRef="ItemDefinition_2" name="serviceToken"/>
-    <bpmn2:property id="sessionFacts" itemSubjectRef="ItemDefinition_954" name="sessionFacts"/>
+    <bpmn2:property id="sessionFacts" name="sessionFacts"/>
     <bpmn2:property id="callingProcessToken" itemSubjectRef="ItemDefinition_1346" name="callingProcessToken"/>
     <bpmn2:property id="processId" itemSubjectRef="ItemDefinition_1812" name="processId"/>
     <bpmn2:property id="targetBe" itemSubjectRef="ItemDefinition_2016" name="targetBe"/>
@@ -539,7 +539,7 @@ System.out.println(&quot;###menteeResponse ###&quot; + menteeResponse);
         <di:waypoint xsi:type="dc:Point" x="1137.0" y="276.0"/>
         <di:waypoint xsi:type="dc:Point" x="1435.0" y="276.0"/>
         <di:waypoint xsi:type="dc:Point" x="1435.0" y="322.0"/>
-        <bpmndi:BPMNLabel/>
+        <bpmndi:BPMNLabel id="BPMNLabel_16"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
