@@ -279,7 +279,7 @@ BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
 menteeResponseBe = beUtils.getBaseEntityByCode(menteeResponseBe.getCode());
 
 
-System.out.println(&quot;###MENTEE_RESPONSE_CODE ###&quot; + mentorResponseBe.getCode());
+System.out.println(&quot;###MENTEE_RESPONSE_CODE ###&quot; + menteeResponseBe.getCode());
 
 menteeResponse = menteeResponseBe.getValue(&quot;LNK_MENTEE_AGREE_TO_MENTORING&quot;, null);
 kcontext.setVariable(&quot;menteeResponse&quot;, menteeResponse);
