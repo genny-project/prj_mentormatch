@@ -38,8 +38,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: menteeCode: " + menteeCode);
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
- 			/*beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");*/
- 			
+			beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING"));
+			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
 			
 			String mentorCode = beUtils.quantumStrip(applicationBe, "PRI_MENTOR_CODE", "mentorCode");
@@ -56,7 +56,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			String meetingTimeStr = dtf.format(meetingTime);
 			System.out.println(drools.getRule().getName() + " :: meetingTimeStr: " + meetingTimeStr);
 			
-			/*beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_TIME", meetingTimeStr); */
+			beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_TIME", meetingTimeStr)); 
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
@@ -147,24 +147,5 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 		output.setTargetCode(menteeCode);
 		output.setSuitCase(availabilityCode);
 		
-		
-		System.out.println("################## START Shleemy ##################");
-		System.out.println(drools.getRule().getName() + " ::  meetingTime : " + meetingTime);
-				
-		String scheduleMsgCode = applicationCode + "_SCHEDULE_MEETING";
-		
-		
-		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
-    	String prettyNow = dtf.format(now);
-    	System.out.println("MEETING_REMINDER_EVENT :: The current date and time is ~ " + prettyNow);
-    	
-    	/*LocalDateTime orangeTimer = meetingTime.minusHours(24); */
-		 LocalDateTime orangeTimer = now.plusSeconds(20); 
-		String prettyOrange = dtf.format(orangeTimer);
-		System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
-		
-		ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, applicationCode);
-		
-		System.out.println("################## END Shleemy ##################");
 		retract($message);
 	end
