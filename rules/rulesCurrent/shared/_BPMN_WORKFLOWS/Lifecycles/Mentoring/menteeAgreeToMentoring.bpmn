@@ -307,6 +307,7 @@ System.out.println(&quot;###menteeResponse ###&quot; + menteeResponse);
         <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;### Inside agree to mentor flow ####&quot;);
+BaseEntityUtils beUtils = new BaseEntityUtils(userToken);
 
 beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), &quot;PRI_STATUS&quot;, &quot;MENTORING&quot;));</bpmn2:script>
       </bpmn2:scriptTask>
