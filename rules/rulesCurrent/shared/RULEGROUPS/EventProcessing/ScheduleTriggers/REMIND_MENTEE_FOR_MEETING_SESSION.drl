@@ -54,17 +54,14 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 		
-		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
-		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
-		String meetingTimeStr = dtf.format(meetingTime);
+		String meetingTime = newApplication.getValue("PRI_MEETING_TIME", null);
 		
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
 		
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
-		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
+		System.out.println("^^^^^^^^^ meetingTime = " + meetingTime);
 		
 		if (menteeBe != null) {
 			System.out.println("Sending email remind to mentee for meeting");
@@ -78,13 +75,13 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 
 				if (menteeEmail != null) {
 
-						String subject = "Reminder: Your upcoming MentorMatch mentoring session is tomorrow!";
+						String subject = "Reminder: Your upcoming MentorMatch meeting is tomorrow!";
 						String template_id = "d-0ad1e70fb59a4e9dbcd4ecd34d05f6e4";
 
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        templateData.put("MeetingTime", meetingTimeStr);
+                        templateData.put("MeetingTime", meetingTime);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -132,7 +129,7 @@ rule "REMIND_MENTEE_FOR_MEETING_SESSION"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
-                        templateData.put("MeetingTime", meetingTimeStr);
+                        templateData.put("MeetingTime", meetingTime);
 
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
