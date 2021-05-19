@@ -27,7 +27,8 @@ rule "MOVE_BUCKET_CLICK_EVENT"
     when
 		$message : QEventMessage((data.code matches "ACT_PRI_EVENT_ON_SHORE_APPLICATION") || (data.code matches "ACT_PRI_EVENT_TRAINING_APPLICATION")
 								 || (data.code matches "ACT_PRI_EVENT_MATCH_APPLICATION") || (data.code matches "ACT_PRI_EVENT_SELECT_MENTOR")
-								 || (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION"))
+								 || (data.code matches "ACT_PRI_EVENT_MENTORING_APPLICATION") || (data.code matches "ACT_PRI_EVENT_ALUMNI_APPLICATION")
+								 || (data.code matches "ACT_PRI_EVENT_SCHEDULE_MENTORING"))
 		userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam( )
