@@ -147,8 +147,6 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 		output.setTargetCode(menteeCode);
 		output.setSuitCase(availabilityCode);
 		
-		System.out.println(drools.getRule().getName() + " :: START SIGNAL: " +workflowSignalCode);
-		
 		
 		System.out.println("################## START Shleemy ##################");
 		System.out.println(drools.getRule().getName() + " ::  meetingTime : " + meetingTime);
