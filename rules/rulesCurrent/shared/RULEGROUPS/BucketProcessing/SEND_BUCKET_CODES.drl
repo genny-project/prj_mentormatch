@@ -39,9 +39,10 @@ rule "SEND_BUCKET_CODES"
 			if(allowed.code.equals("AGENT") || allowed.code.equals("MENTEE")){
 				codes.add("SBE_OFF_SHORE_"+sessionCode);
 				codes.add("SBE_ON_SHORE_"+sessionCode);
+				codes.add("SBE_MENTEE_TRAINING_"+sessionCode);
 			}
 
-			codes.add("SBE_MENTEE_TRAINING_"+sessionCode);
+			/* Only these buckets are visible for the Mentor */
 			codes.add("SBE_MATCHED_"+sessionCode);
 			codes.add("SBE_ROTARY_MENTORING_"+sessionCode);
 			codes.add("SBE_COMPLETED_"+sessionCode);
