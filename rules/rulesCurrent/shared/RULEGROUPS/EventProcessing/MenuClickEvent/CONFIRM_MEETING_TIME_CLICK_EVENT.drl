@@ -40,12 +40,8 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
 
- 			Answer answer = new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
- 			beUtils.saveAnswer(answer);
+ 			beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING");
  			
-			
-			System.out.println(drools.getRule().getName() + " :: Answer = " + answer);
-			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
 			
 			String mentorCode = beUtils.quantumStrip(applicationBe, "PRI_MENTOR_CODE", "mentorCode");
@@ -58,9 +54,11 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: availabilityCode: " + availabilityCode);
 			
 			LocalDateTime meetingTime = applicationBe.getValue(availabilityCode, null);
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, E, hh:mm:ss a");
 			String meetingTimeStr = dtf.format(meetingTime);
 			System.out.println(drools.getRule().getName() + " :: meetingTimeStr: " + meetingTimeStr);
+			
+			beUtils.saveAnswer(userToken.getUserCode(), applicationBe.getCode(), "PRI_MEETING_TIME", meetingTimeStr);
 			
 			if (menteeBe != null) {
 			System.out.println("Sending email to mentee for accepting meeting request");
