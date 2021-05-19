@@ -61,7 +61,7 @@ rule "MEETING_REMINDER_EVENT"
 	/*	LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null); */
 		
 		System.out.println("################## START Shleemy ##################");
-		System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);
+		/*System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);*/
 				
 		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING";
 		
