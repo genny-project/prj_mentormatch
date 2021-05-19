@@ -29,7 +29,7 @@ rule "SBE_SUMMARY_MENTEE"
      	System.out.println("   Generate "+drools.getRule().getName() );
 
       SearchEntity searchBE = new SearchEntity(drools.getRule().getName(), "My Profile")
-                              .addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")
+                              /*.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")*/
                               .addFilter("PRI_IS_MENTEE", true)
 
                               /* Columns */
@@ -43,9 +43,9 @@ rule "SBE_SUMMARY_MENTEE"
                               .addColumn("PRI_STUDENT_ID", "Student Id")
                               .addColumn("PRI_ASSOC_INDUSTRY", "Industry")
                               .addColumn("PRI_ASSOC_OCCUPATION", "Specialisation")
-                              .addColumn("PRI_ASSOC_DURATION", "Duration (Weeks)")
+                              .addColumn("PRI_ASSOC_DURATION", "Duration (Weeks)")*/
 
-                     			.addColumn("PRI_IMAGE_URL", " ")*/
+                     			.addColumn("PRI_IMAGE_URL", " ")
 
                               /* Actions */
                         		/* .addAction("PRI_EVENT_EDIT", "Edit") */
