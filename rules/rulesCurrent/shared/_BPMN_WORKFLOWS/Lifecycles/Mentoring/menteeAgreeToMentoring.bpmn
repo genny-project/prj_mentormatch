@@ -308,7 +308,7 @@ System.out.println(&quot;###menteeResponse ###&quot; + menteeResponse);
         <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
         <bpmn2:script>System.out.println(&quot;### Inside agree to mentor flow ####&quot;);
 
-</bpmn2:script>
+beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), &quot;PRI_STATUS&quot;, &quot;MENTORING&quot;));</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_13" drools:priority="1" name="AGREE_TO_MENTOR" sourceRef="ExclusiveGateway_3" targetRef="ScriptTask_4">
         <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2" language="http://www.java.com/java">return(menteeResponse.equals(&quot;SEL_YES&quot;));</bpmn2:conditionExpression>
