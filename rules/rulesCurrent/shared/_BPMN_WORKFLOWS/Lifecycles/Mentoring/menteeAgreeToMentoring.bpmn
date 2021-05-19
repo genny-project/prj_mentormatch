@@ -68,6 +68,7 @@
     <bpmn2:property id="project" itemSubjectRef="ItemDefinition_2016" name="project"/>
     <bpmn2:property id="menteeResponseBe" itemSubjectRef="ItemDefinition_2016" name="menteeResponseBe"/>
     <bpmn2:property id="menteeResponse" itemSubjectRef="ItemDefinition_2733" name="menteeResponse"/>
+    <bpmn2:property id="applicationBe" itemSubjectRef="ItemDefinition_2016" name="applicationBe"/>
     <bpmn2:endEvent id="EndEvent_2" name="End cardsA">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -136,6 +137,19 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ codes: &quot; + codes);
 targetBe = beUtils. getBaseEntityByCode(codes);
 kcontext.setVariable(&quot;targetBe&quot;, targetBe);
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ targetBe: &quot; + targetBe);
+
+
+String applicationCode = null;
+
+if (targetBe.getCode() != null) {
+			applicationCode = beUtils.quantumStrip(targetBe, &quot;PRI_APP_LNK_CODE&quot;, &quot;newApplication&quot;);
+			kcontext.setVariable(&quot;applicationCode&quot;, applicationCode);
+}
+
+System.out.println(&quot;Setup :: applicationCode: &quot; + applicationCode);
+
+applicationBe = beUtils.quantumBe(applicationCode, &quot;applicationBe&quot;);
+kcontext.setVariable(&quot;applicationBe&quot;, applicationBe);
 
 uuid = UUID.randomUUID();
 kcontext.setVariable(&quot;uuid&quot;, uuid);
