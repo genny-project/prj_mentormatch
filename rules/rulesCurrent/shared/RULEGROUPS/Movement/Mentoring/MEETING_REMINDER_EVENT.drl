@@ -41,9 +41,10 @@ rule "MEETING_REMINDER_EVENT"
 		targetBaseEntity : BaseEntity( code matches "PER_\\S+" )
 		output : OutputParam( )
 		controlSignalCode : String(controlSignalCode.equals("SCHEDULE_MEETING"))
+		key : String()
 		beUtils : BaseEntityUtils()
 	then
-		System.out.println(drools.getRule().getName() + " : Rule fired" );
+		System.out.println(drools.getRule().getName() + " : Rule fired" + key);
 		
 		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
 		System.out.println("MEETING_REMINDER_EVENT:: targetBaseEntityCode: " + targetBaseEntity.getCode());
@@ -57,7 +58,7 @@ rule "MEETING_REMINDER_EVENT"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
-		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+	/*	LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null); */
 		
 		System.out.println("################## START Shleemy ##################");
 		System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);
@@ -70,8 +71,8 @@ rule "MEETING_REMINDER_EVENT"
     	String prettyNow = dtf.format(now);
     	System.out.println("MEETING_REMINDER_EVENT :: The current date and time is ~ " + prettyNow);
     	
-    	LocalDateTime orangeTimer = meetingTime.minusHours(24);
-		/* LocalDateTime orangeTimer = now.plusSeconds(20); */
+    	/*LocalDateTime orangeTimer = meetingTime.minusHours(24); */
+		LocalDateTime orangeTimer = now.plusSeconds(20);
 		String prettyOrange = dtf.format(orangeTimer);
 		System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
 		
@@ -83,4 +84,5 @@ rule "MEETING_REMINDER_EVENT"
 		
 		retract(controlSignalCode);
 		retract(newApplication);
+		retract(key);
 	end
