@@ -72,6 +72,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("ACT_MENTOR_MEETING_AGREE", "DIALOG_FORM");
 		displayCodes.put("ACT_MENTEE_MENTORING_AGREE", "DIALOG_FORM");
 		displayCodes.put("ACT_MEETING_REQUEST", "DIALOG_FORM");
+		displayCodes.put("ACT_PRI_EVENT_SCHEDULE_MENTORING", "DIALOG_FORM");
 
 		insert(displayCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());

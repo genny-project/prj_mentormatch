@@ -63,6 +63,10 @@ rule "MOVE_BUCKET_CLICK_EVENT"
 		    workflowSignalCode = "MEETING";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
 		    break;
+		case "ACT_PRI_EVENT_SCHEDULE_MENTORING":
+		    workflowSignalCode = "MENTORING";
+		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
+		    break;
 		case "ACT_PRI_EVENT_ALUMNI_APPLICATION":
 		    workflowSignalCode = "ALUMNI";
 		    System.out.println("########workflowSignalCode : "+ workflowSignalCode);
