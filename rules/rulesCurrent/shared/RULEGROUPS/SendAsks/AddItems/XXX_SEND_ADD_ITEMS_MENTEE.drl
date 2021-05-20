@@ -39,6 +39,8 @@ rule "SEND_ADD_ITEMS_MENTEE"
 		/* get the addItems ask from cache */
 		Ask addItemsAsk = VertxUtils.getObject(serviceToken.getRealm(), "", "ADD_ITEMS_MENTEE", Ask.class, serviceToken.getToken());
 
+		System.out.println("ADD ITEMS MENTEE: " + JsonUtils.toJson(addItemsAsk));
+
 		if(addItemsAsk == null){
 			System.out.println("addItemsAsk is not in cache");
 
