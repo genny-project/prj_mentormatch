@@ -61,23 +61,23 @@ rule "MEETING_REQUEST_NOTIFICATION"
 		String newCode = "MTS_"+uuid;
 		BaseEntity newMentoringSessions = beUtils.create(newCode, newCode);
 		System.out.println("newMentoringSessions = " + newMentoringSessions);
-		
+		LocalDateTime mentoringSession = meetingTime;
 		for(int i = 1 ; i<=12 ; i++)
 		{
 			if(i==1)
 			{
-				String firstMentoringStr = dtf.format(meetingTime);
+				String firstMentoringStr = dtf.format(mentoringSession);
 				System.out.println(drools.getRule().getName() + " :: firstMentoringStr = " + firstMentoringStr);
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , firstMentoringStr));
 			}
 			else {
-				LocalDateTime mentoringSession = meetingTime.plusHours(336);
+				mentoringSession = mentoringSession.plusHours(336);
 				String mentoringSessionStr = dtf.format(mentoringSession);
 				System.out.println(drools.getRule().getName() + " :: mentoringSessionStr = " + mentoringSessionStr);
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , mentoringSessionStr));
 			}
 		}
-		
+		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newApplication.getCode(), "PRI_MENTORING_SESSION_CODE" , newCode));
 		String meetingTimeStr = dtf.format(meetingTime);
 
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
