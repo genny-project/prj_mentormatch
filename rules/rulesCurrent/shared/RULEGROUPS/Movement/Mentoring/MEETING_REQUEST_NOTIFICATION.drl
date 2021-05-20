@@ -31,6 +31,7 @@ import life.genny.notifications.EmailHelper;
 import java.util.HashMap;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList; 
 
 rule "MEETING_REQUEST_NOTIFICATION"
     ruleflow-group 'Movement'
@@ -62,17 +63,20 @@ rule "MEETING_REQUEST_NOTIFICATION"
 		BaseEntity newMentoringSessions = beUtils.create(newCode, newCode);
 		System.out.println("newMentoringSessions = " + newMentoringSessions);
 		LocalDateTime mentoringSession = meetingTime;
-		for(int i = 1 ; i<=12 ; i++)
-		{
+		ArrayList<String> mentoringSessionLst = new ArrayList<String>();
+		
+		for(int i = 1 ; i<=12 ; i++){
 			if(i==1)
 			{
 				String firstMentoringStr = dtf.format(mentoringSession);
+				mentoringSessionLst.add(firstMentoringStr);
 				System.out.println(drools.getRule().getName() + " :: firstMentoringStr = " + firstMentoringStr);
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , firstMentoringStr));
 			}
 			else {
 				mentoringSession = mentoringSession.plusHours(336);
 				String mentoringSessionStr = dtf.format(mentoringSession);
+				mentoringSessionLst.add(mentoringSessionStr);
 				System.out.println(drools.getRule().getName() + " :: mentoringSessionStr = " + mentoringSessionStr);
 				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , mentoringSessionStr));
 			}
@@ -82,7 +86,6 @@ rule "MEETING_REQUEST_NOTIFICATION"
 
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
-		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
@@ -100,8 +103,10 @@ rule "MEETING_REQUEST_NOTIFICATION"
 					    HashMap<String, String> templateData = new HashMap<>();
 
                         templateData.put("Mentee", menteeName);
-                        templateData.put("MeetingTime", meetingTimeStr);
-
+                        for (int i = 0; i < mentoringSessionLst.size(); i++) {
+      						 templateData.put("MeetingTime" + i, mentoringSessionLst.get(i));
+      						 System.out.println(drools.getRule().getName() + " :: mentoringSessionLst = " + mentoringSessionLst.get(i));
+   					 	}
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
 						System.out.println("template_id: " +template_id);
