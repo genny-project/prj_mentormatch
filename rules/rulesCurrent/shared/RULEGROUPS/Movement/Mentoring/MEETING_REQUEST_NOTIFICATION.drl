@@ -59,7 +59,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
 		
 		String uuid = UUID.randomUUID().toString().toUpperCase();
 		String newCode = "MTS_"+uuid;
-		newMentoringSessions = beUtils.create(newCode, newCode);
+		BaseEntity newMentoringSessions = beUtils.create(newCode, newCode);
 		System.out.println("newMentoringSessions = " + newMentoringSessions);
 		
 		for(int i = 1 ; i<=12 ; i++)
