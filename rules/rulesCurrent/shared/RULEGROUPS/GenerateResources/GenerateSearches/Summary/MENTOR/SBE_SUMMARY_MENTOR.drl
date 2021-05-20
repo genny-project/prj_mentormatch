@@ -19,36 +19,40 @@ import org.kie.api.runtime.process.WorkflowProcessInstance;
 import life.genny.utils.BaseEntityUtils;
 import life.genny.qwandautils.GennySettings;
 
-rule "SBE_SUMMARY_AGENTS"
+rule "SBE_SUMMARY_MENTOR"
    ruleflow-group 'GenerateSearches'
    no-loop true
    when
-      not  SearchEntity (code == "SBE_SUMMARY_AGENTS")
+      not  SearchEntity (code == "SBE_SUMMARY_MENTOR")
       serviceToken : GennyToken( code == "PER_SERVICE")
    then
      	System.out.println("   Generate "+drools.getRule().getName() );
 
-      SearchEntity searchBE =  new SearchEntity(drools.getRule().getName(), "Mentees")
-                              .addSort("PRI_NAME", "Name", SearchEntity.Sort.ASC)
+      SearchEntity searchBE = new SearchEntity(drools.getRule().getName(), "My Profile")
                               /*.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")*/
-                              .addFilter("PRI_IS_AGENT", true)
+                              .addFilter("PRI_IS_MENTOR", true)
 
                               /* Columns */
-                              .addColumn("PRI_STATUS", "Status")
                               .addColumn("PRI_NAME", "Name")
                               .addColumn("PRI_EMAIL", "Email")
                               .addColumn("PRI_MOBILE", "Mobile")
-                              .addColumn("PRI_ADDRESS_FULL", "Address")
+                     			.addColumn("PRI_LINKEDIN_URL", "LinkedIn")
+                     			/*.addColumn("PRI_CV", "CV")
+                     			.addColumn("PRI_ADDRESS_FULL", "Address")
+                     			.addColumn("PRI_ASSOC_EP", "Education Provider")
+                              .addColumn("PRI_STUDENT_ID", "Student Id")
+                              .addColumn("PRI_ASSOC_INDUSTRY", "Industry")
+                              .addColumn("PRI_ASSOC_OCCUPATION", "Specialisation")
+                              .addColumn("PRI_ASSOC_DURATION", "Duration (Weeks)")*/
+
                      			.addColumn("PRI_IMAGE_URL", " ")
 
                               /* Actions */
-                     			.addAction("PRI_EVENT_VIEW", "View")
-                              .addSearchAction("PRI_EVENT_QUE_AGENT_MENU", "Add Mentee")
-                     			.addSearchAction("PRI_EVENT_QUE_TREE_ITEM_AGENTS", "View All")
+                        		/* .addAction("PRI_EVENT_EDIT", "Edit") */
 
                               /* Display Mode */
-                              .setDisplayMode("agents")
-                              .setPageStart(0).setPageSize(10);
+                              .setDisplayMode("my_profile")
+                              .setPageStart(0).setPageSize(1);
 
       searchBE.setRealm(serviceToken.getRealm());
 
