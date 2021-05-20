@@ -41,30 +41,48 @@ rule "MEETING_REQUEST_NOTIFICATION"
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		newApplication : BaseEntity(code matches "APP_\\S+" )
 		output : OutputParam()
-		bucketCode : String(bucketCode.equals("MATCHED"))
+		bucketCode : String(bucketCode.equals("MENTORING"))
 		controlSignalCode : String(controlSignalCode.equals("MEETING_REQUEST_NOTIFICATION"))
 		beUtils : BaseEntityUtils()
      then
- 		System.out.println("MEETING_REQUEST_NOTIFICATION: Rule fired" );
+ 		System.out.println(drools.getRule().getName() + " Rule fired" );
 
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
-		System.out.println("SET_PRI_STATUS_AS_MENTORING: newApplication = " + newApplication);
+		System.out.println(drools.getRule().getName() + " :: newApplication = " + newApplication);
 
 		String menteeBeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorBeCode = newApplication.getValue("PRI_MENTOR_CODE", null);
 		
 		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, E, hh:mm:ss a");
 		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
+		String uuid = UUID.randomUUID().toString().toUpperCase();
+		String newCode = "MTS_"+uuid;
+		newMentoringSessions = beUtils.create(newCode, newCode);
+		System.out.println("newMentoringSessions = " + newMentoringSessions);
+		
+		for(int i = 1 ; i<=12 ; i++)
+		{
+			if(i==1)
+			{
+				String firstMentoringStr = dtf.format(meetingTime);
+				System.out.println(drools.getRule().getName() + " :: firstMentoringStr = " + firstMentoringStr);
+				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , firstMentoringStr));
+			}
+			else {
+				LocalDateTime mentoringSession = meetingTime.plusHours(336);
+				String mentoringSessionStr = dtf.format(mentoringSession);
+				System.out.println(drools.getRule().getName() + " :: mentoringSessionStr = " + mentoringSessionStr);
+				beUtils.saveAnswer(new Answer(userToken.getUserCode(), newMentoringSessions.getCode(), "PRI_MENTORING_MEETING_"+ i , mentoringSessionStr));
+			}
+		}
+		
 		String meetingTimeStr = dtf.format(meetingTime);
-		
-		String meetingType = newApplication.getValue("LNK_MEETING_TYPE", null);
-		
+
 		System.out.println("^^^^^^^^^ menteeBeCode = " + menteeBeCode);
 		System.out.println("^^^^^^^^^ mentorBeCode = " + mentorBeCode);
 		System.out.println("^^^^^^^^^ meetingTimeStr = " + meetingTimeStr);
-		System.out.println("^^^^^^^^^ meetingType = " + meetingType);
 
 		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeBeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorBeCode);
@@ -111,7 +129,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
 			/* Email to mentor created meeting request*/
 
 		if (mentorBe != null) {
-			System.out.println("Sending email to mentor for meeting request");
+			System.out.println("Sending email to mentor for metoring sessions request");
 
 			/* SEND EMAIL */
                 String mentorEmail = mentorBe.getValue("PRI_EMAIL", null);
