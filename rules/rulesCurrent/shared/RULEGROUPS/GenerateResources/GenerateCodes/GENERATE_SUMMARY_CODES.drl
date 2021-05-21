@@ -41,6 +41,7 @@ rule "GENERATE_SUMMARY_CODES"
 		List<String> agentCodes = new ArrayList<String>();
 		agentCodes.add("SBE_SUMMARY_AGENTS");
 		agentCodes.add("SBE_SUMMARY_MENTEE");
+		agentCodes.add("SBE_SUMMARY_MENTOR");
 
 		List<String> menteeCodes = new ArrayList<String>();
 		menteeCodes.add("SBE_SUMMARY_MENTEE");
