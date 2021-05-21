@@ -29,7 +29,6 @@ rule "SBE_SUMMARY_MENTOR"
      	System.out.println("   Generate "+drools.getRule().getName() );
 
       SearchEntity searchBE = new SearchEntity(drools.getRule().getName(), "My Profile")
-                              /*.addFilter("PRI_CODE", SearchEntity.StringFilter.LIKE, "PER_%")*/
                               .addFilter("PRI_IS_MENTOR", true)
 
                               /* Columns */
@@ -37,18 +36,11 @@ rule "SBE_SUMMARY_MENTOR"
                               .addColumn("PRI_EMAIL", "Email")
                               .addColumn("PRI_MOBILE", "Mobile")
                      			.addColumn("PRI_LINKEDIN_URL", "LinkedIn")
-                     			/*.addColumn("PRI_CV", "CV")
-                     			.addColumn("PRI_ADDRESS_FULL", "Address")
-                     			.addColumn("PRI_ASSOC_EP", "Education Provider")
-                              .addColumn("PRI_STUDENT_ID", "Student Id")
-                              .addColumn("PRI_ASSOC_INDUSTRY", "Industry")
-                              .addColumn("PRI_ASSOC_OCCUPATION", "Specialisation")
-                              .addColumn("PRI_ASSOC_DURATION", "Duration (Weeks)")*/
 
                      			.addColumn("PRI_IMAGE_URL", " ")
 
                               /* Actions */
-                        		/* .addAction("PRI_EVENT_EDIT", "Edit") */
+                        		.addAction("PRI_EVENT_EDIT", "Edit")
 
                               /* Display Mode */
                               .setDisplayMode("my_profile")
