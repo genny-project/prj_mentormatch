@@ -45,7 +45,7 @@ rule "GENERATE_SUMMARY_CODES"
 		List<String> menteeCodes = new ArrayList<String>();
 		menteeCodes.add("SBE_SUMMARY_MENTEE");
 
-		List<String> menteeCodes = new ArrayList<String>();
+		List<String> mentorCodes = new ArrayList<String>();
 		mentorCodes.add("SBE_SUMMARY_MENTOR");
 
 		summaryCodes.put("SUMMARY_CODES_AGENT", agentCodes);
