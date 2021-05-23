@@ -154,7 +154,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
                			System.out.println("token: " + token);
 						
 						String urlParentCode = "QUE_FAKE_PARENT";
-                		String urlCode = "ACT_MENTOR_MEETING_AGREE";
+                		String urlCode = "ACT_MENTORING_TIME_AGREE";
 
                 		/* Encode each section of the url */
                 		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
@@ -168,9 +168,11 @@ rule "MEETING_REQUEST_NOTIFICATION"
 						HashMap<String, String> templateData = new HashMap<String, String>();
 
                         templateData.put("Mentor", mentorName);
-                        templateData.put("MeetingTime", meetingTimeStr);
                         templateData.put("url", url);
-
+						for (int i = 0; i < mentoringSessionLst.size(); i++) {
+      						 templateData.put("MeetingTime" + i, mentoringSessionLst.get(i));
+      						 System.out.println(drools.getRule().getName() + " :: mentoringSessionLst = " + mentoringSessionLst.get(i));
+   					 	}
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
 						System.out.println("template_id: " +template_id);
