@@ -1,0 +1,101 @@
+package life.genny.rules;
+import io.vertx.core.json.JsonObject;
+import life.genny.qwanda.message.QDataBaseEntityMessage;
+import life.genny.qwanda.message.QEventBtnClickMessage;
+import life.genny.models.GennyToken;
+import life.genny.utils.VertxUtils;
+import life.genny.utils.OutputParam;
+import life.genny.qwanda.message.QDataAskMessage;
+import life.genny.utils.BaseEntityUtils;
+import life.genny.utils.QuestionUtils;
+import life.genny.qwandautils.JsonUtils;
+import java.util.ArrayList;
+import java.util.List;
+import life.genny.qwandautils.QwandaMessage;
+import org.json.JSONObject;
+
+import life.genny.notifications.EmailHelper;
+import life.genny.qwanda.message.QScheduleMessage;
+import life.genny.notifications.SmsHelper;
+import java.util.Arrays;
+import java.time.ZoneOffset;
+import life.genny.qwandautils.QwandaUtils;
+import life.genny.qwandautils.KeycloakUtils;
+import java.time.LocalDateTime;
+import life.genny.notifications.EmailHelper;
+import life.genny.qwanda.message.QScheduleMessage;
+import life.genny.notifications.SmsHelper;
+import java.util.Arrays;
+import java.time.ZoneOffset;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
+rule "MENTORING_SESSIONS_REMINDER_EVENT"
+	ruleflow-group 'Movement'
+	salience 2
+	no-loop
+	when
+		userToken : GennyToken (code != "PER_SERVICE" )
+		serviceToken : GennyToken( code == "PER_SERVICE")
+		targetBaseEntity : BaseEntity( code matches "PER_\\S+" )
+		output : OutputParam( )
+		controlSignalCode : String(controlSignalCode.equals("SCHEDULE_MENTORING_SESSIONS"))
+		beUtils : BaseEntityUtils()
+	then
+		System.out.println(drools.getRule().getName() + " : Rule fired" + key);
+		
+		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
+		System.out.println(drools.getRule().getName() + " ::  targetBaseEntityCode: " + targetBaseEntity.getCode());
+ 		
+ 		String newApplicationCode = null;
+ 		
+ 		if (targetBaseEntity.getCode() != null) {
+			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
+			System.out.println(drools.getRule().getName() + " :: newApplicationCode: " + newApplicationCode);
+		}
+
+		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
+		
+		String menteeBeCode = newApplication.getValue("PRI_MENTORING_SESSION_CODE", null);
+
+		BaseEntity mentoringSessionsBe = beUtils.quantumBe(mentoringSessionsCode, "mentoringSessions");
+		ArrayList<String> mentoringSessionLst = new ArrayList<String>();
+		
+		for(int i = 1 ; i<=12 ; i++){
+			String mentoringSessions = mentoringSessionsBe.getValue("PRI_MENTORING_MEETING_" + i, null);
+			System.out.println(drools.getRule().getName() + " :: mentoringSessions: " + mentoringSessions);
+			mentoringSessionLst.add(mentoringSessions);
+		}
+		String menteeBeCode = newApplication.getValue("PRI_MENTORING_SESSION_CODE", null);
+		
+		
+		System.out.println("################## START Shleemy ##################");
+		/*System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);*/
+				
+		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING";
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, E, hh:mm:ss a");
+		
+		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+    	String prettyNow = dtf.format(now);
+    	System.out.println(drools.getRule().getName() + " :: The current date and time is ~ " + prettyNow);
+    	
+    	for(String mentoringSession : mentoringSessionLst)
+    	{
+    		
+	    	LocalDateTime mentoringSessionDT = LocalDateTime.parse(mentoringSession, formatter);
+			LocalDateTime orangeTimer = mentoringSessionDT.minusHours(24);
+			/*LocalDateTime orangeTimer = now.plusSeconds(20);*/
+			String prettyOrange = dtf.format(orangeTimer);
+			System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
+			
+			ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, newApplication.getCode());
+	    }
+		System.out.println("################## END Shleemy ##################");
+		
+		
+		
+		retract(controlSignalCode);
+		retract(newApplication);
+	end
