@@ -38,7 +38,7 @@ rule "CONFIRM_MEETING_TIME_CLICK_EVENT"
 			System.out.println(drools.getRule().getName() + " :: menteeCode: " + menteeCode);
 			
 			BaseEntity applicationBe = beUtils.quantumBe(applicationCode, "applicationBe");
-			beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MEETING"));
+			beUtils.saveAnswer(new Answer(userToken.getUserCode(), applicationBe.getCode(), "PRI_STATUS","MENTORING"));
 			
 			BaseEntity menteeBe = beUtils.quantumBe(menteeCode, "menteeBe");	
 			
