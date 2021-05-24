@@ -98,7 +98,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
 				if (menteeEmail != null) {
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions";
-						String template_id = "d-3d5a56f4c7a9449690898696c4e46fa9";
+						String template_id = "d-e473f5c4ed7b4e82b31509732c8f426d";
 
 					    HashMap<String, String> templateData = new HashMap<>();
 
@@ -145,7 +145,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
 				if (mentorEmail != null) {
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
-						String template_id = "d-8df9d4b9362e4b38a0cd2f0de576ac48";
+						String template_id = "d-f76b89743a40480bb67d0ba443012d56 ";
 						
 						BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
