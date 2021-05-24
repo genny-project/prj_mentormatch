@@ -105,7 +105,6 @@ rule "MEETING_REQUEST_NOTIFICATION"
                         templateData.put("Mentee", menteeName);
                         for (int i = 0; i < mentoringSessionLst.size(); i++) {
       						 templateData.put("MeetingTime" + i, mentoringSessionLst.get(i));
-      						 System.out.println(drools.getRule().getName() + " :: mentoringSessionLst = " + mentoringSessionLst.get(i));
    					 	}
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
@@ -171,7 +170,6 @@ rule "MEETING_REQUEST_NOTIFICATION"
                         templateData.put("url", url);
 						for (int i = 0; i < mentoringSessionLst.size(); i++) {
       						 templateData.put("MeetingTime" + i, mentoringSessionLst.get(i));
-      						 System.out.println(drools.getRule().getName() + " :: mentoringSessionLst = " + mentoringSessionLst.get(i));
    					 	}
                         System.out.println("-------- EMAIL DATA --------");
                         System.out.println("subject: " +subject);
