@@ -43,7 +43,7 @@ rule "MENTORING_SESSIONS_REMINDER_EVENT"
 		controlSignalCode : String(controlSignalCode.equals("SCHEDULE_MENTORING_SESSIONS"))
 		beUtils : BaseEntityUtils()
 	then
-		System.out.println(drools.getRule().getName() + " : Rule fired" + key);
+		System.out.println(drools.getRule().getName() + " : Rule fired");
 		
 		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
 		System.out.println(drools.getRule().getName() + " ::  targetBaseEntityCode: " + targetBaseEntity.getCode());
