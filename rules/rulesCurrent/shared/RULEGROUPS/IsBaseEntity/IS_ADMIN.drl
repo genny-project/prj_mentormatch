@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
-rule "IS_AGENT"
+rule "IS_ADMIN"
     ruleflow-group 'IsBaseEntity'
     no-loop true
     salience 1000
@@ -24,18 +24,18 @@ rule "IS_AGENT"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("AGENT"))
+		baseEntityType : String(baseEntityType.equals("ADMIN"))
 		newBe : BaseEntity()
 
      then
- 		System.out.println("IS_AGENT: Rule fired" );
- 		System.out.println("IS_AGENT: newBe = " + newBe.getCode());
+ 		System.out.println("IS_ADMIN: Rule fired" );
+ 		System.out.println("IS_ADMIN: newBe = " + newBe.getCode());
 
  	/*  Construct answer with Source, Target, Attribute Code, Value */
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_AGENT", "true"));
-		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_AGENT_CODE", newBe.getCode()));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_ADMIN", "true"));
+		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_ADMIN_CODE", newBe.getCode()));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS", "OFF_SHORE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS_COLOR", "#5cb85c"));
@@ -88,7 +88,7 @@ rule "IS_AGENT"
 						beUtils.saveAnswer(keycloakId);
 						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password:" +userPassword);
 					} else {
-					     System.out.println("KEYCLOAK USER CREATION DISABLED IN RULE IS_AGENT");
+					     System.out.println("KEYCLOAK USER CREATION DISABLED IN RULE IS_ADMIN");
 					}
 				}
 			}
@@ -100,19 +100,19 @@ rule "IS_AGENT"
 
 		String tag = "ni";
 
-		QwandaUtils.apiPostNote(endPoint, userToken.getUserCode(), tag, userToken.getUserCode(), "Added a Agent: " + firstname, serviceToken.getToken());
+		QwandaUtils.apiPostNote(endPoint, userToken.getUserCode(), tag, userToken.getUserCode(), "Added a Admin: " + firstname, serviceToken.getToken());
 
 		System.out.println("I just posted the note");
 		System.out.println("Note endPoint: " +endPoint);
 		System.out.println("Note userToken.getUserCode(): " +userToken.getUserCode());
 
-		BaseEntity agentBe = beUtils.getBaseEntityByCode(newBe.getCode());
+		BaseEntity adminBe = beUtils.getBaseEntityByCode(newBe.getCode());
 
-		if(agentBe != null){
+		if(adminBe != null){
 
-			QDataBaseEntityMessage agentBeMsg = new QDataBaseEntityMessage(agentBe);
-			agentBeMsg.setToken(userToken.getToken());
-			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(agentBeMsg));
+			QDataBaseEntityMessage adminBeMsg = new QDataBaseEntityMessage(adminBe);
+			adminBeMsg.setToken(userToken.getToken());
+			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(adminBeMsg));
 		}
 
 		/* Send email to Mentee */
