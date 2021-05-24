@@ -64,6 +64,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_MENTOR_GRP", "DASHBOARD");
 		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
+		displayCodes.put("QUE_MENTOR_MEETING_TIME_GRP", "DASHBOARD");
 
 
 		/* dialog */
@@ -73,6 +74,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("ACT_MENTEE_MENTORING_AGREE", "DIALOG_FORM");
 		displayCodes.put("ACT_MEETING_REQUEST", "DIALOG_FORM");
 		displayCodes.put("ACT_PRI_EVENT_SCHEDULE_MENTORING", "DIALOG_FORM");
+		displayCodes.put("ACT_MENTORING_TIME_AGREE", "DIALOG_FORM");
 
 		insert(displayCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());
