@@ -41,9 +41,11 @@ rule "GENERATE_DISPLAY_CODES"
 		/* FORM:DETAIL */
 		displayCodes.put("QUE_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_MENTOR_MENU", "FORM:DETAIL");
+		displayCodes.put("QUE_ADMIN_MENU", "FORM:DETAIL");
 		displayCodes.put("ACT_PRI_EVENT_START_MENTEE_TRAINING", "FORM:DETAIL");
 		displayCodes.put("QUE_QA_MENTEE_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_QA_MENTOR_MENU", "FORM:DETAIL");
+		displayCodes.put("QUE_QA_ADMIN_MENU", "FORM:DETAIL");
 		displayCodes.put("QUE_FINISH_MENTEE", "FORM:DETAIL");
 		displayCodes.put("ACT_MENTOR_AGREE_TO_MENTOR", "FORM:DETAIL");
 
@@ -62,6 +64,7 @@ rule "GENERATE_DISPLAY_CODES"
 		displayCodes.put("QUE_DASHBOARD_VIEW", "DASHBOARD");
 		displayCodes.put("QUE_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_MENTOR_GRP", "DASHBOARD");
+		displayCodes.put("QUE_ADMIN_GRP", "DASHBOARD");
 		displayCodes.put("QUE_MENTOR_AGREE_TO_MENTOR_GRP", "DASHBOARD");
 		displayCodes.put("QUE_QA_MENTEE_GRP", "DASHBOARD");
 		displayCodes.put("QUE_MENTOR_MEETING_TIME_GRP", "DASHBOARD");
