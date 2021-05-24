@@ -84,7 +84,7 @@ rule "MENTORING_SESSIONS_REMINDER_EVENT"
     	for(String mentoringSession : mentoringSessionLst)
     	{
     		
-	    	LocalDateTime mentoringSessionDT = LocalDateTime.parse(mentoringSession, formatter);
+	    	LocalDateTime mentoringSessionDT = LocalDateTime.parse(mentoringSession, dtf);
 			LocalDateTime orangeTimer = mentoringSessionDT.minusHours(24);
 			/*LocalDateTime orangeTimer = now.plusSeconds(20);*/
 			String prettyOrange = dtf.format(orangeTimer);
