@@ -34,7 +34,7 @@ rule "IS_ADMIN"
  	/*  Construct answer with Source, Target, Attribute Code, Value */
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_ADMIN", "true"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_AGENT", "true"));
 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_ADMIN_CODE", newBe.getCode()));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS", "OFF_SHORE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
