@@ -145,7 +145,7 @@ rule "MEETING_REQUEST_NOTIFICATION"
 				if (mentorEmail != null) {
 
 						String subject = "Dates and times of your upcoming MentorMatch mentoring sessions – please confirm!";
-						String template_id = "d-f76b89743a40480bb67d0ba443012d56 ";
+						String template_id = "d-5b5a658f5fe14ab484c715407c0d9729";
 						
 						BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
