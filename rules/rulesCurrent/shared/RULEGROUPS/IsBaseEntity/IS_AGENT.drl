@@ -35,7 +35,7 @@ rule "IS_AGENT"
  		BaseEntityUtils beUtils = new BaseEntityUtils(serviceToken, userToken);
 
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_AGENT", "true"));
-		 beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_AGENT_CODE", newBe.getCode()));
+		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_AGENT_CODE", newBe.getCode()));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS", "OFF_SHORE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS_COLOR", "#5cb85c"));
