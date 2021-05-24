@@ -57,7 +57,7 @@ rule "MENTORING_SESSIONS_REMINDER_EVENT"
 
 		BaseEntity newApplication = beUtils.quantumBe(newApplicationCode, "newApplication");
 		
-		String menteeBeCode = newApplication.getValue("PRI_MENTORING_SESSION_CODE", null);
+		String mentoringSessionsCode = newApplication.getValue("PRI_MENTORING_SESSION_CODE", null);
 
 		BaseEntity mentoringSessionsBe = beUtils.quantumBe(mentoringSessionsCode, "mentoringSessions");
 		ArrayList<String> mentoringSessionLst = new ArrayList<String>();
