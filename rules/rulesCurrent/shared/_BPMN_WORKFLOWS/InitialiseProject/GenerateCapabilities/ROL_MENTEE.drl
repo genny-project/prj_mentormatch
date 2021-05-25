@@ -43,7 +43,7 @@ rule "ROL_MENTEE"
 
    	     capabilityUtils.inheritRole(role,userRole);
 
- 		 capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);
+ 		 /*capabilityUtils.addCapabilityToRole(role,"ON_SHORE_APPLICATION", CapabilityMode.VIEW);*/
 		 capabilityUtils.addCapabilityToRole(role,"TRAINING_APPLICATION", CapabilityMode.VIEW);
 		 capabilityUtils.addCapabilityToRole(role,"MATCHED_APPLICATION", CapabilityMode.VIEW);
 		 capabilityUtils.addCapabilityToRole(role,"MENTORING_APPLICATION", CapabilityMode.VIEW);
