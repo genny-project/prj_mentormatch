@@ -73,7 +73,7 @@ rule "MENTORING_SESSIONS_REMINDER_EVENT"
 		System.out.println("################## START Shleemy ##################");
 		/*System.out.println("MEETING_REMINDER_EVENT :: meetingTime : " + meetingTime);*/
 				
-		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_MEETING";
+		
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, E, hh:mm:ss a");
 		
@@ -81,16 +81,18 @@ rule "MENTORING_SESSIONS_REMINDER_EVENT"
     	String prettyNow = dtf.format(now);
     	System.out.println(drools.getRule().getName() + " :: The current date and time is ~ " + prettyNow);
     	
+    	int count = 1;
     	for(String mentoringSession : mentoringSessionLst)
     	{
-    		
+    		String scheduleMsgCode = newApplication.getCode() + "_SCHEDULE_SESSIONS_" + count;
 	    	LocalDateTime mentoringSessionDT = LocalDateTime.parse(mentoringSession, dtf);
 			LocalDateTime orangeTimer = mentoringSessionDT.minusHours(24);
 			/*LocalDateTime orangeTimer = now.plusSeconds(20);*/
 			String prettyOrange = dtf.format(orangeTimer);
-			System.out.println("MEETING_REMINDER_EVENT :: The Shleemy timer is set for ~ " + prettyOrange);
+			System.out.println(drools.getRule().getName() + " :: The Shleemy timer is set for ~ " + prettyOrange);
 			
-			ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MEETING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, newApplication.getCode());
+			ShleemyUtils.scheduleMessage(userToken, "SCHEDULE_MENTORING_REMINDER_24HRS_BEFORE", scheduleMsgCode,  orangeTimer, newApplication.getCode());
+			count++;
 	    }
 		System.out.println("################## END Shleemy ##################");
 		
