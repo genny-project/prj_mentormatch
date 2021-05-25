@@ -47,5 +47,5 @@ rule "FILTER_TRAINING_APPLICATION"
 		payload.add(msg);
 
 		drools.getKnowledgeRuntime().setGlobal("payload", payload);
-		/*retract(allowed);*/
+		retract(allowed);
 end
