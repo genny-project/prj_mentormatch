@@ -46,7 +46,7 @@ rule "SBE_SUMMARY_MENTEES"
 			.addSearchAction("PRI_EVENT_QUE_TREE_ITEM_MENTEES", "View")
 
 			/* Display Mode */
-			.setDisplayMode("our_interns")
+			.setDisplayMode("our_mentees")
 			.setPageStart(0).setPageSize(GennySettings.defaultPageSize);
 
 		searchBE.setRealm(serviceToken.getRealm());
