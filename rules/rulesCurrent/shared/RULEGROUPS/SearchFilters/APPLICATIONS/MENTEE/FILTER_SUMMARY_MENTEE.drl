@@ -29,6 +29,7 @@ rule "FILTER_SUMMARY_MENTEE"
 	no-loop true
 	when
 		userToken : GennyToken ( code != "PER_SERVICE" )
+		serviceToken : GennyToken (code == "PER_SERVICE" )
 		allowed : Allowed(code == "MENTEE")
 		searchBE: SearchEntity( code matches "SBE_SUMMARY_MENTEE_.*" )
 
