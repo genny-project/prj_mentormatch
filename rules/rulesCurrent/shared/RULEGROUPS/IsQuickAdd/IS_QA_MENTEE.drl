@@ -129,6 +129,7 @@ rule "IS_QA_MENTEE"
 		char[] allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGJKLMNPRSTUVWXYZ0123456789^$?!@#%&".toCharArray();
 		String password = new SecureRandom().ints(15, 0, allowed.length).mapToObj(i -> String.valueOf(allowed[i])).collect(Collectors.joining());
 		KeycloakUtils.setPassword(serviceToken.getToken(), serviceToken.getRealm(), userId, password, true);
+		System.out.println("char password: " + password);
 
 		if (rawSendEmail.equals("SEL_YES")) {
 
@@ -149,8 +150,7 @@ rule "IS_QA_MENTEE"
 			System.out.println("email: " + email);
 			System.out.println("subject: " + subject);
 			System.out.println("template_id: " + template_id);
-			System.out.println("char password: " + password);
-
+			System.out.println("SEL_YES:: char password: " + password);
 
 			HashMap<String, String> templateData = new HashMap<String, String>();
 			templateData.put("Mentee", firstname);
