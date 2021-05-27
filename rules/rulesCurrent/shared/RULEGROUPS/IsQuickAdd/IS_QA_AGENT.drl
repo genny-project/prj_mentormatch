@@ -27,7 +27,7 @@ rule "IS_QA_AGENT"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("QA_AGENT"))
+		baseEntityType : String(baseEntityType.equals("AGENT"))
 		newBe : BaseEntity()
 		beUtils: BaseEntityUtils()
 

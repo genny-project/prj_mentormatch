@@ -27,7 +27,7 @@ rule "IS_QA_MENTEE"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("QA_MENTEE"))
+		baseEntityType : String(baseEntityType.equals("MENTEE"))
 		newBe : BaseEntity()
 		beUtils: BaseEntityUtils()
 
