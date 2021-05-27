@@ -27,7 +27,7 @@ rule "IS_QA_MENTOR"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("MENTOR"))
+		baseEntityType : String(baseEntityType.equals("QA_MENTOR"))
 		newBe : BaseEntity()
 		beUtils: BaseEntityUtils()
 
