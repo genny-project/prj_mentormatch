@@ -36,10 +36,10 @@ rule "IS_MENTEE"
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_IS_MENTEE", "true"));
 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_MENTEE_CODE", newBe.getCode()));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS", "OFF_SHORE"));
-		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_TRAINING_STATUS", "No"));
+		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_TRAINING_STATUS", "INCOMPLETE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS_COLOR", "#5cb85c"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_PROFILE", "Complete"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_PROFILE", "COMPLETED"));
 
 		String target = newBe.getCode();
 
