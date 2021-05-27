@@ -49,9 +49,9 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
  		targetBaseEntity = beUtils.getBaseEntityByCode(targetBaseEntity.getCode());
  		System.out.println("SET_PRI_STATUS_AS_MENTORING: targetBaseEntity = " + targetBaseEntity);
- 		
+
  		String newApplicationCode = null;
- 		
+
  		if (targetBaseEntity.getCode() != null) {
 			newApplicationCode = beUtils.quantumStrip(targetBaseEntity, "PRI_APP_LNK_CODE", "newApplication");
 			System.out.println("SET_PRI_STATUS_AS_MENTORING:: newApplicationCode: " + newApplicationCode);
@@ -68,20 +68,25 @@ rule "SET_PRI_STATUS_AS_MENTORING"
 
 		TableUtils.moveEntity(newApplication.getCode(), "SBE_MATCHED", "SBE_ROTARY_MENTORING", beUtils);
 
-		
+
 		LocalDateTime meetingTime = newApplication.getValue("PRI_MEETING_START_DATETIME", null);
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss a, E, dd MMM yyyy");
 		String meetingTimeStr = dtf.format(meetingTime);
-		
+
 		/* Get Mentee Details */
 		String associatedMenteeBeCode = beUtils.quantumStrip(newApplication, "PRI_MENTEE_CODE", "associatedMenteeBeCode");
-		
+
 		System.out.println("SET_PRI_STATUS_AS_MENTORING:: associatedMenteeBeCode: " + associatedMenteeBeCode);
-		
-		BaseEntity associatedMenteeBe = beUtils.quantumBe(associatedMenteeBeCode, "associatedMenteeBe");		
+
+		BaseEntity associatedMenteeBe = beUtils.quantumBe(associatedMenteeBeCode, "associatedMenteeBe");
 
 		if (associatedMenteeBe != null) {
+
+			System.out.println("## Update Mentee Status ##");
+			Answer answerMenteeStatus = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_MEETING_WITH_MENTOR", "COMPLETE");
+			beUtils.saveAnswer(answerMenteeStatus);
+
 			System.out.println("Sending email to mentee for accepting meeting request");
 
 			/* SEND EMAIL */
