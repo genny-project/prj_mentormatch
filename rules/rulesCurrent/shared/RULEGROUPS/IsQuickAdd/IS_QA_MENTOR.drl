@@ -86,11 +86,11 @@ rule "IS_QA_MENTOR"
 					/* TODO HACK */
 					if (true) {
 						/*String userPassword = "password1";*/
-						userId = KeycloakUtils.updateUser(userCode,serviceToken.getToken(), serviceToken.getRealm(), email, firstname, lastname,  email, randomPW, "user", "users");
+						userId = KeycloakUtils.updateUser(userCode,serviceToken.getToken(), serviceToken.getRealm(), email, firstname, lastname,  email, null, "user", "users");
 						userId = userId.toUpperCase();
 						Answer keycloakId = new Answer(beUtils.getGennyToken().getUserCode(),newBe.getCode(),"PRI_UUID",userId);
 						beUtils.saveAnswer(keycloakId);
-						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password: " + randomPW);
+						System.out.println("Created User "+email+" in Keycloak with id = "+userId + " and password (depricated): " + randomPW);
 					} else {
 					     System.out.println("KEYCLOAK USER CREATION DISABLED IN RULE IS_MENTOR");
 					}
@@ -119,9 +119,13 @@ rule "IS_QA_MENTOR"
 			VertxUtils.writeMsg("webcmds", JsonUtils.toJson(mentorBeMsg));
 		}
 
+		/* Generate a random 15 char password */
+		char[] allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGJKLMNPRSTUVWXYZ0123456789^$?!@#%&".toCharArray();
+		String password = new SecureRandom().ints(15, 0, allowed.length).mapToObj(i -> String.valueOf(allowed[i])).collect(Collectors.joining());
+		KeycloakUtils.setPassword(serviceToken.getToken(), serviceToken.getRealm(), userId, password, true);
+		System.out.println("char password: " + password);
+
 		/* Send email to mentor */
-
-
 		String rawSendEmail = user.getValue("LNK_SEND_EMAIL", null);
 		System.out.println("rawSendEmail: " + rawSendEmail + " Sending email to: " + email);
 
@@ -144,12 +148,12 @@ rule "IS_QA_MENTOR"
 			System.out.println("email: " + email);
 			System.out.println("subject: " + subject);
 			System.out.println("template_id: " + template_id);
-			System.out.println("randomPW: " + randomPW);
+			System.out.println("SEL_YES:: char password: " + password);
 
 
 			HashMap<String, String> templateData = new HashMap<String, String>();
 			templateData.put("Mentor", firstname);
-			templateData.put("pw", randomPW);
+			templateData.put("pw", password);
 			templateData.put("url", url);
 
 			List<String> bccList = Arrays.asList("rahul@gada.io", "tarjnee.gandhi@outcomelife.com.au");

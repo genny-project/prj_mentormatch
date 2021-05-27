@@ -154,7 +154,7 @@ rule "IS_QA_MENTEE"
 
 			HashMap<String, String> templateData = new HashMap<String, String>();
 			templateData.put("Mentee", firstname);
-			templateData.put("pw", randomPW);
+			templateData.put("pw", password);
 			templateData.put("url", url);
 
 			List<String> bccList = Arrays.asList("rahul@gada.io");
