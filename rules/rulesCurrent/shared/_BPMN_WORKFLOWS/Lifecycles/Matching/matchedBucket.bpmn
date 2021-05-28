@@ -179,10 +179,9 @@ workflowBeCode = newCode;
 kcontext.setVariable(&quot;workflowBeCode&quot;, workflowBeCode);
 System.out.println(&quot;dynamicCards: workflowBeCode2 = &quot; + workflowBeCode);
 
-BaseEntity currentUser = beUtils.getBaseEntityByCode(userToken.getUserCode());
-System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ currentUser: &quot; + currentUser);
+associatedMentee = beUtils.getBaseEntityByCode(userToken.getUserCode());
 
-associatedMentee = sessionFacts.getMessage().toString();
+/*associatedMentee = sessionFacts.getMessage().toString();
 String str_one = &quot;&quot;;
 str_one = associatedMentee.split(&quot;=&quot;)[3];
 kcontext.setVariable(&quot;str_one&quot;, str_one);
@@ -191,9 +190,9 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ str_one: &quot; + str_one
 String str_two = &quot;&quot;;
 str_two = str_one.split(&quot;:&quot;)[0];
 kcontext.setVariable(&quot;str_two&quot;, str_two);
-System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ str_two: &quot; + str_two);
+System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ str_two: &quot; + str_two);*/
 
-associatedMenteeBe = beUtils.getBaseEntityByCode(str_two);
+associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMentee);
 kcontext.setVariable(&quot;associatedMenteeBe&quot;, associatedMenteeBe);
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ associatedMenteeBe: &quot; + associatedMenteeBe);</bpmn2:script>
       </bpmn2:scriptTask>
