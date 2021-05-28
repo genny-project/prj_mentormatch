@@ -49,17 +49,17 @@ rule "SEND_EMAIL_FOR_MEETING_REQUEST_EVENT"
      then
  		System.out.println(drools.getRule().getName() + " : Rule fired" );
  		System.out.println("Current Time is "+LocalDateTime.now());
- 		
+
  		newApplication = beUtils.getBaseEntityByCode(newApplication.getCode());
 
 		System.out.println(drools.getRule().getName() +" :: newApplication = " + newApplication);
 
 		String menteeCode = newApplication.getValue("PRI_MENTEE_CODE", null);
 		String mentorCode = newApplication.getValue("PRI_MENTOR_CODE", null);
- 		
+
  		BaseEntity menteeBe = beUtils.getBaseEntityByCode(menteeCode);
 		BaseEntity mentorBe = beUtils.getBaseEntityByCode(mentorCode);
-		
+
 		BaseEntity project = beUtils.getBaseEntityByCode("PRJ_"+ serviceToken.getRealm().toUpperCase());
 
 		if (mentorBe != null) {
@@ -76,19 +76,19 @@ rule "SEND_EMAIL_FOR_MEETING_REQUEST_EVENT"
 
 						String subject = "Confirm to Meeting Request";
 						String template_id = "d-241a5c5326084028a464f7f1763240be";
-						
+
 						String urlParentCode = "QUE_FAKE_PARENT";
                 		String urlCode = "ACT_MEETING_REQUEST";
 
 					 	String token = KeycloakUtils.getImpersonatedToken(serviceToken.getKeycloakUrl(), serviceToken.getRealm(), project, mentorEmail, serviceToken.getToken());
        					System.out.println("token: " + token);
-       					
+
                 		/* Encode each section of the url */
                 		urlParentCode = new String(Base64.getEncoder().encode(urlParentCode.getBytes()));
                 		urlCode = new String(Base64.getEncoder().encode(urlCode.getBytes()));
-            
+
                 		String url = GennySettings.projectUrl+"/home/"+urlParentCode+"/"+urlCode;
-                		
+
                 		url = url + "?token=" + token;
                 		System.out.println("url: " + url);
 
@@ -106,13 +106,13 @@ rule "SEND_EMAIL_FOR_MEETING_REQUEST_EVENT"
 
 						if (!GennySettings.projectUrl.contains("dev")) {
 
-								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au", "rahul@gada.io");
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent ||| Subject: " + subject + "||| template_id: " + template_id);
 
 						} else {
-								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au");
+								List<String> bccList = Arrays.asList("tarjnee.gandhi@outcomelife.com.au", "rahul@gada.io");
 								EmailHelper.sendGrid(beUtils, mentorEmail, null, bccList, subject, template_id, templateData, true);
 
 								System.out.println("Email Sent To ||| " + mentorEmail + " Subject: " + subject + "||| template_id: " + template_id);
