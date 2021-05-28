@@ -73,6 +73,10 @@ rule "SET_PRI_STATUS_AS_MATCHED"
 
 		if (newApplication.getCode() != null && mentorResponse.equals("SEL_YES")) {
 
+			System.out.println("## Update Mentee Status ##");
+			Answer answerMenteeStatus = new Answer(userToken.getUserCode(), associatedMenteeBe.getCode(), "PRI_MATCHED_WITH_MENTOR", "COMPLETE");
+			beUtils.saveAnswer(answerMenteeStatus);
+
 			System.out.println("## Removing from Training Bucket ##");
 
 			/* Remove from Training bucket */

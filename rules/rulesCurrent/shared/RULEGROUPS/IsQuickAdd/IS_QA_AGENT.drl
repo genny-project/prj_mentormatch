@@ -27,7 +27,7 @@ rule "IS_QA_AGENT"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("QA_AGENT"))
+		baseEntityType : String(baseEntityType.equals("IS_QA_AGENT"))
 		newBe : BaseEntity()
 		beUtils: BaseEntityUtils()
 
@@ -40,10 +40,9 @@ rule "IS_QA_AGENT"
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_AGENT", "true"));
 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_AGENT_CODE", newBe.getCode()));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_STATUS", "OFF_SHORE"));
-		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode() ,"PRI_TRAINING_STATUS", "No"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS_COLOR", "#5cb85c"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_PROFILE", "Complete"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_PROFILE", "COMPLETE"));
 
 		String target = newBe.getCode();
 

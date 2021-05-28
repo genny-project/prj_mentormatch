@@ -24,7 +24,7 @@ rule "IS_ADMIN"
 	 	userToken : GennyToken (code != "PER_SERVICE" )
 		serviceToken : GennyToken (code == "PER_SERVICE" )
 		output : OutputParam()
-		baseEntityType : String(baseEntityType.equals("ADMIN"))
+		baseEntityType : String(baseEntityType.equals("AGENT"))
 		newBe : BaseEntity()
 
      then
@@ -36,10 +36,9 @@ rule "IS_ADMIN"
 
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_IS_AGENT", "true"));
 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_ADMIN_CODE", newBe.getCode()));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS", "OFF_SHORE"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_DISABLED", "false"));
  		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_STATUS_COLOR", "#5cb85c"));
- 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_PROFILE", "Complete"));
+ 		beUtils.saveAnswer(new Answer(userToken.getUserCode(), newBe.getCode(), "PRI_PROFILE", "COMPLETE"));
 
 		String target = newBe.getCode();
 
