@@ -24,6 +24,7 @@
   <bpmn2:itemDefinition id="ItemDefinition_5" isCollection="false" structureRef="life.genny.utils.VertxUtils.ESubscriptionType"/>
   <bpmn2:itemDefinition id="ItemDefinition_6" isCollection="false" structureRef="life.genny.utils.VertxUtils"/>
   <bpmn2:itemDefinition id="ItemDefinition_4" isCollection="false" structureRef="life.genny.qwanda.Answer"/>
+  <bpmn2:itemDefinition id="ItemDefinition_24" isCollection="false" structureRef="java.lang.Short"/>
   <bpmn2:signal id="Signal_1" name="notification"/>
   <bpmn2:signal id="Signal_2" name="dynamicControl"/>
   <bpmn2:signal id="Signal_3" name="controlSignal"/>
@@ -177,6 +178,9 @@ System.out.println(&quot;>>>>>>>>>>>> &quot; + newApplication.getCode() + &quot;
 workflowBeCode = newCode;
 kcontext.setVariable(&quot;workflowBeCode&quot;, workflowBeCode);
 System.out.println(&quot;dynamicCards: workflowBeCode2 = &quot; + workflowBeCode);
+
+BaseEntity currentUser = beUtils.getBaseEntityByCode(userToken.getUserCode());
+System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ currentUser: &quot; + currentUser);
 
 associatedMentee = sessionFacts.getMessage().toString();
 String str_one = &quot;&quot;;
