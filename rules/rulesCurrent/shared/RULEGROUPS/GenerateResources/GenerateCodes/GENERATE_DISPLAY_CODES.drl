@@ -82,7 +82,9 @@ rule "GENERATE_DISPLAY_CODES"
 		
 		/* TABLE */
 		displayCodes.put("SCH_ACT_PRI_EVENT_QUE_TREE_ITEM_AGENTS", "TABLE");
-
+		displayCodes.put("SCH_ACT_PRI_EVENT_QUE_TREE_ITEM_MENTEES", "TABLE");
+		displayCodes.put("SCH_ACT_PRI_EVENT_QUE_TREE_ITEM_MENTORS", "TABLE");
+		
 		insert(displayCodes);
 		VertxUtils.putObject(serviceToken.getRealm(), "", "DISPLAY_CODES", displayCodes, serviceToken.getToken());
 end
