@@ -179,7 +179,7 @@ workflowBeCode = newCode;
 kcontext.setVariable(&quot;workflowBeCode&quot;, workflowBeCode);
 System.out.println(&quot;dynamicCards: workflowBeCode2 = &quot; + workflowBeCode);
 
-associatedMentee = beUtils.getBaseEntityByCode(userToken.getUserCode());
+associatedMenteeBe = beUtils.getBaseEntityByCode(userToken.getUserCode());
 
 /*associatedMentee = sessionFacts.getMessage().toString();
 String str_one = &quot;&quot;;
@@ -192,7 +192,7 @@ str_two = str_one.split(&quot;:&quot;)[0];
 kcontext.setVariable(&quot;str_two&quot;, str_two);
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ str_two: &quot; + str_two);*/
 
-associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMentee);
+/*associatedMenteeBe = beUtils.getBaseEntityByCode(associatedMentee);*/
 kcontext.setVariable(&quot;associatedMenteeBe&quot;, associatedMenteeBe);
 System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ associatedMenteeBe: &quot; + associatedMenteeBe);</bpmn2:script>
       </bpmn2:scriptTask>
