@@ -323,12 +323,16 @@ System.out.println(&quot;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ associatedMenteeBe: &quot
           </drools:metaData>
           <drools:onEntry-script scriptFormat="http://www.java.com/java">
             <drools:script>System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => (CREATE_MENTEE_MENTOR_APP) rule flow group&quot;);
+System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => controlSignalCode = &quot; + controlSignalCode);
+System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => associatedMenteeBe = &quot; + associatedMenteeBe);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => bucketCode = &quot; + bucketCode);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ ENTERING => controlSignalCode = &quot; + controlSignalCode);
 </drools:script>
           </drools:onEntry-script>
           <drools:onExit-script scriptFormat="http://www.java.com/java">
             <drools:script>System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => (CREATE_MENTEE_MENTOR_APP) rule flow group&quot;);
+System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot; + controlSignalCode);
+System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => associatedMenteeBe = &quot; + associatedMenteeBe);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => bucketCode = &quot; + bucketCode);
 System.out.println(&quot;@@@@@@@@@@@@@@@@@ EXITING => controlSignalCode = &quot; + controlSignalCode);
 </drools:script>
